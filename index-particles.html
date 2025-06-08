@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>EcoLuxe Bharat</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- script
+    ================================================== -->
+    <script src="js/modernizr.js"></script>
+    <script defer src="js/fontawesome/all.min.js"></script>
+
+    <!-- favicons
+    ================================================== -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+
+</head>
+<script src="js/main.js"></script>
+<script>
+    // Set the launch date here (YYYY-MM-DDTHH:MM:SS format)
+    const launchDate = new Date("2025-06-30T00:00:00").getTime();
+
+    const countdown = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = launchDate - now;
+
+        if (distance < 0) {
+            clearInterval(countdown);
+            document.querySelector(".days").innerHTML = "0<span>D</span>";
+            document.querySelector(".hours").innerHTML = "0<span>H</span>";
+            document.querySelector(".minutes").innerHTML = "0<span>M</span>";
+            document.querySelector(".seconds").innerHTML = "0<span>S</span>";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.querySelector(".days").innerHTML = days + "<span>D</span>";
+        document.querySelector(".hours").innerHTML = hours + "<span>H</span>";
+        document.querySelector(".minutes").innerHTML = minutes + "<span>M</span>";
+        document.querySelector(".seconds").innerHTML = seconds + "<span>S</span>";
+    }, 1000);
+</script>
+<style>
+.counter__time {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin: 0 10px;
+}
+
+.counter__time span {
+    margin-left: 6px; /* Adds spacing between number and unit */
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+
+</style>
+
+
+<body id="top">
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+        <div id="loader" class="dots-fade">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- site header
+    ================================================== -->
+    <header class="s-header">
+
+        <div class="header-logo">
+            <a class="site-logo" href="index.html">
+                <img src="images/logo.svg" alt="Homepage" style="width: 300px; height: auto;">
+            </a>
+        </div>
+
+        <div class="header-email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 12l11 3.1 7-8.1-8.156 5.672-4.312-1.202 15.362-7.68-3.974 14.57-3.75-3.339-2.17 2.925v-.769l-2-.56v7.383l4.473-6.031 4.527 4.031 6-22z"/></svg>
+            <a href="mailto:ecoluxebharat@gmail.com">ecoluxebharat@gmail.com</a>
+        </div>
+
+    </header> <!-- end s-header -->
+
+    <!-- intro
+    ================================================== -->
+    <section id="intro" class="s-intro s-intro--particles">
+
+        <div id="particles-js" class="intro-particles"></div>
+
+        <div class="grid-overlay">
+            <div></div>
+        </div> 
+
+        <div class="row intro-content">
+
+            <div class="column">
+
+                <div class="intro-content__text">
+
+                    <h3>
+                    Coming Soon
+                    </h3>
+                    
+                    <h1>
+                    Ecoluxe Bharat <br>
+                    Crafting luxury <br>
+                    the sustainable way.
+                    </h1>
+
+                </div> <!-- end intro-content__text -->
+
+                <div class="intro-content__bottom">
+
+                    <div class="intro-content__counter-wrap">
+                        <h4>Launching in</h4>
+            
+                        <div class="counter">
+                            <div class="counter__time days">
+                                365
+                                <span>D</span>
+                            </div>
+                            <div class="counter__time hours">
+                                09
+                                <span>H</span>
+                            </div>
+                            <div class="counter__time minutes">
+                                54
+                                <span>M</span>
+                            </div>
+                            <div class="counter__time seconds">
+                                57
+                                <span>S</span>
+                            </div>
+                        </div>  <!-- end counter -->
+                    </div> <!-- end intro-content__counter-wrap -->
+
+                    <div class="intro-content__notify">
+                        <button type="button" class="btn--stroke btn--small modal-trigger">
+                            Contact Us
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 12l-9-9v7h-15v4h15v7z"/></svg>
+                        </button>
+                    </div> <!-- end intro-content__notify -->
+    
+                </div> <!-- end intro-content__bottom -->
+
+            </div> <!-- end column -->
+
+        </div> <!--  end intro-content -->
+
+<div class="modal">
+    <div class="modal__inner">
+
+        <span class="modal__close"></span>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+        </svg>
+
+        <h3>Contact Us</h3>
+        <p>
+            We'd love to hear from you!<br>
+            Reach out by email or give us a call.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <a href="mailto:ecoluxebharat@gmail.com" class="btn--stroke btn--small h-full-width">Email Us</a>
+            <a href="tel:+919211809192" class="btn--stroke btn--small h-full-width">Call Us</a>
+        </div>
+
+    </div> <!-- end modal inner -->
+</div> <!-- end modal -->
+
+
+        <ul class="intro-social">
+            <li><a href="#0"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+            <li><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+            <li><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="#0"><i class="fab fa-dribbble" aria-hidden="true"></i></a></li>
+            <li><a href="#0"><i class="fab fa-behance" aria-hidden="true"></i></a></li>
+        </ul> <!-- end intro social -->
+
+        <div class="intro-scroll">
+            <a href="#info" class="scroll-link smoothscroll">
+                Scroll For More
+            </a>
+        </div> <!-- end intro scroll -->
+
+    </section> <!-- end s-intro -->
+
+    <!-- info
+    ================================================== -->
+    <section id="info" class="s-info">
+
+        <div class="vert-line"></div>
+        
+        <div class="row info-content">
+            <div class="column">
+                
+                <nav class="tab-nav">
+                    <ul class="tab-nav__list"> 
+                        <li class="active" data-id="tab-about">
+                            <a href="#0">
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li data-id="tab-services">
+                            <a href="#0">
+                                <span>Services</span>
+                            </a>
+                        </li>
+                        <li data-id="tab-contact">
+                            <a href="#0">
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav> <!-- end tab-nav -->
+
+                <div class="tab-content">
+
+                    <!-- 01. tab about -->
+<div id="tab-about" class='tab-content__item'>
+
+    <div class="row tab-content__item-header">
+        <div class="column">
+            <h1>Welcome to Ecoluxe Bharat</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <p class="lead">
+            At Ecoluxe Bharat, we merge luxury with sustainability — creating elegant, eco-conscious spaces that elevate everyday living.
+            </p>
+
+            <p>
+            From concept to completion, our multidisciplinary team delivers transformative solutions in interior and exterior design, landscaping, metal fabrication, solar integration, acoustics, and workspace renovation. Every project is an opportunity to innovate with purpose and build environments that are beautiful, functional, and future-ready.
+            </p>
+
+            <div class="row">
+                <div class="column large-6 tab-full">
+                    <h4>Why Choose Us?</h4>
+                    <p>
+                    We believe good design is not just how it looks, but how it performs and inspires. Our tailored approach ensures every detail reflects your vision while embracing sustainability. Whether it's a luxury residence or a modern office revamp, we deliver with precision, creativity, and care.
+                    </p>
+                </div>
+                <div class="column large-6 tab-full">
+                    <h4>Let’s Build Something Extraordinary</h4>
+                    <p>
+                    Have a project in mind? Let’s bring it to life with innovation and style. Reach out today to explore how we can collaborate.
+                    </p>
+                    <a href="mailto:ecoluxebharat@gmail.com" class="btn btn--stroke h-full-width">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- end 01. tab about -->
+
+
+<!-- 02. tab services -->
+<div id="tab-services" class='tab-content__item'>
+
+    <div class="row tab-content__item-header">
+        <div class="column">
+            <h1>What We Do</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <p class="lead">
+                Ecoluxe Bharat brings together creativity, engineering, and sustainability to transform spaces — inside and out. We blend premium aesthetics with practical innovation across residential, commercial, and industrial projects.
+            </p>
+        </div>
+    </div>
+
+    <div class="row services-list block-large-1-2 block-medium-1-2 block-tab-full">
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Interior Design</h4>
+                <p>
+                    Bespoke interiors tailored to elevate lifestyle and functionality. We focus on elegance, smart layout, and premium materials — all curated to your taste.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Exterior Design</h4>
+                <p>
+                    We craft stunning exteriors with thoughtful architecture and façade enhancements that bring lasting visual impact to any structure.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Metal Fabrication</h4>
+                <p>
+                    High-quality custom metalwork for gates, railings, structures, and décor — designed for durability, safety, and aesthetic harmony.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Landscaping</h4>
+                <p>
+                    From gardens to green walls, we design and maintain beautiful outdoor environments that connect nature with modern living.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Solar Solutions</h4>
+                <p>
+                    Power your space sustainably with solar panel installations and energy optimization systems — cost-efficient and eco-friendly.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Office Renovation</h4>
+                <p>
+                    We redesign and renovate workspaces to boost functionality, aesthetics, and employee well-being, all while reflecting your brand ethos.
+                </p>
+            </div>
+        </div>
+
+        <!-- New Services Start Here -->
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Turnkey Project Management</h4>
+                <p>
+                    Complete end-to-end execution of your project — from planning and design to final delivery — handled by our expert team with precision and professionalism.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Vertical Gardens & Green Roofs</h4>
+                <p>
+                    Add lush greenery to your walls and rooftops. We design living spaces that enhance aesthetics, reduce heat, and promote urban biodiversity.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Home & Studio Acoustics</h4>
+                <p>
+                    Acoustic solutions for home theatres, studios, and workspaces — enhancing sound quality while maintaining design integrity.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Design Consultation & 3D Visualization</h4>
+                <p>
+                    Bring your vision to life with expert guidance, material curation, and realistic 3D renderings that help you see before you build.
+                </p>
+            </div>
+        </div>
+
+        <div class="column services-list__item">
+            <div class="services-list__item-content">
+                <h4 class="item-title">Civil & Structural Work</h4>
+                <p>
+                    Robust and reliable construction support — from foundations to finishes — ensuring every element is structurally sound and built to last.
+                </p>
+            </div>
+        </div>
+		
+		<div class="column services-list__item">
+    <div class="services-list__item-content">
+        <h4 class="item-title">Glass & Glazing Works</h4>
+        <p>
+            Precision-crafted glass solutions for partitions, facades, balustrades, and skylights. We combine safety, clarity, and design finesse to elevate both interiors and exteriors.
+        </p>
+    </div>
+</div>
+
+        <!-- New Services End Here -->
+
+    </div> <!-- end services-list -->
+    
+</div> <!-- end 02. tab services -->
+
+
+
+                    <!-- 03. tab contact -->
+<div id="tab-contact" class="tab-content__item">
+
+    <div class="row tab-content__item-header">
+        <div class="column">
+            <h1>Get In Touch With Us</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <p class="lead">
+                Have a project in mind or want to explore collaboration? We're just a message away. Reach out for consultations, quotes, or a simple hello — we'd love to hear from you.
+            </p>
+
+            <div class="row">
+                <div class="column large-six tab-full">
+                    <h4>Where to Find Us</h4>
+
+                    <p>
+                    Ecoluxe Bharat<br>
+                    1903 B10, Supertech Ecovillage 1, Sector 1<br>
+                    Greater Noida West, Uttar Pradesh<br>
+					India – 110001
+                    </p>
+                </div>
+
+                <div class="column large-six tab-full">
+                    <h4>Follow Us</h4>
+
+                    <ul class="link-list">
+                        <li><a href="https://facebook.com/ecoluxebharat" target="_blank">Facebook</a></li>
+                        <li><a href="https://instagram.com/ecoluxebharat" target="_blank">Instagram</a></li>
+                        <li><a href="https://linkedin.com/company/ecoluxebharat" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="tab-content__item-bottom">
+                <a href="mailto:ecoluxebharat@gmail.com" class="contact-email">ecoluxebharat@gmail.com</a>
+                <span class="contact-number"> 
+                    <a href="tel:+919211809192">+91 92118 09192</a>
+                    <a href="tel:+919045290167">+91 90452 90167</a>
+                </span>
+            </p>
+
+        </div>
+    </div>
+    
+</div> <!-- end 03. tab contact -->
+
+
+                </div> <!-- end tab content -->
+
+                <footer>
+
+                    <div class="ss-copyright">
+                        <span>© EcoLuxe Bharat 2025</span> 
+                    </div>
+
+                    <div class="ss-go-top">
+                        <a class="smoothscroll" title="Back to Top" href="#top">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0l8 9h-6v15h-4v-15h-6z"></path></svg>
+                        </a>
+                    </div>
+                    
+                </footer>
+
+            </div> <!-- end column -->
+        </div> <!-- end row -->
+
+    </section> <!-- end s-info -->
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/particles.min.js"></script>
+    <script src="js/particle-settings.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
