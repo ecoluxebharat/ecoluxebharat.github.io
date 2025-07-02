@@ -1223,8 +1223,8 @@ ol {
 -----------------------*/
 
 .project-details {
-	padding-top: 120px;
-	padding-bottom: 90px;
+	padding-top: 75px;
+	padding-bottom: 45px;
 }
 
 .project-details img {
@@ -2992,6 +2992,10 @@ ol {
 	}
 	.footer__top {
 	padding-bottom: 10px;
+	}
+	.project-details {
+	padding-top: 40px;
+	padding-bottom: 40px;
 	}
 }
 
