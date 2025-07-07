@@ -531,22 +531,32 @@ ol {
 	display: none;
 }
 
-.hero__slider.owl-carousel .owl-nav button {
-	font-size: 28px;
-	color: #ffffff;
-	position: absolute;
-	left: 145px;
-	top: 50%;
-	display: inline-block;
-	height: 50px;
-	width: 50px;
-	margin-top: -25px;
+.project__slider.owl-carousel .owl-nav button {
+    height: 42px;
+    width: 42px;
+    background: rgba(255, 255, 255, 0.64); /* 60% transparent white */
+    font-size: 18px; /* Adjust font size if necessary */
+    color: #111111;
+    position: absolute;
+    top: 50%;
+    margin-top: -21px; /* Center vertically based on the new height */
+    line-height: 42px; /* Center text vertically */
+    text-align: center;
+    border-radius: 50%; /* Make the button circular */
+    border: none; /* Remove any border */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Show pointer cursor on hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add a slight shadow for better visibility */
 }
 
-.hero__slider.owl-carousel .owl-nav button.owl-next {
-	left: auto;
-	right: 145px;
+.project__slider.owl-carousel .owl-nav button.owl-prev {
+    left: 10px; /* Adjust left position as needed */
 }
+
+.project__slider.owl-carousel .owl-nav button.owl-next {
+    right: 10px; /* Adjust right position as needed */
+}
+
 
 .hero__slider.owl-carousel .owl-nav button:before {
 	position: absolute;
@@ -680,22 +690,29 @@ ol {
 }
 
 .project__slider.owl-carousel .owl-nav button {
-	height: 50px;
-	width: 50px;
-	background: #ffffff;
-	font-size: 28px;
-	color: #111111;
-	position: absolute;
-	left: 35px;
-	top: 50%;
-	margin-top: -25px;
-	line-height: 54px;
-	text-align: center;
+    height: 50px;
+    width: 50px;
+    background: rgba(255, 255, 255, 0.64); /* Changed to transparent white */
+    font-size: 28px;
+    color: #111111;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    line-height: 54px;
+    text-align: center;
+    border-radius: 50%; /* Ensure it's circular for larger sizes too */
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.project__slider.owl-carousel .owl-nav button.owl-prev {
+    left: 25px; /* Ensures equal margin from the left */
 }
 
 .project__slider.owl-carousel .owl-nav button.owl-next {
-	left: auto;
-	right: 35px;
+    right: 25px; /* Ensures equal margin from the right */
 }
 
 .project__slider__item__hover {
@@ -3095,4 +3112,135 @@ ol {
 
 
 
+/* For wide mobile devices (480px and up to 767px) */
+@media only screen and (max-width: 767px) {
+    .project__slider.owl-carousel .owl-nav button {
+        height: 42px;
+        width: 42px;
+        background: rgba(255, 255, 255, 0.64); /* 60% transparent white */
+        font-size: 18px; /* Adjust font size if necessary */
+        color: #111111;
+        position: absolute;
+        top: 50%;
+        margin-top: -21px; /* Center vertically based on the new height */
+        line-height: 42px; /* Center text vertically */
+        text-align: center;
+        border-radius: 50%; /* Make the button circular */
+        border: none; /* Remove any border */
+        outline: none; /* Remove outline */
+        cursor: pointer; /* Show pointer cursor on hover */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add a slight shadow for better visibility */
+    }
+    .project__slider.owl-carousel .owl-nav button.owl-prev {
+        left: 10px; /* Adjust left position as needed */
+    }
+    .project__slider.owl-carousel .owl-nav button.owl-next {
+        right: 10px; /* Adjust right position as needed */
+    }
+}
 
+/* For small mobile devices (below 480px) */
+@media only screen and (max-width: 479px) {
+    .project__slider.owl-carousel .owl-nav button {
+        height: 42px;
+        width: 42px;
+        background: rgba(255, 255, 255, 0.64); /* 60% transparent white */
+        font-size: 18px; /* Adjust font size if necessary */
+        color: #111111;
+        position: absolute;
+        top: 50%;
+        margin-top: -21px; /* Center vertically based on the new height */
+        line-height: 42px; /* Center text vertically */
+        text-align: center;
+        border-radius: 50%; /* Make the button circular */
+        border: none; /* Remove any border */
+        outline: none; /* Remove outline */
+        cursor: pointer; /* Show pointer cursor on hover */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add a slight shadow for better visibility */
+    }
+    .project__slider.owl-carousel .owl-nav button.owl-prev {
+        left: 10px; /* Adjust left position as needed */
+    }
+    .project__slider.owl-carousel .owl-nav button.owl-next {
+        right: 10px; /* Adjust right position as needed */
+    }
+}
+
+
+/* For small mobile devices (below 480px) */
+@media only screen and (max-width: 479px) {
+    .project__slider.owl-carousel .owl-nav button {
+        background: rgba(255, 255, 255, 0.64); /* 60% transparent white */
+    }
+}
+
+
+
+
+
+
+
+
+
+/*
+ * IMPORTANT: Paste this block at the very end of your style.css file
+ * This will override any conflicting rules defined earlier in the file.
+ */
+
+/* Styles for screens 768px and above */
+@media only screen and (min-width: 768px) {
+    .project__slider.owl-carousel .owl-nav button {
+        height: 50px;
+        width: 50px;
+        background: rgba(255, 255, 255, 0.64); /* Transparent white */
+        font-size: 28px;
+        color: #111111;
+        position: absolute;
+        top: 50%;
+        margin-top: -25px;
+        line-height: 54px;
+        text-align: center;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .project__slider.owl-carousel .owl-nav button.owl-prev {
+        left: 25px; /* Ensures equal margin from the left */
+    }
+
+    .project__slider.owl-carousel .owl-nav button.owl-next {
+        right: 25px; /* Ensures equal margin from the right */
+        left: auto; /* Crucial to allow 'right' property to work effectively */
+    }
+}
+
+/* Styles for small mobile devices (479px and below) */
+@media only screen and (max-width: 479px) {
+    .project__slider.owl-carousel .owl-nav button {
+        height: 42px;
+        width: 42px;
+        background: rgba(255, 255, 255, 0.64); /* Transparent white */
+        font-size: 18px;
+        color: #111111;
+        position: absolute;
+        top: 50%;
+        margin-top: -21px;
+        line-height: 42px;
+        text-align: center;
+        border-radius: 50%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .project__slider.owl-carousel .owl-nav button.owl-prev {
+        left: 10px; /* Adjust left position as needed */
+    }
+    .project__slider.owl-carousel .owl-nav button.owl-next {
+        right: 10px; /* Adjust right position as needed */
+        left: auto; /* Crucial to allow 'right' property to work effectively */
+    }
+}
