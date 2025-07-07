@@ -51,7 +51,7 @@
         Hero Slider
     ------------------------*/
     $(".hero__slider").owlCarousel({
-        loop: true,
+        loop: false, // Set this to false
         margin: 0,
         items: 1,
         dots: true,
@@ -63,6 +63,7 @@
         autoHeight: false,
         autoplay: true,
         mouseDrag: false,
+		touchDrag: false, // Add this line to explicitly disable touch dragging
         onInitialized: function (e) {
             var a = this.items().length;
             $("#snh-1").html("<span>01</span><span>" + "0" + a + "</span>");
