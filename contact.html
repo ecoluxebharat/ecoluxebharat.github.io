@@ -319,7 +319,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
 
     // 2. Set the dynamic subject *before* creating FormData
     const subjectField = document.getElementById("dynamicSubject");
-    subjectField.value = userName ? `${userName} : Website Inquiry` : "Website Inquiry";
+    subjectField.value = userName ? `${userName} : Inquiry from Contact Us Page` : "Website Inquiry";
 
     // 3. NOW create the FormData object
     const formData = new FormData(form);
