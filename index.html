@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/slick.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/popupinquiry.css" type="text/css">
 	
 	<!-- favicons
     ================================================== -->
@@ -514,6 +515,52 @@
 </footer>
 <!-- Footer Section End -->
 
+
+<!-- Inquiry Popup -->
+
+<div id="inquiryContainer" class="inquiry-container">
+    <button id="inquiryToggleButton" class="inquiry-toggle-button">
+        <svg xmlns="http://www.w3.org/2999/xlink" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-message-square">
+            <path d="M10 9H17M10 13H17M7 9H7.01M7 13H7.01M21 20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20Z"></path>
+        </svg>
+        <span class="button-text">Got a question? Ask Us.</span>
+    </button>
+    <span id="permanentCloseInquiryButton" class="permanent-close-button">&times;</span>
+    <div class="inquiry-form-content">
+        <button id="closeInquiryForm" class="close-button">&times;</button>
+        <h2>Send Us an Inquiry</h2>
+        
+        <div class="form-blur-area">
+            <form id="inquiryForm" action="https://formsubmit.co/temp2temp2222@gmail.com" method="POST">
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="Form" value="Popup Form"> 
+                <input type="hidden" name="_subject" id="inquiryDynamicSubject" value="Website Inquiry" /> 
+                
+                <div class="form-row">
+                    <input type="text" name="Name" id="inquiryName" placeholder="Name" required /> 
+                    <input type="text" name="Phone Number" placeholder="Number" required />
+                </div>
+                <input type="email" name="Email" placeholder="Email" required />
+                <textarea id="inquiryMessage" name="Message" rows="5" placeholder="Message" required></textarea>
+                <button type="submit" name="_submit" id="sendMessageButton">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" width="20" height="20" viewBox="0 0 32 32" id="send-icon" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title>send--filled</title><path d="M27.45,15.11l-22-11a1,1,0,0,0-1.08.12,1,1,0,0,0-.33,1L6.69,15H18v2H6.69L4,26.74A1,1,0,0,0,5,28a1,1,0,0,0,.45-.11l22-11a1,1,0,0,0,0-1.78Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
+                    <span>Send Message</span>
+                </button>
+            </form>
+        </div>
+
+        <div id="inquiryOverlay" class="inquiry-overlay">
+            <div id="spinner" class="spinner"></div>
+            <p id="overlayMessage" class="overlay-message"></p>
+        </div>
+    </div>
+</div>
+
+<!-- Inquiry Popup End -->
+
+	
 <!-- Js Plugins -->
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -521,6 +568,7 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/slick.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/popupinquiry.js"></script>
 </body>
 
 </html>
