@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const startTime = Date.now();
 
-            fetch("https://formsubmit.co/ajax/temp2temp2222@gmail.com", { // Use the provided email and ?_ajax=true for AJAX mode
+            fetch("https://formsubmit.co/ajax/c1d7227628041c568dbd62caac8ef5e7", { // Use the provided email and ?_ajax=true for AJAX mode
                 method: "POST",
                 body: formData
             })
