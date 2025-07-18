@@ -114,12 +114,12 @@ body {
 /* Shaking Animation for the shrunk circle */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    15% { transform: translateX(-5px); } /* Increased displacement */
-    30% { transform: translateX(5px); }  /* Increased displacement */
-    45% { transform: translateX(-5px); } /* Increased displacement */
-    60% { transform: translateX(5px); }  /* Increased displacement */
-    75% { transform: translateX(-5px); } /* Increased displacement */
-    90% { transform: translateX(5px); }  /* Increased displacement */
+    15% { transform: translateX(-10px); } /* Increased displacement */
+    30% { transform: translateX(10px); }  /* Increased displacement */
+    45% { transform: translateX(-10px); } /* Increased displacement */
+    60% { transform: translateX(10px); }  /* Increased displacement */
+    75% { transform: translateX(-10px); } /* Increased displacement */
+    90% { transform: translateX(10px); }  /* Increased displacement */
 }
 
 /* NOTE: The inquiry-container.shrunk class is not being used in your JS.
