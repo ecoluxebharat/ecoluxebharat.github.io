@@ -276,6 +276,36 @@
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/slick.min.js"></script>
 <script src="js/main.js"></script>
+
+<script>
+/* ===============================
+   Project Image Mobile Touch Zoom Effect (Pointer Events)
+   - Triggers zoom as soon as finger contacts image, even for scrolling.
+   - Removes zoom on finger lift or scroll cancel.
+   =============================== */
+
+document.querySelectorAll('.project__item img').forEach(function(img) {
+  var parent = img.closest('.project__item');
+
+  // Zoom in on any pointer contact (touch, mouse, pen)
+  img.addEventListener('pointerdown', function() {
+    parent.classList.add('touch-zoomed');
+  }, {passive: true});
+
+  // Remove zoom when finger/mouse lifts or scrolling cancels
+  img.addEventListener('pointerup', function() {
+    parent.classList.remove('touch-zoomed');
+  });
+  img.addEventListener('pointercancel', function() {
+    parent.classList.remove('touch-zoomed');
+  });
+});
+/* ===============================
+   End: Project Image Mobile Touch Zoom Effect (Pointer Events)
+   =============================== */
+</script>
+
+	
 </body>
 
 </html>
