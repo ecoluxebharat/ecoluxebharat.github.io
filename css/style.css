@@ -1237,23 +1237,26 @@ ol {
 
 
 /* ===============================
-   Project Image Hover/Touch Zoom Effect
+   Project Image Hover Zoom Effect (Desktop Only)
    =============================== */
 .project__item img {
   transition: transform 0.3s cubic-bezier(.28, .84, .42, 1);
   will-change: transform;
 }
-.project__item:hover img,
-.project__item.touch-zoomed img {
-  transform: scale(1.045);
+
+/* Zoom in only on hover-capable devices (desktop) */
+@media (hover: hover) and (pointer: fine) {
+  .project__item:hover img {
+    transform: scale(1.045);
+  }
 }
+
 .project__item {
   overflow: hidden;
 }
 /* ===============================
-   End: Project Image Hover/Touch Zoom Effect
+   End: Project Image Hover Zoom Effect (Desktop Only)
    =============================== */
-
 
 
 
