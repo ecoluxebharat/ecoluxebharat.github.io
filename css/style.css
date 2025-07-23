@@ -1236,30 +1236,24 @@ ol {
 }
 
 
-/* =========================
-   Project Image Hover Zoom Effect
-   Adds a smooth zoom-in animation to project grid images on hover.
-   Use in conjunction with your project grid to enhance interactivity.
-   ========================= */
-
+/* ===============================
+   Project Image Hover/Touch Zoom Effect
+   =============================== */
 .project__item img {
   transition: transform 0.3s cubic-bezier(.28, .84, .42, 1);
-  /* Smooth and slightly elastic animation */
-  will-change: transform; /* Enhances performance */
+  will-change: transform;
 }
-
-.project__item:hover img {
+.project__item:hover img,
+.project__item.touch-zoomed img {
   transform: scale(1.045);
-  /* Scales image to 104.5% (about 4.5% zoom in) */
 }
-
 .project__item {
   overflow: hidden;
 }
+/* ===============================
+   End: Project Image Hover/Touch Zoom Effect
+   =============================== */
 
-/* =========================
-   End: Project Image Hover Zoom Effect
-   ========================= */
 
 
 
