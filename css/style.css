@@ -3356,3 +3356,38 @@ ol {
 }
 
 /* Service Section fix on mobile end */
+
+
+
+
+
+/* =======================================
+Project Carousel Image Hover Zoom Effect
+======================================= */
+
+/* 
+  This ensures the container for each slide clips the content,
+  so the zoomed image doesn't overflow. Owl Carousel wraps items
+  in '.owl-item', so we target that.
+*/
+.project__slider .owl-item {
+  overflow: hidden;
+  border-radius: 4px; /* Optional: adds slightly rounded corners */
+}
+
+/* 
+  This applies a smooth transition to the item that contains 
+  the background image.
+*/
+.project__slider__item {
+  transition: transform 0.35s ease-in-out;
+}
+
+/*
+  When you hover over the slide's container (.owl-item), this rule
+  scales up the '.project__slider__item' within it by 4%.
+*/
+.project__slider .owl-item:hover .project__slider__item {
+  transform: scale(1.04);
+}
+
