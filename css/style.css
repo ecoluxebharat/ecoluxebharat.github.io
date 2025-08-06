@@ -3380,7 +3380,7 @@ Project Carousel Image Hover Zoom Effect
   the background image.
 */
 .project__slider__item {
-  transition: transform 0.35s ease-in-out;
+  transition: transform 0.25s ease-in-out;
 }
 
 /*
