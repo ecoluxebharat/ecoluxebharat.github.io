@@ -641,6 +641,55 @@
 <script src="js/slick.min.js"></script>
 <script src="js/main.js"></script>
 <script src="js/popupinquiry.js"></script>
+
+<script>
+ (function ($) {
+  function setBackgrounds() {
+   $('.set-bg').each(function () {
+    var bg = $(this).data('setbg');
+    if (bg) $(this).css('background-image', 'url(' + bg + ')');
+   });
+  }
+
+  function initProjectSlider() {
+   var $slider = $('.project__slider');
+
+   // If Owl already initialized, update autoplay settings instead of reinit
+   if ($slider.hasClass('owl-loaded')) {
+    $slider.trigger('play.owl.autoplay', [3000]); // Updated to 1000ms
+    return;
+   }
+
+   $slider.owlCarousel({
+    loop: true,
+    margin: 30,
+    nav: true,
+    dots: false,
+    autoplay: true,
+    autoplayTimeout: 1000,  // 1 second
+    autoplayHoverPause: true,
+    smartSpeed: 600,
+    responsive: {
+     0:  { items: 1 },
+     480: { items: 1 },
+     768: { items: 2 },
+     992: { items: 3 },
+     1200: { items: 4 }
+    }
+   });
+  }
+
+  // Run when DOM is ready
+  $(function () {
+   setBackgrounds();
+   initProjectSlider();
+  });
+
+  // If content is injected later or images change layout, you can refresh:
+  // $(window).on('load', function(){ $('.project__slider').trigger('refresh.owl.carousel'); });
+ })(jQuery);
+</script>
+
 </body>
 
 </html>
