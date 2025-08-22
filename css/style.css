@@ -3317,47 +3317,6 @@ ol {
 
 /* Message Sent popup ends */
 
-/* Service Section fix on mobile */
-@media only screen and (max-width: 575.98px) {
-  .services__item {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    gap: 12px;
-    margin-bottom: 32px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .services__item img {
-    width: 48px;
-    min-width: 48px;
-    max-width: 48px;
-    height: 48px;   /* Or 'auto' if your icons are different sizes */
-    margin: 0;
-    display: block;
-  }
-  .service-title-desc {
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-  }
-  .service-title-desc h4 {
-    margin-top: 0;
-    margin-bottom: 0.18em;
-    font-size: 1.05em;
-  }
-  .service-title-desc p {
-    margin-bottom: 0;
-    margin-top: 2px;
-    font-size: 0.98em;
-  }
-}
-
-/* Service Section fix on mobile end */
-
-
 
 
 
