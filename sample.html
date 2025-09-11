@@ -286,197 +286,177 @@
     <script src="https://cdn.jsdelivr.net/npm/lil-gui@0.17"></script>
 
     <!-- Main Three.js Implementation Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const container = document.getElementById('model-viewer-container');
-            const guiContainer = document.getElementById('gui-container');
-            if (!container || !guiContainer) return;
-            
-            const params = {
-                hdri: '01.hdr',
-                hdrIntensity: 2.0,
-                sunIntensity: 1.6,
-                exposure: 2.0,
-                cameraFov: 40,
-                roughness: 0.4,
-                metalness: 0.0,
-                shadowDarkness: 0.5,
-                saveSettings: () => {
-                    const settings = {
-                        hdri: params.hdri,
-                        hdrIntensity: params.hdrIntensity,
-                        sunIntensity: params.sunIntensity,
-                        exposure: params.exposure,
-                        cameraFov: params.cameraFov,
-                        roughness: params.roughness,
-                        metalness: params.metalness,
-                        shadowDarkness: params.shadowDarkness,
-                        sunPosition: { x: dirLight.position.x, y: dirLight.position.y, z: dirLight.position.z }
-                    };
-                    console.log("Copy these settings to update your defaults:");
-                    console.log(JSON.stringify(settings, null, 2));
-                    alert("Settings logged to console (F12)!");
-                }
-            };
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const container = document.getElementById('model-viewer-container');
+    const guiContainer = document.getElementById('gui-container');
+    if (!container || !guiContainer) return;
 
-            const loadingIndicator = document.createElement('div');
-            container.appendChild(loadingIndicator);
+    const params = {
+        hdri: '01.jpg',
+        hdrIntensity: 2.0,
+        sunIntensity: 1.6,
+        exposure: 2.0,
+        cameraFov: 40,
+        shadowDarkness: 0.5
+    };
 
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(params.cameraFov, container.clientWidth / container.clientHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
-            
-            renderer.physicallyCorrectLights = true;
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = params.exposure;
-            renderer.outputEncoding = THREE.sRGBEncoding;
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            container.appendChild(renderer.domElement);
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.innerText = 'Loading environment...';
+    loadingIndicator.style.position = 'absolute';
+    loadingIndicator.style.top = '10px';
+    loadingIndicator.style.left = '10px';
+    loadingIndicator.style.padding = '5px 10px';
+    loadingIndicator.style.background = 'rgba(0,0,0,0.5)';
+    loadingIndicator.style.color = '#fff';
+    loadingIndicator.style.borderRadius = '4px';
+    loadingIndicator.style.display = 'none';
+    container.appendChild(loadingIndicator);
 
-            const controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(params.cameraFov, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
 
-            const dirLight = new THREE.DirectionalLight(0xffffff, params.sunIntensity);
-            dirLight.position.set(3, 10, 7.5);
-            dirLight.castShadow = true;
-            dirLight.shadow.mapSize.width = 1024;
-            dirLight.shadow.mapSize.height = 1024;
-            scene.add(dirLight);
-            
-            const ambientLight = new THREE.AmbientLight(0xffffff, params.shadowDarkness);
-            scene.add(ambientLight);
+    renderer.physicallyCorrectLights = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = params.exposure;
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
 
-            const gui = new lil.GUI({ container: guiContainer });
-            gui.close();
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
 
-            const envFolder = gui.addFolder('Environment');
-            envFolder.add(params, 'hdri', ['01.hdr', '02.hdr', '03.hdr']).name('Select HDRI').onChange(switchHdri);
-            envFolder.add(params, 'hdrIntensity', 0, 5, 0.05).name('HDR Intensity').onChange((value) => { scene.environmentIntensity = value; });
-            envFolder.add(params, 'exposure', 0, 4, 0.1).name('Exposure').onChange((value) => { renderer.toneMappingExposure = value; });
+    const dirLight = new THREE.DirectionalLight(0xffffff, params.sunIntensity);
+    dirLight.position.set(3, 10, 7.5);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 1024;
+    dirLight.shadow.mapSize.height = 1024;
+    scene.add(dirLight);
 
-            const sunFolder = gui.addFolder('Sun Light');
-            sunFolder.add(params, 'sunIntensity', 0, 5, 0.05).name('Sun Intensity').onChange((value) => { dirLight.intensity = value; });
-            sunFolder.add(dirLight.position, 'x', -20, 20, 0.5).name('Sun X');
-            sunFolder.add(dirLight.position, 'y', -20, 20, 0.5).name('Sun Y');
-            sunFolder.add(dirLight.position, 'z', -20, 20, 0.5).name('Sun Z');
-            
-            const materialsFolder = gui.addFolder('Model Materials');
-            materialsFolder.add(params, 'roughness', 0, 1, 0.01).name('Roughness').onChange(updateMaterials);
-            materialsFolder.add(params, 'metalness', 0, 1, 0.01).name('Metalness').onChange(updateMaterials);
+    const ambientLight = new THREE.AmbientLight(0xffffff, params.shadowDarkness);
+    scene.add(ambientLight);
 
-            const cameraFolder = gui.addFolder('Camera');
-            cameraFolder.add(params, 'cameraFov', 25, 120, 1).name('Field of View').onChange((value) => {
-                camera.fov = value;
-                camera.updateProjectionMatrix();
-            });
+    const gui = new lil.GUI({ container: guiContainer });
+    gui.close();
 
-            const qualityFolder = gui.addFolder('Renderer Quality');
-            qualityFolder.add(params, 'shadowDarkness', 0, 1, 0.01).name('Shadow Darkness').onChange(value => ambientLight.intensity = value);
-            
-            gui.add(params, 'saveSettings').name('Save Settings');
-            
-            let loadedModel;
-            function updateMaterials() {
-                if (!loadedModel) return;
-                loadedModel.traverse((node) => {
-                    if (node.isMesh && node.material?.isMeshStandardMaterial) {
-                        node.material.roughness = params.roughness;
-                        node.material.metalness = params.metalness;
-                    }
-                });
-            }
+    const envFolder = gui.addFolder('Environment');
+    envFolder.add(params, 'hdri', ['01.jpg', '02.jpg', '03.jpg']).name('Select HDRI').onChange(switchHdri);
+    envFolder.add(params, 'hdrIntensity', 0, 5, 0.05).name('HDR Intensity').onChange((value) => {
+        scene.environmentIntensity = value;
+    });
+    envFolder.add(params, 'exposure', 0, 4, 0.1).name('Exposure').onChange((value) => {
+        renderer.toneMappingExposure = value;
+    });
 
-            const rgbeLoader = new THREE.RGBELoader().setPath('sample/hdri/');
-            
-            function switchHdri(filename) {
-                loadingIndicator.style.display = 'block';
-                if (scene.environment) {
-                    scene.environment.dispose();
-                }
+    const sunFolder = gui.addFolder('Sun Light');
+    sunFolder.add(params, 'sunIntensity', 0, 5, 0.05).name('Sun Intensity').onChange((value) => {
+        dirLight.intensity = value;
+    });
+    sunFolder.add(dirLight.position, 'x', -20, 20, 0.5).name('Sun X');
+    sunFolder.add(dirLight.position, 'y', -20, 20, 0.5).name('Sun Y');
+    sunFolder.add(dirLight.position, 'z', -20, 20, 0.5).name('Sun Z');
 
-                rgbeLoader.load(filename, function (texture) {
-                    texture.mapping = THREE.EquirectangularReflectionMapping;
-                    
-                    scene.environment = texture;
-                    scene.background = texture;
-                    scene.environmentIntensity = params.hdrIntensity;
-                    
-                    loadingIndicator.style.display = 'none';
-                });
-            }
-            
-            switchHdri(params.hdri);
-            loadModel();
-            
-            function loadModel() {
-                const loader = new THREE.GLTFLoader().setPath('sample/sample01/');
-                loader.load('scene.gltf', (gltf) => {
-                    loadedModel = gltf.scene;
-                    updateMaterials(); 
-                    
-                    loadedModel.traverse(node => {
-                        if (node.isMesh) {
-                            node.castShadow = true;
-                            node.receiveShadow = true;
-                        }
-                    });
-                    
-                    const box = new THREE.Box3().setFromObject(loadedModel);
-                    const center = box.getCenter(new THREE.Vector3());
-                    const size = box.getSize(new THREE.Vector3());
-                    
-                    const maxDim = Math.max(size.x, size.y, size.z);
-                    const fov = camera.fov * (Math.PI / 180);
-                    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-                    cameraZ *= 1.5;
+    const cameraFolder = gui.addFolder('Camera');
+    cameraFolder.add(params, 'cameraFov', 25, 120, 1).name('Field of View').onChange((value) => {
+        camera.fov = value;
+        camera.updateProjectionMatrix();
+    });
 
-                    camera.near = maxDim / 100;
-                    camera.far = maxDim * 100;
-                    camera.updateProjectionMatrix();
+    const qualityFolder = gui.addFolder('Renderer Quality');
+    qualityFolder.add(params, 'shadowDarkness', 0, 1, 0.01).name('Shadow Darkness').onChange(value => ambientLight.intensity = value);
 
-                    camera.position.set(center.x, center.y + size.y * 0.2, center.z + cameraZ);
-                    
-                    controls.target.copy(center);
-                    loadedModel.position.sub(center); 
-                    
-                    controls.update();
-                    scene.add(loadedModel);
-                });
-            }
+    let loadedModel;
 
-            function animate() {
-                requestAnimationFrame(animate);
-                controls.update();
-                renderer.render(scene, camera);
-            }
-            animate();
+    const textureLoader = new THREE.TextureLoader().setPath('sample/hdri/');
 
-            function onWindowResize() {
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            }
-            window.addEventListener('resize', onWindowResize);
+    function switchHdri(filename) {
+        loadingIndicator.style.display = 'block';
+        textureLoader.load(filename, function (texture) {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.encoding = THREE.sRGBEncoding;
 
-            const fullscreenBtn = document.getElementById('fullscreen-btn');
-            fullscreenBtn.addEventListener('click', () => {
-                if (!document.fullscreenElement) {
-                    container.requestFullscreen().catch(err => {
-                        alert(`Error: ${err.message}`);
-                    });
-                } else {
-                    document.exitFullscreen();
-                }
-            });
-            
-            document.addEventListener('fullscreenchange', () => {
-                onWindowResize();
-                fullscreenBtn.textContent = document.fullscreenElement ? 'Exit Fullscreen' : 'Go Fullscreen';
-            });
+            scene.environment = texture;
+            scene.background = texture;
+            scene.environmentIntensity = params.hdrIntensity;
+
+            loadingIndicator.style.display = 'none';
         });
-    </script>
+    }
+
+    switchHdri(params.hdri);
+    loadModel();
+
+    function loadModel() {
+        const loader = new THREE.GLTFLoader().setPath('sample/sample01/');
+        loader.load('scene.gltf', (gltf) => {
+            loadedModel = gltf.scene;
+
+            loadedModel.traverse(node => {
+                if (node.isMesh) {
+                    node.castShadow = true;
+                    node.receiveShadow = true;
+                }
+            });
+
+            const box = new THREE.Box3().setFromObject(loadedModel);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+            cameraZ *= 1.5;
+
+            camera.near = maxDim / 100;
+            camera.far = maxDim * 100;
+            camera.updateProjectionMatrix();
+
+            camera.position.set(center.x, center.y + size.y * 0.2, center.z + cameraZ);
+
+            controls.target.copy(center);
+            loadedModel.position.sub(center);
+
+            controls.update();
+            scene.add(loadedModel);
+        });
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    function onWindowResize() {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+    window.addEventListener('resize', onWindowResize);
+
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            container.requestFullscreen().catch(err => {
+                alert(`Error: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+        onWindowResize();
+        fullscreenBtn.textContent = document.fullscreenElement ? 'Exit Fullscreen' : 'Go Fullscreen';
+    });
+});
+</script>
+
+
 
 </body>
 
