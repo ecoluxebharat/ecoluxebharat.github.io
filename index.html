@@ -1,407 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temporarily Down for Maintenance</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #1a535c;
-            --secondary-color: #287680;
-            --accent-color: #4ecdc4;
-            --text-color: #f7fff7;
-            --shadow-color: rgba(0, 0, 0, 0.2);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temporarily Down for Maintenance</title>
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-            flex-direction: column;
-            padding: 20px;
-            box-sizing: border-box;
-            background-image: radial-gradient(circle at 10% 20%, var(--primary-color) 0%, var(--secondary-color) 100%);
-            animation: fadeIn 1s ease-in-out;
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
 
-        .container {
-            padding: 4rem 2rem;
-            background-color: var(--secondary-color);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow-color);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            max-width: 600px;
-            width: 100%;
-            transition: transform 0.3s ease-in-out;
-        }
+  <style>
+    :root {
+      --primary-color: #1a535c;
+      --secondary-color: #287680;
+      --accent-color: #4ecdc4;
+      --text-color: #f7fff7;
+      --shadow-color: rgba(0, 0, 0, 0.2);
+      --dark-ink: #0b1f22;
+      --ui-bg: rgba(255, 255, 255, 0.06);
+    }
 
-        .container:hover {
-            transform: translateY(-5px);
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        .icon {
-            font-size: 4rem;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      flex-direction: column;
+      padding: 24px;
+      background-image: radial-gradient(
+        circle at 10% 20%,
+        var(--primary-color) 0%,
+        var(--secondary-color) 100%
+      );
+      animation: fadeIn 0.8s ease-in-out;
+      gap: 20px;
+    }
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0 0 1rem;
-            letter-spacing: -1px;
-        }
+    .container {
+      padding: 2.75rem 1.75rem;
+      background-color: var(--secondary-color);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      transition: transform 0.3s ease-in-out;
+    }
 
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-            opacity: 0.8;
-        }
+    .container:hover {
+      transform: translateY(-4px);
+    }
 
-        .countdown {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            margin-top: 1.5rem;
-            padding: 1rem;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.05);
-            display: inline-block;
-            min-width: 250px;
-        }
+    .icon {
+      font-size: 3.25rem;
+      color: var(--accent-color);
+      margin-bottom: 1.25rem;
+      animation: pulse 2s infinite;
+    }
 
-        .countdown span {
-            display: inline-block;
-            margin: 0 0.5rem;
-        }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.5px;
+    }
 
-        .countdown .label {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            display: block;
-            margin-top: 0.2rem;
-            font-weight: 400;
-        }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin: 0.25rem 0 1.1rem;
+      opacity: 0.9;
+    }
 
-        .contact-link {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.3s ease-in-out;
-            border-bottom: 2px solid transparent;
-            padding-bottom: 2px;
-        }
+    .countdown {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.05);
+      display: inline-block;
+      min-width: 260px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        .contact-link:hover {
-            color: #2980b9;
-            border-color: #2980b9;
-        }
-        
-        /* Game Styles */
-        .game-container {
-            margin-top: 2rem;
-            background-color: #000;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            width: 100%;
-            aspect-ratio: 2 / 1;
-            position: relative;
-        }
-        
-        #gameCanvas {
-            width: 100%;
-            height: 100%;
-            background-color: #287680;
-            border-radius: 10px;
-            display: block;
-            border: 2px solid var(--accent-color);
-        }
+    .countdown span {
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    .countdown .label {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      display: block;
+      margin-top: 0.2rem;
+      font-weight: 400;
+    }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+    .contact-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 2px;
+    }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
+    .contact-link:hover {
+      color: #2dbeb5;
+      border-color: #2dbeb5;
+    }
 
-            .container {
-                padding: 3rem 1.5rem;
-            }
+    /* Game area */
+    .game-card {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #0f373b, #164a50);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px var(--shadow-color);
+      padding: 14px;
+      position: relative;
+    }
 
-            .countdown span {
-                display: block;
-                margin: 0.5rem 0;
-            }
-        }
-    </style>
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 4px 2px 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .game-title {
+      font-size: 1rem;
+      margin: 0;
+      opacity: 0.9;
+      letter-spacing: 0.3px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: var(--ui-bg);
+      color: var(--text-color);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font: 600 0.9rem 'Inter', sans-serif;
+      cursor: pointer;
+      transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease;
+      user-select: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .canvas-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      background: #287680;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid var(--accent-color);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      /* The JS will set internal resolution for HiDPI */
+    }
+
+    /* HUD overlay */
+    .hud {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      color: var(--text-color);
+      font-weight: 700;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    .hud .score {
+      font-size: 1rem;
+    }
+
+    .hud .hi {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+
+    /* On-screen mobile action buttons */
+    .action-bar {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .action-button {
+      pointer-events: auto;
+      min-width: 110px;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-color);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      font: 700 0.95rem 'Inter', sans-serif;
+      backdrop-filter: blur(6px);
+      user-select: none;
+    }
+
+    .center-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.45);
+      color: var(--text-color);
+      padding: 20px;
+    }
+
+    .center-overlay.show {
+      display: flex;
+    }
+
+    .overlay-card {
+      background: rgba(10, 25, 27, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 16px 18px;
+      width: min(92%, 520px);
+    }
+
+    .overlay-title {
+      margin: 0 0 6px;
+      font-size: 1.3rem;
+    }
+
+    .overlay-text {
+      margin: 8px 0 12px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.95;
+    }
+
+    .kbd {
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1px 6px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin: 0 3px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8rem; }
+      .container { padding: 2.25rem 1.25rem; }
+      .countdown span { display: block; margin: 0.35rem 0; }
+      .hud .score, .hud .hi { font-size: 0.95rem; }
+      .game-header { gap: 6px; }
+      .btn { padding: 7px 10px; font-size: 0.85rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Using a Unicode character for a sleek icon -->
-        <div class="icon">⚙️</div>
-        <h1>Temporarily Under Maintenance</h1>
-        <p>
-            We're working on some important upgrades to improve your experience. We apologize for any inconvenience this may cause.
-        </p>
-        <div class="countdown" id="countdown">
-            <!-- Countdown will be rendered here by JavaScript -->
+  <div class="container" aria-live="polite">
+    <div class="icon">⚙️</div>
+    <h1>Temporarily Under Maintenance</h1>
+    <p>We're working on upgrades to improve the experience and will be back soon.</p>
+    <div class="countdown" id="countdown"></div>
+    <p>
+      For urgent inquiries, please
+      <a href="mailto:contact@yourwebsite.com" class="contact-link">contact us</a>.
+    </p>
+  </div>
+
+  <div class="game-card">
+    <div class="game-header">
+      <p class="game-title">Endless Runner Mini‑Game</p>
+      <div class="controls" role="group" aria-label="Game controls">
+        <button class="btn" id="pauseBtn" type="button">Pause (P)</button>
+        <button class="btn" id="muteBtn" type="button">Mute (M)</button>
+        <button class="btn" id="restartBtn" type="button">Restart (R)</button>
+      </div>
+    </div>
+
+    <div class="canvas-wrap" id="canvasWrap">
+      <canvas id="gameCanvas"></canvas>
+
+      <div class="hud" aria-hidden="true">
+        <div class="score" id="scoreHud">Score: 0</div>
+        <div class="hi" id="hiHud">Best: 0</div>
+      </div>
+
+      <div class="center-overlay" id="overlay">
+        <div class="overlay-card">
+          <h3 class="overlay-title" id="overlayTitle">Ready</h3>
+          <p class="overlay-text" id="overlayText">
+            Press <span class="kbd">Space</span> or tap Jump to start, jump over obstacles, and aim for a new high score. Use
+            <span class="kbd">P</span> to pause and <span class="kbd">M</span> to mute. On mobile, use the on‑screen buttons.
+          </p>
+          <div class="controls" style="justify-content:center;">
+            <button class="btn" id="overlayStart">Start</button>
+          </div>
         </div>
-        <p>
-            For urgent inquiries, you can <a href="mailto:contact@yourwebsite.com" class="contact-link">contact us directly</a>.
-        </p>
+      </div>
+
+      <div class="action-bar" aria-hidden="false">
+        <button class="action-button" id="jumpBtn" type="button">Jump</button>
+        <button class="action-button" id="pauseBtn2" type="button">Pause</button>
+        <button class="action-button" id="restartBtn2" type="button">Restart</button>
+      </div>
     </div>
+  </div>
 
-    <div class="game-container">
-        <canvas id="gameCanvas"></canvas>
-    </div>
+  <script>
+    // ----------------------------
+    // Countdown
+    // ----------------------------
+    const countdownElement = document.getElementById('countdown');
+    const maintenanceDate = new Date('November 1, 2025 00:00:00').getTime();
+    const updateCountdown = () => {
+      const now = Date.now();
+      const distance = maintenanceDate - now;
+      if (distance < 0) {
+        countdownElement.textContent = "We're back!";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownElement.innerHTML = `
+        <span>${days}<span class="label">Days</span></span>
+        <span>${hours}<span class="label">Hours</span></span>
+        <span>${minutes}<span class="label">Minutes</span></span>
+        <span>${seconds}<span class="label">Seconds</span></span>
+      `;
+    };
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 
-    <script>
-        const countdownElement = document.getElementById('countdown');
-        const maintenanceDate = new Date("November 1, 2025 00:00:00").getTime();
+    // ----------------------------
+    // Game
+    // ----------------------------
+    const canvas = document.getElementById('gameCanvas');
+    const wrap = document.getElementById('canvasWrap');
+    let ctx;
 
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = maintenanceDate - now;
+    // HUD
+    const scoreHud = document.getElementById('scoreHud');
+    const hiHud = document.getElementById('hiHud');
 
-            if (distance < 0) {
-                countdownElement.innerHTML = "We're back!";
-                clearInterval(interval);
-                return;
-            }
+    // Overlay
+    const overlay = document.getElementById('overlay');
+    const overlayTitle = document.getElementById('overlayTitle');
+    const overlayText = document.getElementById('overlayText');
+    const overlayStart = document.getElementById('overlayStart');
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Buttons
+    const pauseBtn = document.getElementById('pauseBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const muteBtn = document.getElementById('muteBtn');
 
-            countdownElement.innerHTML = `
-                <span>${days}<span class="label">Days</span></span>
-                <span>${hours}<span class="label">Hours</span></span>
-                <span>${minutes}<span class="label">Minutes</span></span>
-                <span>${seconds}<span class="label">Seconds</span></span>
-            `;
-        };
+    const jumpBtn = document.getElementById('jumpBtn');
+    const pauseBtn2 = document.getElementById('pauseBtn2');
+    const restartBtn2 = document.getElementById('restartBtn2');
 
-        updateCountdown();
-        const interval = setInterval(updateCountdown, 1000);
+    // HiDPI setup
+    function setupHiDPI() {
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const rect = wrap.getBoundingClientRect();
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      ctx = canvas.getContext('2d');
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr); // Keep drawing in CSS pixels, sharp on HiDPI
+    }
 
-        // --- Dino Game Logic ---
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        let ball, obstacles, score, gameSpeed, gameOver, animationFrameId;
-        
-        const gameData = {
-            ball: {
-                x: 50,
-                y: 100,
-                radius: 15,
-                color: '#f7fff7',
-                velocityY: 0,
-                gravity: 0.5,
-                jumpForce: -10,
-                isJumping: false
-            },
-            groundY: 100,
-            obstacles: {
-                minGap: 400,
-                maxGap: 800,
-                color: '#111',
-                minWidth: 10,
-                maxWidth: 20,
-                minHeight: 20,
-                maxHeight: 50
-            },
-            game: {
-                speed: 3,
-                scoreIncrement: 0.1,
-                speedIncrement: 0.002
-            }
-        };
+    // Game state
+    const state = {
+      mode: 'ready', // 'ready' | 'playing' | 'paused' | 'gameover'
+      muted: false,
+      score: 0,
+      hi: Number(localStorage.getItem('runner_hi') || 0),
+      speed: 340,           // px/s starting speed
+      speedRamp: 0.035,     // speed gain per second
+      gravity: 1600,        // px/s^2
+      jumpVel: -580,        // px/s
+      groundY: 0,           // set on resize
+      lastTs: 0,
+      spawnTimer: 0,
+      spawnInterval: 1.0,   // seconds, will vary
+      clouds: [],
+      grounds: [],
+      obstacles: [],
+      particles: []
+    };
 
-        function resizeCanvas() {
-            canvas.width = canvas.parentElement.clientWidth;
-            canvas.height = canvas.parentElement.clientHeight;
-            gameData.groundY = canvas.height - 50;
-        }
+    // Player (ball)
+    const player = {
+      x: 60,
+      y: 0,
+      r: 16,
+      vy: 0,
+      jumping: false
+    };
 
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+    // Audio (WebAudio basic)
+    let audioCtx = null;
+    function beep(freq, dur, type = 'sine', vol = 0.03) {
+      if (state.muted) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = type;
+        o.frequency.value = freq;
+        g.gain.value = vol;
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start();
+        o.stop(audioCtx.currentTime + dur);
+      } catch {}
+    }
 
-        function createBall() {
-            ball = {
-                ...gameData.ball,
-                y: gameData.groundY - gameData.ball.radius
-            };
-        }
+    // Helpers
+    function rand(a, b) { return Math.random() * (b - a) + a; }
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
-        function createObstacle() {
-            const width = Math.random() * (gameData.obstacles.maxWidth - gameData.obstacles.minWidth) + gameData.obstacles.minWidth;
-            const height = Math.random() * (gameData.obstacles.maxHeight - gameData.obstacles.minHeight) + gameData.obstacles.minHeight;
-            const x = canvas.width + Math.random() * (gameData.obstacles.maxGap - gameData.obstacles.minGap) + gameData.obstacles.minGap;
-            const y = gameData.groundY - height;
-            obstacles.push({ x, y, width, height, color: gameData.obstacles.color });
-        }
+    function circleRectCollide(cx, cy, r, rx, ry, rw, rh) {
+      const nx = clamp(cx, rx, rx + rw);
+      const ny = clamp(cy, ry, ry + rh);
+      const dx = cx - nx;
+      const dy = cy - ny;
+      return (dx * dx + dy * dy) <= r * r;
+    }
 
-        function drawObstacle(ctx, obstacle) {
-            ctx.fillStyle = obstacle.color;
-            // Draw cylinder body (rectangle)
-            ctx.fillRect(obstacle.x, obstacle.y + obstacle.width/2, obstacle.width, obstacle.height);
-            
-            // Draw cylinder top (ellipse)
-            ctx.beginPath();
-            ctx.ellipse(obstacle.x + obstacle.width / 2, obstacle.y + obstacle.width/2, obstacle.width / 2, obstacle.width / 4, 0, 0, 2 * Math.PI);
-            ctx.fill();
-        }
+    // Spawners
+    function spawnCloud(width) {
+      const size = rand(30, 80);
+      state.clouds.push({
+        x: width + rand(0, 200),
+        y: rand(20, 120),
+        w: size,
+        h: size * 0.6,
+        speed: rand(18, 40)
+      });
+    }
 
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw ground
-            ctx.fillStyle = '#f7fff7';
-            ctx.fillRect(0, gameData.groundY - 2, canvas.width, 2);
+    function spawnGround(width) {
+      // Ground tile segment for mild parallax
+      const segW = rand(90, 160);
+      state.grounds.push({
+        x: width + rand(0, 60),
+        w: segW,
+        h: 6,
+        speed: state.speed * 0.9
+      });
+    }
 
-            // Draw Ball
-            ctx.fillStyle = ball.color;
-            ctx.beginPath();
-            ctx.arc(ball.x + ball.radius, ball.y + ball.radius, ball.radius, 0, 2 * Math.PI);
-            ctx.fill();
+    function spawnObstacle(width) {
+      const type = Math.random() < 0.5 ? 'cylinder' : 'box';
+      const w = type === 'cylinder' ? rand(16, 28) : rand(22, 36);
+      const h = type === 'cylinder' ? rand(26, 60) : rand(28, 46);
+      const gapMin = 260;
+      const gapMax = 420;
+      const x = width + rand(gapMin, gapMax);
+      const y = state.groundY - h;
+      state.obstacles.push({ type, x, y, w, h, color: '#0f1a1c' });
+      // Next spawn interval varies slightly with speed to keep challenge balanced
+      state.spawnInterval = clamp(0.7 - (state.speed - 340) / 1200, 0.45, 0.9);
+    }
 
-            // Draw obstacles
-            obstacles.forEach(obstacle => {
-                drawObstacle(ctx, obstacle);
-            });
-            
-            // Draw score
-            ctx.fillStyle = '#f7fff7';
-            ctx.font = '20px Inter';
-            ctx.textAlign = 'right';
-            ctx.fillText(`Score: ${Math.floor(score)}`, canvas.width - 20, 30);
-        }
-
-        function update() {
-            // Update Ball position
-            ball.y += ball.velocityY;
-            ball.velocityY += ball.gravity;
-            if (ball.y + ball.radius * 2 > gameData.groundY) {
-                ball.y = gameData.groundY - ball.radius * 2;
-                ball.velocityY = 0;
-                ball.isJumping = false;
-            }
-
-            // Update obstacle positions
-            obstacles.forEach(obstacle => {
-                obstacle.x -= gameSpeed;
-            });
-            obstacles = obstacles.filter(obstacle => obstacle.x + obstacle.width > 0);
-            
-            // Generate new obstacles
-            const lastObstacle = obstacles[obstacles.length - 1];
-            if (!lastObstacle || lastObstacle.x < canvas.width - Math.random() * (gameData.obstacles.maxGap - gameData.obstacles.minGap) + gameData.obstacles.minGap) {
-                 createObstacle();
-            }
-
-            // Check for collision (using bounding boxes)
-            obstacles.forEach(obstacle => {
-                if (
-                    ball.x + ball.radius > obstacle.x &&
-                    ball.x - ball.radius < obstacle.x + obstacle.width &&
-                    ball.y + ball.radius * 2 > obstacle.y
-                ) {
-                    gameOver = true;
-                }
-            });
-            
-            score += gameData.game.scoreIncrement;
-            gameSpeed += gameData.game.speedIncrement;
-        }
-
-        function gameLoop(currentTime) {
-            if (gameOver) {
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                ctx.fillStyle = '#f7fff7';
-                ctx.font = '30px Inter';
-                ctx.textAlign = 'center';
-                ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
-
-                ctx.font = '20px Inter';
-                ctx.fillText(`Final Score: ${Math.floor(score)}`, canvas.width / 2, canvas.height / 2 + 20);
-                ctx.fillText('Tap or press space to restart', canvas.width / 2, canvas.height / 2 + 50);
-                return;
-            }
-            
-            update();
-            draw();
-            animationFrameId = requestAnimationFrame(gameLoop);
-        }
-
-        function startGame() {
-            cancelAnimationFrame(animationFrameId);
-            createBall();
-            obstacles = [];
-            score = 0;
-            gameSpeed = gameData.game.speed;
-            gameOver = false;
-            createObstacle();
-            gameLoop(0);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' && !ball.isJumping) {
-                ball.velocityY = ball.jumpForce;
-                ball.isJumping = true;
-            }
-            if (e.code === 'Space' && gameOver) {
-                startGame();
-            }
+    function spawnDust(x, y, count = 8) {
+      for (let i = 0; i < count; i++) {
+        state.particles.push({
+          x: x + rand(-4, 4),
+          y: y + rand(-2, 2),
+          vx: rand(-60, 60),
+          vy: rand(-120, -40),
+          life: rand(0.25, 0.45)
         });
-        
-        canvas.addEventListener('mousedown', () => {
-            if (!ball.isJumping) {
-                ball.velocityY = ball.jumpForce;
-                ball.isJumping = true;
-            }
-            if (gameOver) {
-                startGame();
-            }
-        });
+      }
+    }
 
-        canvas.addEventListener('touchstart', (e) => {
-            e.preventDefault(); // Prevent scrolling
-            if (!ball.isJumping) {
-                ball.velocityY = ball.jumpForce;
-                ball.isJumping = true;
-            }
-            if (gameOver) {
-                startGame();
-            }
-        });
-        
+    // Resize
+    function resize() {
+      setupHiDPI();
+      const cssW = wrap.clientWidth;
+      const cssH = wrap.clientHeight;
+      state.groundY = cssH - 50;
+      if (player.y === 0) {
+        player.y = state.groundY - player.r * 2;
+      }
+    }
+
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+
+    // Draw
+    function drawBackground(w, h, dt) {
+      // Sky gradient
+      const g = ctx.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#1c5e66');
+      g.addColorStop(1, '#287680');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      // Parallax dots (simple stars/sea-sparkles vibe)
+      ctx.globalAlpha = 0.15;
+      ctx.fillStyle = '#ffffff';
+      for (let i = 0; i < 30; i++) {
+        const px = (i * 31) % w;
+        const py = (i * 53) % Math.floor(h * 0.6);
+        ctx.fillRect(px, py, 2, 2);
+      }
+      ctx.globalAlpha = 1;
+
+      // Clouds
+      const cssW = wrap.clientWidth;
+      for (const c of state.clouds) {
+        c.x -= c.speed * dt;
+      }
+      state.clouds = state.clouds.filter(c => c.x + c.w > -10);
+      if (state.clouds.length < 6) spawnCloud(cssW);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      for (const c of state.clouds) {
+        roundedRect(c.x, c.y, c.w, c.h, Math.min(12, c.h / 2));
+        ctx.fill();
+      }
+    }
+
+    function roundedRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function drawGround(w, dt) {
+      // Base ground line
+      ctx.fillStyle = '#f7fff7';
+      ctx.fillRect(0, state.groundY - 2, w, 2);
+
+      // Segments parallax
+      for (const g of state.grounds) {
+        g.x -= g.speed * dt;
+      }
+      state.grounds = state.grounds.filter(g => g.x + g.w > -10);
+      if (state.grounds.length < 12) spawnGround(w);
+
+      ctx.fillStyle = 'rgba(247, 255, 247, 0.6)';
+      for (const g of state.grounds) {
+        ctx.fillRect(g.x, state.groundY - g.h, g.w, g.h);
+      }
+    }
+
+    function drawPlayer() {
+      ctx.fillStyle = '#f7fff7';
+      ctx.beginPath();
+      ctx.arc(player.x + player.r, player.y + player.r, player.r, 0, Math.PI * 2);
+      ctx.fill();
+      // Shadow
+      ctx.globalAlpha = 0.15;
+      ctx.fillStyle = '#000';
+      const shadowW = player.r * 2.1;
+      ctx.beginPath();
+      ctx.ellipse(
+        player.x + player.r, state.groundY - 4, shadowW * 0.6, shadowW * 0.25, 0, 0, Math.PI * 2
+      );
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+
+    function drawObstacle(o) {
+      ctx.fillStyle = o.color;
+      if (o.type === 'cylinder') {
+        // Body
+        ctx.fillRect(o.x, o.y + o.w / 2, o.w, o.h);
+        // Top ellipse
+        ctx.beginPath();
+        ctx.ellipse(o.x + o.w / 2, o.y + o.w / 2, o.w / 2, o.w / 4, 0, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Box
+        roundedRect(o.x, o.y, o.w, o.h, Math.min(6, o.w * 0.25));
+        ctx.fill();
+      }
+    }
+
+    function drawParticles(dt) {
+      ctx.fillStyle = 'rgba(247,255,247,0.8)';
+      for (const p of state.particles) {
+        p.x += p.vx * dt;
+        p.y += p.vy * dt;
+        p.vy += state.gravity * 0.7 * dt;
+        p.life -= dt;
+        ctx.globalAlpha = Math.max(0, p.life * 2);
+        ctx.fillRect(p.x, p.y, 2, 2);
+      }
+      ctx.globalAlpha = 1;
+      state.particles = state.particles.filter(p => p.life > 0);
+    }
+
+    function update(dt) {
+      const w = wrap.clientWidth;
+
+      // Increase difficulty over time
+      state.speed += state.speedRamp * state.speed * dt;
+      state.spawnTimer += dt;
+
+      // Spawn obstacles
+      if (state.spawnTimer >= state.spawnInterval) {
+        spawnObstacle(w);
+        state.spawnTimer = 0;
+      }
+
+      // Update player physics
+      player.y += player.vy * dt;
+      player.vy += state.gravity * dt;
+
+      // Ground collision
+      const floor = state.groundY - player.r * 2;
+      if (player.y > floor) {
+        if (player.jumping) {
+          spawnDust(player.x + player.r, state.groundY - 6, 10);
+        }
+        player.y = floor;
+        player.vy = 0;
+        player.jumping = false;
+      }
+
+      // Obstacles
+      for (const o of state.obstacles) {
+        o.x -= state.speed * dt;
+      }
+      state.obstacles = state.obstacles.filter(o => o.x + o.w > -10);
+
+      // Collisions
+      const cx = player.x + player.r;
+      const cy = player.y + player.r;
+      for (const o of state.obstacles) {
+        if (circleRectCollide(cx, cy, player.r, o.x, o.y, o.w, o.h)) {
+          gameOver();
+          return;
+        }
+      }
+
+      // Score
+      state.score += dt * 10;
+      scoreHud.textContent = 'Score: ' + Math.floor(state.score);
+      hiHud.textContent = 'Best: ' + Math.floor(state.hi);
+    }
+
+    function draw(dt) {
+      const w = wrap.clientWidth;
+      const h = wrap.clientHeight;
+
+      // Clear
+      ctx.clearRect(0, 0, w, h);
+
+      // World
+      drawBackground(w, h, dt);
+      drawGround(w, dt);
+
+      // Entities
+      for (const o of state.obstacles) drawObstacle(o);
+      drawPlayer();
+      drawParticles(dt);
+    }
+
+    // Loop
+    let rafId = 0;
+    function loop(ts) {
+      if (state.mode !== 'playing') return;
+      if (!state.lastTs) state.lastTs = ts;
+      let dt = (ts - state.lastTs) / 1000;
+      state.lastTs = ts;
+      // Clamp dt to avoid simulation spikes
+      dt = Math.min(dt, 0.05);
+
+      update(dt);
+      draw(dt);
+
+      rafId = requestAnimationFrame(loop);
+    }
+
+    // Actions
+    function startGame() {
+      cancelAnimationFrame(rafId);
+      state.mode = 'playing';
+      overlay.classList.remove('show');
+
+      // Reset
+      state.score = 0;
+      state.speed = 340;
+      state.spawnTimer = 0;
+      state.spawnInterval = 1.0;
+      state.obstacles = [];
+      state.clouds = [];
+      state.grounds = [];
+      state.particles = [];
+      player.y = state.groundY - player.r * 2;
+      player.vy = 0;
+      player.jumping = false;
+
+      // Seed background
+      const w = wrap.clientWidth;
+      for (let i = 0; i < 6; i++) spawnCloud(w);
+      for (let i = 0; i < 12; i++) spawnGround(w);
+
+      state.lastTs = 0;
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function pauseGame() {
+      if (state.mode === 'playing') {
+        state.mode = 'paused';
+        overlay.classList.add('show');
+        overlayTitle.textContent = 'Paused';
+        overlayText.innerHTML =
+          'Press <span class="kbd">P</span> or Pause to resume, <span class="kbd">R</span> to restart.';
+      } else if (state.mode === 'paused') {
+        state.mode = 'playing';
+        overlay.classList.remove('show');
+        state.lastTs = 0;
+        rafId = requestAnimationFrame(loop);
+      }
+    }
+
+    function gameOver() {
+      state.mode = 'gameover';
+      cancelAnimationFrame(rafId);
+      beep(180, 0.18, 'sawtooth', 0.04);
+      spawnDust(player.x + player.r, state.groundY - 6, 16);
+      // Update high score
+      if (state.score > state.hi) {
+        state.hi = state.score;
+        localStorage.setItem('runner_hi', String(Math.floor(state.hi)));
+      }
+      overlay.classList.add('show');
+      overlayTitle.textContent = 'Game Over';
+      overlayText.innerHTML =
+        'Final Score: <b>' + Math.floor(state.score) +
+        '</b><br/>Press <span class="kbd">Space</span> or <span class="kbd">R</span> to restart.';
+    }
+
+    function jump() {
+      if (state.mode === 'ready') {
         startGame();
-    </script>
+        return;
+      }
+      if (state.mode !== 'playing') return;
+      if (!player.jumping) {
+        player.vy = state.jumpVel;
+        player.jumping = true;
+        beep(440, 0.08, 'square', 0.03);
+      }
+    }
+
+    function restart() {
+      overlay.classList.remove('show');
+      startGame();
+    }
+
+    function toggleMute() {
+      state.muted = !state.muted;
+      muteBtn.textContent = state.muted ? 'Unmute (M)' : 'Mute (M)';
+    }
+
+    // Input
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (state.mode === 'gameover') restart();
+        else jump();
+      } else if (e.code === 'KeyP') {
+        pauseGame();
+      } else if (e.code === 'KeyR') {
+        restart();
+      } else if (e.code === 'KeyM') {
+        toggleMute();
+      }
+    });
+
+    // Click / touch
+    jumpBtn.addEventListener('click', () => {
+      if (state.mode === 'gameover') restart();
+      else jump();
+    });
+    pauseBtn2.addEventListener('click', pauseGame);
+    restartBtn2.addEventListener('click', restart);
+
+    pauseBtn.addEventListener('click', pauseGame);
+    restartBtn.addEventListener('click', restart);
+    muteBtn.addEventListener('click', toggleMute);
+    overlayStart.addEventListener('click', startGame);
+
+    canvas.addEventListener('mousedown', () => {
+      if (state.mode === 'gameover') restart();
+      else jump();
+    });
+    canvas.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      if (state.mode === 'gameover') restart();
+      else jump();
+    }, { passive: false });
+
+    // Initialize overlay
+    overlay.classList.add('show');
+    overlayTitle.textContent = 'Ready';
+    overlayText.innerHTML =
+      'Press <span class="kbd">Space</span> or tap Jump to start, jump over obstacles, and aim for a new high score.';
+
+  </script>
 </body>
 </html>
