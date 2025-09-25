@@ -108,6 +108,27 @@
             color: #2980b9;
             border-color: #2980b9;
         }
+        
+        /* Game Styles */
+        .game-container {
+            margin-top: 2rem;
+            background-color: #000;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+            aspect-ratio: 2 / 1;
+            position: relative;
+        }
+        
+        #gameCanvas {
+            width: 100%;
+            height: 100%;
+            background-color: #287680;
+            border-radius: 10px;
+            display: block;
+            border: 2px solid var(--accent-color);
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -152,6 +173,10 @@
         </p>
     </div>
 
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
     <script>
         const countdownElement = document.getElementById('countdown');
         const maintenanceDate = new Date("November 1, 2025 00:00:00").getTime();
@@ -181,6 +206,202 @@
 
         updateCountdown();
         const interval = setInterval(updateCountdown, 1000);
+
+        // --- Dino Game Logic ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let ball, obstacles, score, gameSpeed, gameOver, animationFrameId;
+        
+        const gameData = {
+            ball: {
+                x: 50,
+                y: 100,
+                radius: 15,
+                color: '#f7fff7',
+                velocityY: 0,
+                gravity: 0.5,
+                jumpForce: -10,
+                isJumping: false
+            },
+            groundY: 100,
+            obstacles: {
+                minGap: 400,
+                maxGap: 800,
+                color: '#111',
+                minWidth: 10,
+                maxWidth: 20,
+                minHeight: 20,
+                maxHeight: 50
+            },
+            game: {
+                speed: 3,
+                scoreIncrement: 0.1,
+                speedIncrement: 0.002
+            }
+        };
+
+        function resizeCanvas() {
+            canvas.width = canvas.parentElement.clientWidth;
+            canvas.height = canvas.parentElement.clientHeight;
+            gameData.groundY = canvas.height - 50;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function createBall() {
+            ball = {
+                ...gameData.ball,
+                y: gameData.groundY - gameData.ball.radius
+            };
+        }
+
+        function createObstacle() {
+            const width = Math.random() * (gameData.obstacles.maxWidth - gameData.obstacles.minWidth) + gameData.obstacles.minWidth;
+            const height = Math.random() * (gameData.obstacles.maxHeight - gameData.obstacles.minHeight) + gameData.obstacles.minHeight;
+            const x = canvas.width + Math.random() * (gameData.obstacles.maxGap - gameData.obstacles.minGap) + gameData.obstacles.minGap;
+            const y = gameData.groundY - height;
+            obstacles.push({ x, y, width, height, color: gameData.obstacles.color });
+        }
+
+        function drawObstacle(ctx, obstacle) {
+            ctx.fillStyle = obstacle.color;
+            // Draw cylinder body (rectangle)
+            ctx.fillRect(obstacle.x, obstacle.y + obstacle.width/2, obstacle.width, obstacle.height);
+            
+            // Draw cylinder top (ellipse)
+            ctx.beginPath();
+            ctx.ellipse(obstacle.x + obstacle.width / 2, obstacle.y + obstacle.width/2, obstacle.width / 2, obstacle.width / 4, 0, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw ground
+            ctx.fillStyle = '#f7fff7';
+            ctx.fillRect(0, gameData.groundY - 2, canvas.width, 2);
+
+            // Draw Ball
+            ctx.fillStyle = ball.color;
+            ctx.beginPath();
+            ctx.arc(ball.x + ball.radius, ball.y + ball.radius, ball.radius, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Draw obstacles
+            obstacles.forEach(obstacle => {
+                drawObstacle(ctx, obstacle);
+            });
+            
+            // Draw score
+            ctx.fillStyle = '#f7fff7';
+            ctx.font = '20px Inter';
+            ctx.textAlign = 'right';
+            ctx.fillText(`Score: ${Math.floor(score)}`, canvas.width - 20, 30);
+        }
+
+        function update() {
+            // Update Ball position
+            ball.y += ball.velocityY;
+            ball.velocityY += ball.gravity;
+            if (ball.y + ball.radius * 2 > gameData.groundY) {
+                ball.y = gameData.groundY - ball.radius * 2;
+                ball.velocityY = 0;
+                ball.isJumping = false;
+            }
+
+            // Update obstacle positions
+            obstacles.forEach(obstacle => {
+                obstacle.x -= gameSpeed;
+            });
+            obstacles = obstacles.filter(obstacle => obstacle.x + obstacle.width > 0);
+            
+            // Generate new obstacles
+            const lastObstacle = obstacles[obstacles.length - 1];
+            if (!lastObstacle || lastObstacle.x < canvas.width - Math.random() * (gameData.obstacles.maxGap - gameData.obstacles.minGap) + gameData.obstacles.minGap) {
+                 createObstacle();
+            }
+
+            // Check for collision (using bounding boxes)
+            obstacles.forEach(obstacle => {
+                if (
+                    ball.x + ball.radius > obstacle.x &&
+                    ball.x - ball.radius < obstacle.x + obstacle.width &&
+                    ball.y + ball.radius * 2 > obstacle.y
+                ) {
+                    gameOver = true;
+                }
+            });
+            
+            score += gameData.game.scoreIncrement;
+            gameSpeed += gameData.game.speedIncrement;
+        }
+
+        function gameLoop(currentTime) {
+            if (gameOver) {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#f7fff7';
+                ctx.font = '30px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2 - 20);
+
+                ctx.font = '20px Inter';
+                ctx.fillText(`Final Score: ${Math.floor(score)}`, canvas.width / 2, canvas.height / 2 + 20);
+                ctx.fillText('Tap or press space to restart', canvas.width / 2, canvas.height / 2 + 50);
+                return;
+            }
+            
+            update();
+            draw();
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+
+        function startGame() {
+            cancelAnimationFrame(animationFrameId);
+            createBall();
+            obstacles = [];
+            score = 0;
+            gameSpeed = gameData.game.speed;
+            gameOver = false;
+            createObstacle();
+            gameLoop(0);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && !ball.isJumping) {
+                ball.velocityY = ball.jumpForce;
+                ball.isJumping = true;
+            }
+            if (e.code === 'Space' && gameOver) {
+                startGame();
+            }
+        });
+        
+        canvas.addEventListener('mousedown', () => {
+            if (!ball.isJumping) {
+                ball.velocityY = ball.jumpForce;
+                ball.isJumping = true;
+            }
+            if (gameOver) {
+                startGame();
+            }
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent scrolling
+            if (!ball.isJumping) {
+                ball.velocityY = ball.jumpForce;
+                ball.isJumping = true;
+            }
+            if (gameOver) {
+                startGame();
+            }
+        });
+        
+        startGame();
     </script>
 </body>
 </html>
