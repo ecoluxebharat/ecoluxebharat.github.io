@@ -31,7 +31,6 @@
       margin: 0;
       color: var(--text-color);
       background: radial-gradient(circle at 10% 20%, var(--primary-color) 0%, var(--secondary-color) 100%);
-      /* Safe-area padding for phones with notches */
       padding:
         max(16px, env(safe-area-inset-top))
         max(16px, env(safe-area-inset-right))
@@ -41,7 +40,7 @@
       flex-direction: column;
       align-items: center;
       gap: 18px;
-      min-height: 100svh; /* stable height unit for mobile toolbars */
+      min-height: 100svh;
       animation: fadeIn 0.8s ease-in-out;
     }
 
@@ -108,11 +107,7 @@
 
     .game-title { margin: 0; font-size: 1rem; opacity: 0.9; letter-spacing: 0.2px; }
 
-    .controls {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    .controls { display: flex; gap: 8px; flex-wrap: wrap; }
 
     .btn {
       appearance: none;
@@ -129,9 +124,6 @@
     }
     .btn:hover { transform: translateY(-1px); background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.25); }
 
-    /* Canvas wrapper:
-       Desktop -> aspect-ratio
-       Mobile -> tall height using svh to prevent cramping */
     .canvas-wrap {
       position: relative;
       width: 100%;
@@ -142,7 +134,6 @@
       border: 2px solid var(--accent-color);
     }
 
-    /* Portrait / small screens: expand vertical space; hide header buttons to save space */
     @media (max-width: 680px) {
       .canvas-wrap {
         aspect-ratio: auto;
@@ -161,7 +152,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* HUD */
     .hud {
       position: absolute;
       top: calc(10px + env(safe-area-inset-top));
@@ -174,11 +164,9 @@
       font-weight: 700;
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     }
-    .hud .score, .hud .hi {
-      font-size: clamp(0.9rem, 2.6vw, 1.05rem);
-    }
+    .hud .score, .hud .hi { font-size: clamp(0.9rem, 2.6vw, 1.05rem); }
 
-    /* New: mobile controls row BELOW the canvas (no overlap) */
+    /* Mobile controls below the canvas */
     .mobile-controls {
       display: none;
       gap: 10px;
@@ -196,12 +184,11 @@
       backdrop-filter: blur(6px);
       font: 700 1rem 'Inter', sans-serif;
       padding: 12px 16px;
-      min-height: 52px; /* ≥44px recommended target size */
+      min-height: 52px;
       min-width: clamp(110px, 30vw, 220px);
     }
     #jumpBtn { flex: 1 1 auto; min-width: clamp(150px, 44vw, 280px); }
 
-    /* Overlay */
     .center-overlay {
       position: absolute;
       inset: 0;
@@ -273,7 +260,7 @@
       </div>
     </div>
 
-    <!-- New: mobile controls below the canvas (no overlap) -->
+    <!-- Mobile controls below the canvas -->
     <div class="mobile-controls" role="group" aria-label="Mobile game controls">
       <button class="action-button" id="jumpBtn" type="button">Jump</button>
       <button class="action-button" id="pauseBtn2" type="button">Pause</button>
@@ -330,16 +317,16 @@
     const restartBtn = document.getElementById('restartBtn');
     const muteBtn = document.getElementById('muteBtn');
 
-    // Mobile controls (below canvas)
+    // Mobile controls
     const jumpBtn = document.getElementById('jumpBtn');
     const pauseBtn2 = document.getElementById('pauseBtn2');
     const restartBtn2 = document.getElementById('restartBtn2');
 
-    // Queries for tuning
+    // Media queries for tuning
     const mqMobile = window.matchMedia('(max-width: 680px)');
     const mqCoarse = window.matchMedia('(pointer: coarse)');
 
-    // HiDPI setup
+    // HiDPI canvas
     function setupHiDPI() {
       const dpr = Math.max(1, window.devicePixelRatio || 1);
       const rect = wrap.getBoundingClientRect();
@@ -349,28 +336,32 @@
       canvas.style.height = rect.height + 'px';
       ctx = canvas.getContext('2d');
       ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr); // draw in CSS pixels, sharp on HiDPI
+      ctx.scale(dpr, dpr); // draw in CSS pixels for crispness
     }
 
     // Tunings
     const desktopTuning = {
-      speed: 300,          // was 340
-      speedRamp: 0.025,    // was 0.035
+      speed: 300,
+      speedRamp: 0.025,
       gravity: 1600,
-      jumpVel: -590,       // slightly stronger jump
-      spawnBase: 1.05,
-      gapMin: 300,         // wider gaps
-      gapMax: 500
+      jumpVel: -590,
+      cadencePad: 0.28,     // base extra time between obstacles
+      cadenceScale: 0.9,    // proportion of flight time to enforce
+      cadenceTallBonus: 0.18,
+      cadenceClampMin: 0.85,
+      cadenceClampMax: 1.6
     };
 
     const mobileTuning = {
-      speed: 240,          // slower on mobile
-      speedRamp: 0.018,    // gentler ramp
-      gravity: 1500,       // a bit lower for more airtime
-      jumpVel: -620,       // stronger jump for small screens
-      spawnBase: 1.25,     // fewer spawns
-      gapMin: 340,         // even wider gaps
-      gapMax: 560
+      speed: 240,
+      speedRamp: 0.018,
+      gravity: 1500,
+      jumpVel: -620,
+      cadencePad: 0.32,
+      cadenceScale: 0.95,
+      cadenceTallBonus: 0.2,
+      cadenceClampMin: 0.9,
+      cadenceClampMax: 1.8
     };
 
     function currentTuning() {
@@ -389,15 +380,14 @@
       gravity: 1600,
       jumpVel: -590,
       groundY: 0,
-      lastTs: 0,
-      spawnTimer: 0,
-      spawnInterval: 1.05,
-      gapMin: 300,
-      gapMax: 500,
+      time: 0,           // seconds since run start
+      lastTs: 0,         // rAF timestamp
+      nextSpawnAt: 1.0,  // next scheduled spawn time (sec)
       clouds: [],
       grounds: [],
       obstacles: [],
-      particles: []
+      particles: [],
+      lastObstacleTall: false
     };
 
     // Player
@@ -436,18 +426,31 @@
       const segW = rand(90, 160);
       state.grounds.push({ x: width + rand(0, 60), w: segW, h: 6, speed: state.speed * 0.9 });
     }
+
+    // New: schedule next spawn using jump cadence and Poisson-like spacing
+    function scheduleNextSpawn() {
+      const t = currentTuning();
+      const flight = 2 * Math.abs(state.jumpVel) / state.gravity; // s, jump up+down
+      const tallBonus = state.lastObstacleTall ? t.cadenceTallBonus : 0;
+      let minCadence = t.cadenceScale * flight + t.cadencePad + tallBonus;
+      minCadence = clamp(minCadence, t.cadenceClampMin, t.cadenceClampMax);
+      const maxCadence = minCadence + 0.55; // randomization window
+      state.nextSpawnAt = state.time + rand(minCadence, maxCadence);
+      state.lastObstacleTall = false; // reset until next spawn decides
+    }
+
     function spawnObstacle(width) {
       const type = Math.random() < 0.5 ? 'cylinder' : 'box';
       const w = type === 'cylinder' ? rand(16, 26) : rand(20, 34);
       const h = type === 'cylinder' ? rand(24, 56) : rand(26, 44);
-      const x = width + rand(state.gapMin, state.gapMax);
+      // Keep small off-screen offset; spacing is handled by scheduler
+      const x = width + rand(80, 160);
       const y = state.groundY - h;
       state.obstacles.push({ type, x, y, w, h, color: '#0f1a1c' });
-
-      // Keep spawn interval from dropping too low
-      const minSI = currentTuning().spawnBase * 0.6;
-      state.spawnInterval = clamp(state.spawnInterval * 0.98, minSI, currentTuning().spawnBase);
+      // Mark tall obstacles to add extra spacing next time
+      state.lastObstacleTall = h >= 44;
     }
+
     function spawnDust(x, y, count = 8) {
       for (let i = 0; i < count; i++) {
         state.particles.push({ x: x + rand(-4, 4), y: y + rand(-2, 2), vx: rand(-60, 60), vy: rand(-120, -40), life: rand(0.25, 0.45) });
@@ -491,7 +494,6 @@
       for (const c of state.clouds) c.x -= c.speed * dt;
       state.clouds = state.clouds.filter(c => c.x + c.w > -10);
 
-      // Fewer clouds on mobile for clarity/perf
       const desiredClouds = (mqMobile.matches || mqCoarse.matches) ? 4 : 6;
       if (state.clouds.length < desiredClouds) spawnCloud(cssW);
 
@@ -549,14 +551,16 @@
     function update(dt) {
       const w = wrap.clientWidth;
 
-      // Difficulty ramp (gentler on mobile via tuning)
+      // Time
+      state.time += dt;
+
+      // Difficulty ramp (gentle)
       state.speed += state.speedRamp * state.speed * dt;
 
-      // Spawning
-      state.spawnTimer += dt;
-      if (state.spawnTimer >= state.spawnInterval) {
+      // Spawning: schedule-driven with cadenced timing
+      if (state.time >= state.nextSpawnAt) {
         spawnObstacle(w);
-        state.spawnTimer = 0;
+        scheduleNextSpawn();
       }
 
       // Player physics
@@ -611,32 +615,36 @@
       state.speedRamp = t.speedRamp;
       state.gravity = t.gravity;
       state.jumpVel = t.jumpVel;
-      state.spawnInterval = t.spawnBase;
-      state.gapMin = t.gapMin;
-      state.gapMax = t.gapMax;
     }
 
     function startGame() {
       cancelAnimationFrame(rafId);
       state.mode = 'playing'; overlay.classList.remove('show');
 
-      // Apply desktop/mobile tuning at start
+      // Apply tuning
       applyTuning(currentTuning());
 
       // Reset
       state.score = 0;
-      state.spawnTimer = 0;
+      state.time = 0;
+      state.lastTs = 0;
       state.obstacles = []; state.clouds = []; state.grounds = []; state.particles = [];
-      player.y = state.groundY - player.r * 2; player.vy = 0; player.jumping = false;
+      state.lastObstacleTall = false;
 
       // Seed background
       const w = wrap.clientWidth;
-      const clouds = (mqMobile.matches || mqCoarse.matches) ? 3 : 6;
-      const grounds = (mqMobile.matches || mqCoarse.matches) ? 8 : 12;
-      for (let i = 0; i < clouds; i++) spawnCloud(w);
-      for (let i = 0; i < grounds; i++) spawnGround(w);
+      const mobile = mqMobile.matches || mqCoarse.matches;
+      for (let i = 0; i < (mobile ? 3 : 6); i++) spawnCloud(w);
+      for (let i = 0; i < (mobile ? 8 : 12); i++) spawnGround(w);
 
-      state.lastTs = 0; rafId = requestAnimationFrame(loop);
+      // Player
+      player.y = state.groundY - player.r * 2; player.vy = 0; player.jumping = false;
+
+      // First spawn scheduled with a small grace period
+      scheduleNextSpawn();
+      state.nextSpawnAt = 0.7; // give the player a moment before the first obstacle
+
+      rafId = requestAnimationFrame(loop);
     }
 
     function pauseGame() {
