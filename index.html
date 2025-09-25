@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- viewport-fit=cover to respect safe-area insets on phones -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Temporarily Down for Maintenance</title>
 
   <!-- Fonts -->
@@ -20,141 +21,92 @@
       --accent-color: #4ecdc4;
       --text-color: #f7fff7;
       --shadow-color: rgba(0, 0, 0, 0.2);
-      --dark-ink: #0b1f22;
       --ui-bg: rgba(255, 255, 255, 0.06);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--primary-color);
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
       margin: 0;
-      text-align: center;
+      color: var(--text-color);
+      background: radial-gradient(circle at 10% 20%, var(--primary-color) 0%, var(--secondary-color) 100%);
+      /* Safe-area padding for phones with notches */
+      padding:
+        max(16px, env(safe-area-inset-top))
+        max(16px, env(safe-area-inset-right))
+        max(16px, env(safe-area-inset-bottom))
+        max(16px, env(safe-area-inset-left));
+      display: flex;
       flex-direction: column;
-      padding: 24px;
-      background-image: radial-gradient(
-        circle at 10% 20%,
-        var(--primary-color) 0%,
-        var(--secondary-color) 100%
-      );
+      align-items: center;
+      gap: 18px;
+      min-height: 100svh; /* stable height unit for mobile toolbars */
       animation: fadeIn 0.8s ease-in-out;
-      gap: 20px;
     }
 
     .container {
-      padding: 2.75rem 1.75rem;
-      background-color: var(--secondary-color);
-      border-radius: 20px;
-      box-shadow: 0 10px 30px var(--shadow-color);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
       width: 100%;
       max-width: 720px;
-      margin: 0 auto;
-      transition: transform 0.3s ease-in-out;
+      border-radius: 20px;
+      background-color: var(--secondary-color);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px var(--shadow-color);
+      backdrop-filter: blur(10px);
+      padding: 2.25rem 1.25rem;
+      text-align: center;
     }
 
-    .container:hover {
-      transform: translateY(-4px);
-    }
-
-    .icon {
-      font-size: 3.25rem;
-      color: var(--accent-color);
-      margin-bottom: 1.25rem;
-      animation: pulse 2s infinite;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin: 0 0 0.75rem;
-      letter-spacing: -0.5px;
-    }
-
-    p {
-      font-size: 1.05rem;
-      line-height: 1.65;
-      margin: 0.25rem 0 1.1rem;
-      opacity: 0.9;
-    }
+    .icon { font-size: 3rem; color: var(--accent-color); margin-bottom: 0.75rem; animation: pulse 2s infinite; }
+    h1 { margin: 0 0 0.5rem; font-size: clamp(1.6rem, 3.5vw, 2.2rem); }
+    p { margin: 0.25rem 0 1rem; font-size: clamp(0.95rem, 2.6vw, 1.05rem); line-height: 1.6; opacity: 0.95; }
 
     .countdown {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--accent-color);
-      margin-top: 1rem;
-      padding: 0.85rem 1rem;
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.7rem 0.9rem;
       border-radius: 12px;
-      background-color: rgba(255, 255, 255, 0.05);
-      display: inline-block;
-      min-width: 260px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--accent-color);
+      font-weight: 700;
+      font-size: clamp(1rem, 3.2vw, 1.2rem);
+      min-width: 240px;
     }
-
-    .countdown span {
-      display: inline-block;
-      margin: 0 0.5rem;
-    }
-
-    .countdown .label {
-      font-size: 0.75rem;
-      opacity: 0.7;
-      display: block;
-      margin-top: 0.2rem;
-      font-weight: 400;
-    }
+    .countdown span { display: inline-block; margin: 0 0.45rem; }
+    .countdown .label { display: block; font-size: 0.75rem; opacity: 0.7; margin-top: 0.15rem; }
 
     .contact-link {
       color: var(--accent-color);
-      text-decoration: none;
       font-weight: 700;
-      transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+      text-decoration: none;
       border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
       padding-bottom: 2px;
     }
+    .contact-link:hover { color: #2dbeb5; border-color: #2dbeb5; }
 
-    .contact-link:hover {
-      color: #2dbeb5;
-      border-color: #2dbeb5;
-    }
-
-    /* Game area */
+    /* Game card */
     .game-card {
       width: 100%;
       max-width: 900px;
-      margin: 0 auto;
       background: linear-gradient(180deg, #0f373b, #164a50);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 10px 30px var(--shadow-color);
-      padding: 14px;
-      position: relative;
+      padding: 12px;
     }
 
     .game-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 4px 2px 10px;
-      gap: 10px;
+      gap: 8px;
+      margin: 2px 4px 10px;
       flex-wrap: wrap;
     }
 
-    .game-title {
-      font-size: 1rem;
-      margin: 0;
-      opacity: 0.9;
-      letter-spacing: 0.3px;
-    }
+    .game-title { margin: 0; font-size: 1rem; opacity: 0.9; letter-spacing: 0.2px; }
 
     .controls {
       display: flex;
@@ -164,27 +116,22 @@
 
     .btn {
       appearance: none;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255,255,255,0.15);
       background: var(--ui-bg);
       color: var(--text-color);
       padding: 8px 12px;
       border-radius: 10px;
       font: 600 0.9rem 'Inter', sans-serif;
       cursor: pointer;
-      transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease;
       user-select: none;
+      transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease;
+      min-height: 40px;
     }
+    .btn:hover { transform: translateY(-1px); background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.25); }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(255, 255, 255, 0.25);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-    }
-
+    /* Canvas wrapper:
+       Desktop -> aspect-ratio
+       Mobile -> tall height using svh to prevent cramping */
     .canvas-wrap {
       position: relative;
       width: 100%;
@@ -195,17 +142,29 @@
       border: 2px solid var(--accent-color);
     }
 
+    /* Portrait / small screens: expand vertical space; hide header buttons to save space */
+    @media (max-width: 680px) {
+      .canvas-wrap {
+        aspect-ratio: auto;
+        height: clamp(360px, 62svh, 78svh);
+      }
+      .game-header .controls { display: none; }
+    }
+
     canvas {
       display: block;
       width: 100%;
       height: 100%;
-      /* The JS will set internal resolution for HiDPI */
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* HUD overlay */
+    /* HUD */
     .hud {
       position: absolute;
-      top: 10px;
+      top: calc(10px + env(safe-area-inset-top));
       left: 10px;
       right: 10px;
       display: flex;
@@ -215,41 +174,34 @@
       font-weight: 700;
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
     }
-
-    .hud .score {
-      font-size: 1rem;
+    .hud .score, .hud .hi {
+      font-size: clamp(0.9rem, 2.6vw, 1.05rem);
     }
 
-    .hud .hi {
-      font-size: 1rem;
-      opacity: 0.85;
-    }
-
-    /* On-screen mobile action buttons */
-    .action-bar {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
-      display: flex;
-      justify-content: center;
+    /* New: mobile controls row BELOW the canvas (no overlap) */
+    .mobile-controls {
+      display: none;
       gap: 10px;
-      pointer-events: none;
+      justify-content: center;
+      margin-top: 10px;
     }
-
+    @media (max-width: 680px) {
+      .mobile-controls { display: flex; }
+    }
     .action-button {
-      pointer-events: auto;
-      min-width: 110px;
-      padding: 10px 14px;
-      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.35);
       color: var(--text-color);
-      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
-      font: 700 0.95rem 'Inter', sans-serif;
       backdrop-filter: blur(6px);
-      user-select: none;
+      font: 700 1rem 'Inter', sans-serif;
+      padding: 12px 16px;
+      min-height: 52px; /* ≥44px recommended target size */
+      min-width: clamp(110px, 30vw, 220px);
     }
+    #jumpBtn { flex: 1 1 auto; min-width: clamp(150px, 44vw, 280px); }
 
+    /* Overlay */
     .center-overlay {
       position: absolute;
       inset: 0;
@@ -257,65 +209,24 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0,0,0,0.45);
       color: var(--text-color);
       padding: 20px;
     }
-
-    .center-overlay.show {
-      display: flex;
-    }
+    .center-overlay.show { display: flex; }
 
     .overlay-card {
-      background: rgba(10, 25, 27, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(10, 25, 27, 0.78);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: clamp(14px, 3.2vw, 18px);
       width: min(92%, 520px);
     }
+    .overlay-title { margin: 0 0 6px; font-size: clamp(1.15rem, 3.8vw, 1.3rem); }
+    .overlay-text { margin: 8px 0 12px; font-size: clamp(0.95rem, 3vw, 1.05rem); line-height: 1.6; opacity: 0.95; }
 
-    .overlay-title {
-      margin: 0 0 6px;
-      font-size: 1.3rem;
-    }
-
-    .overlay-text {
-      margin: 8px 0 12px;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      opacity: 0.95;
-    }
-
-    .kbd {
-      display: inline-block;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.08);
-      padding: 1px 6px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      margin: 0 3px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-      100% { transform: scale(1); }
-    }
-
-    @media (max-width: 768px) {
-      h1 { font-size: 1.8rem; }
-      .container { padding: 2.25rem 1.25rem; }
-      .countdown span { display: block; margin: 0.35rem 0; }
-      .hud .score, .hud .hi { font-size: 0.95rem; }
-      .game-header { gap: 6px; }
-      .btn { padding: 7px 10px; font-size: 0.85rem; }
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.04); } 100% { transform: scale(1); } }
   </style>
 </head>
 <body>
@@ -353,19 +264,20 @@
           <h3 class="overlay-title" id="overlayTitle">Ready</h3>
           <p class="overlay-text" id="overlayText">
             Press <span class="kbd">Space</span> or tap Jump to start, jump over obstacles, and aim for a new high score. Use
-            <span class="kbd">P</span> to pause and <span class="kbd">M</span> to mute. On mobile, use the on‑screen buttons.
+            <span class="kbd">P</span> to pause and <span class="kbd">M</span> to mute.
           </p>
           <div class="controls" style="justify-content:center;">
             <button class="btn" id="overlayStart">Start</button>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="action-bar" aria-hidden="false">
-        <button class="action-button" id="jumpBtn" type="button">Jump</button>
-        <button class="action-button" id="pauseBtn2" type="button">Pause</button>
-        <button class="action-button" id="restartBtn2" type="button">Restart</button>
-      </div>
+    <!-- New: mobile controls below the canvas (no overlap) -->
+    <div class="mobile-controls" role="group" aria-label="Mobile game controls">
+      <button class="action-button" id="jumpBtn" type="button">Jump</button>
+      <button class="action-button" id="pauseBtn2" type="button">Pause</button>
+      <button class="action-button" id="restartBtn2" type="button">Restart</button>
     </div>
   </div>
 
@@ -413,14 +325,19 @@
     const overlayText = document.getElementById('overlayText');
     const overlayStart = document.getElementById('overlayStart');
 
-    // Buttons
+    // Header controls
     const pauseBtn = document.getElementById('pauseBtn');
     const restartBtn = document.getElementById('restartBtn');
     const muteBtn = document.getElementById('muteBtn');
 
+    // Mobile controls (below canvas)
     const jumpBtn = document.getElementById('jumpBtn');
     const pauseBtn2 = document.getElementById('pauseBtn2');
     const restartBtn2 = document.getElementById('restartBtn2');
+
+    // Queries for tuning
+    const mqMobile = window.matchMedia('(max-width: 680px)');
+    const mqCoarse = window.matchMedia('(pointer: coarse)');
 
     // HiDPI setup
     function setupHiDPI() {
@@ -432,7 +349,33 @@
       canvas.style.height = rect.height + 'px';
       ctx = canvas.getContext('2d');
       ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(dpr, dpr); // Keep drawing in CSS pixels, sharp on HiDPI
+      ctx.scale(dpr, dpr); // draw in CSS pixels, sharp on HiDPI
+    }
+
+    // Tunings
+    const desktopTuning = {
+      speed: 300,          // was 340
+      speedRamp: 0.025,    // was 0.035
+      gravity: 1600,
+      jumpVel: -590,       // slightly stronger jump
+      spawnBase: 1.05,
+      gapMin: 300,         // wider gaps
+      gapMax: 500
+    };
+
+    const mobileTuning = {
+      speed: 240,          // slower on mobile
+      speedRamp: 0.018,    // gentler ramp
+      gravity: 1500,       // a bit lower for more airtime
+      jumpVel: -620,       // stronger jump for small screens
+      spawnBase: 1.25,     // fewer spawns
+      gapMin: 340,         // even wider gaps
+      gapMax: 560
+    };
+
+    function currentTuning() {
+      const mobile = mqMobile.matches || mqCoarse.matches;
+      return mobile ? mobileTuning : desktopTuning;
     }
 
     // Game state
@@ -441,30 +384,26 @@
       muted: false,
       score: 0,
       hi: Number(localStorage.getItem('runner_hi') || 0),
-      speed: 340,           // px/s starting speed
-      speedRamp: 0.035,     // speed gain per second
-      gravity: 1600,        // px/s^2
-      jumpVel: -580,        // px/s
-      groundY: 0,           // set on resize
+      speed: 300,
+      speedRamp: 0.025,
+      gravity: 1600,
+      jumpVel: -590,
+      groundY: 0,
       lastTs: 0,
       spawnTimer: 0,
-      spawnInterval: 1.0,   // seconds, will vary
+      spawnInterval: 1.05,
+      gapMin: 300,
+      gapMax: 500,
       clouds: [],
       grounds: [],
       obstacles: [],
       particles: []
     };
 
-    // Player (ball)
-    const player = {
-      x: 60,
-      y: 0,
-      r: 16,
-      vy: 0,
-      jumping: false
-    };
+    // Player
+    const player = { x: 60, y: 0, r: 16, vy: 0, jumping: false };
 
-    // Audio (WebAudio basic)
+    // Audio
     let audioCtx = null;
     function beep(freq, dur, type = 'sine', vol = 0.03) {
       if (state.muted) return;
@@ -472,124 +411,60 @@
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const o = audioCtx.createOscillator();
         const g = audioCtx.createGain();
-        o.type = type;
-        o.frequency.value = freq;
-        g.gain.value = vol;
-        o.connect(g);
-        g.connect(audioCtx.destination);
-        o.start();
-        o.stop(audioCtx.currentTime + dur);
+        o.type = type; o.frequency.value = freq; g.gain.value = vol;
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(); o.stop(audioCtx.currentTime + dur);
       } catch {}
     }
 
-    // Helpers
+    // Utils
     function rand(a, b) { return Math.random() * (b - a) + a; }
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-
     function circleRectCollide(cx, cy, r, rx, ry, rw, rh) {
       const nx = clamp(cx, rx, rx + rw);
       const ny = clamp(cy, ry, ry + rh);
-      const dx = cx - nx;
-      const dy = cy - ny;
+      const dx = cx - nx, dy = cy - ny;
       return (dx * dx + dy * dy) <= r * r;
     }
 
     // Spawners
     function spawnCloud(width) {
       const size = rand(30, 80);
-      state.clouds.push({
-        x: width + rand(0, 200),
-        y: rand(20, 120),
-        w: size,
-        h: size * 0.6,
-        speed: rand(18, 40)
-      });
+      state.clouds.push({ x: width + rand(0, 200), y: rand(20, 120), w: size, h: size * 0.6, speed: rand(18, 40) });
     }
-
     function spawnGround(width) {
-      // Ground tile segment for mild parallax
       const segW = rand(90, 160);
-      state.grounds.push({
-        x: width + rand(0, 60),
-        w: segW,
-        h: 6,
-        speed: state.speed * 0.9
-      });
+      state.grounds.push({ x: width + rand(0, 60), w: segW, h: 6, speed: state.speed * 0.9 });
     }
-
     function spawnObstacle(width) {
       const type = Math.random() < 0.5 ? 'cylinder' : 'box';
-      const w = type === 'cylinder' ? rand(16, 28) : rand(22, 36);
-      const h = type === 'cylinder' ? rand(26, 60) : rand(28, 46);
-      const gapMin = 260;
-      const gapMax = 420;
-      const x = width + rand(gapMin, gapMax);
+      const w = type === 'cylinder' ? rand(16, 26) : rand(20, 34);
+      const h = type === 'cylinder' ? rand(24, 56) : rand(26, 44);
+      const x = width + rand(state.gapMin, state.gapMax);
       const y = state.groundY - h;
       state.obstacles.push({ type, x, y, w, h, color: '#0f1a1c' });
-      // Next spawn interval varies slightly with speed to keep challenge balanced
-      state.spawnInterval = clamp(0.7 - (state.speed - 340) / 1200, 0.45, 0.9);
-    }
 
+      // Keep spawn interval from dropping too low
+      const minSI = currentTuning().spawnBase * 0.6;
+      state.spawnInterval = clamp(state.spawnInterval * 0.98, minSI, currentTuning().spawnBase);
+    }
     function spawnDust(x, y, count = 8) {
       for (let i = 0; i < count; i++) {
-        state.particles.push({
-          x: x + rand(-4, 4),
-          y: y + rand(-2, 2),
-          vx: rand(-60, 60),
-          vy: rand(-120, -40),
-          life: rand(0.25, 0.45)
-        });
+        state.particles.push({ x: x + rand(-4, 4), y: y + rand(-2, 2), vx: rand(-60, 60), vy: rand(-120, -40), life: rand(0.25, 0.45) });
       }
     }
 
     // Resize
     function resize() {
       setupHiDPI();
-      const cssW = wrap.clientWidth;
       const cssH = wrap.clientHeight;
       state.groundY = cssH - 50;
-      if (player.y === 0) {
-        player.y = state.groundY - player.r * 2;
-      }
+      if (player.y === 0) player.y = state.groundY - player.r * 2;
     }
-
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
-    // Draw
-    function drawBackground(w, h, dt) {
-      // Sky gradient
-      const g = ctx.createLinearGradient(0, 0, 0, h);
-      g.addColorStop(0, '#1c5e66');
-      g.addColorStop(1, '#287680');
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, w, h);
-
-      // Parallax dots (simple stars/sea-sparkles vibe)
-      ctx.globalAlpha = 0.15;
-      ctx.fillStyle = '#ffffff';
-      for (let i = 0; i < 30; i++) {
-        const px = (i * 31) % w;
-        const py = (i * 53) % Math.floor(h * 0.6);
-        ctx.fillRect(px, py, 2, 2);
-      }
-      ctx.globalAlpha = 1;
-
-      // Clouds
-      const cssW = wrap.clientWidth;
-      for (const c of state.clouds) {
-        c.x -= c.speed * dt;
-      }
-      state.clouds = state.clouds.filter(c => c.x + c.w > -10);
-      if (state.clouds.length < 6) spawnCloud(cssW);
-
-      ctx.fillStyle = 'rgba(255,255,255,0.7)';
-      for (const c of state.clouds) {
-        roundedRect(c.x, c.y, c.w, c.h, Math.min(12, c.h / 2));
-        ctx.fill();
-      }
-    }
-
+    // Drawing helpers
     function roundedRect(x, y, w, h, r) {
       ctx.beginPath();
       ctx.moveTo(x + r, y);
@@ -600,22 +475,41 @@
       ctx.closePath();
     }
 
+    function drawBackground(w, h, dt) {
+      const g = ctx.createLinearGradient(0, 0, 0, h);
+      g.addColorStop(0, '#1c5e66'); g.addColorStop(1, '#287680');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+
+      ctx.globalAlpha = 0.15; ctx.fillStyle = '#ffffff';
+      for (let i = 0; i < 30; i++) {
+        const px = (i * 31) % w, py = (i * 53) % Math.floor(h * 0.6);
+        ctx.fillRect(px, py, 2, 2);
+      }
+      ctx.globalAlpha = 1;
+
+      const cssW = wrap.clientWidth;
+      for (const c of state.clouds) c.x -= c.speed * dt;
+      state.clouds = state.clouds.filter(c => c.x + c.w > -10);
+
+      // Fewer clouds on mobile for clarity/perf
+      const desiredClouds = (mqMobile.matches || mqCoarse.matches) ? 4 : 6;
+      if (state.clouds.length < desiredClouds) spawnCloud(cssW);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.7)';
+      for (const c of state.clouds) { roundedRect(c.x, c.y, c.w, c.h, Math.min(12, c.h / 2)); ctx.fill(); }
+    }
+
     function drawGround(w, dt) {
-      // Base ground line
       ctx.fillStyle = '#f7fff7';
       ctx.fillRect(0, state.groundY - 2, w, 2);
-
-      // Segments parallax
-      for (const g of state.grounds) {
-        g.x -= g.speed * dt;
-      }
+      for (const g of state.grounds) g.x -= g.speed * dt;
       state.grounds = state.grounds.filter(g => g.x + g.w > -10);
-      if (state.grounds.length < 12) spawnGround(w);
 
-      ctx.fillStyle = 'rgba(247, 255, 247, 0.6)';
-      for (const g of state.grounds) {
-        ctx.fillRect(g.x, state.groundY - g.h, g.w, g.h);
-      }
+      const desiredGrounds = (mqMobile.matches || mqCoarse.matches) ? 10 : 12;
+      if (state.grounds.length < desiredGrounds) spawnGround(w);
+
+      ctx.fillStyle = 'rgba(247,255,247,0.6)';
+      for (const g of state.grounds) ctx.fillRect(g.x, state.groundY - g.h, g.w, g.h);
     }
 
     function drawPlayer() {
@@ -624,89 +518,66 @@
       ctx.arc(player.x + player.r, player.y + player.r, player.r, 0, Math.PI * 2);
       ctx.fill();
       // Shadow
-      ctx.globalAlpha = 0.15;
-      ctx.fillStyle = '#000';
-      const shadowW = player.r * 2.1;
+      ctx.globalAlpha = 0.15; ctx.fillStyle = '#000';
+      const sw = player.r * 2.1;
       ctx.beginPath();
-      ctx.ellipse(
-        player.x + player.r, state.groundY - 4, shadowW * 0.6, shadowW * 0.25, 0, 0, Math.PI * 2
-      );
-      ctx.fill();
-      ctx.globalAlpha = 1;
+      ctx.ellipse(player.x + player.r, state.groundY - 4, sw * 0.6, sw * 0.25, 0, 0, Math.PI * 2);
+      ctx.fill(); ctx.globalAlpha = 1;
     }
 
     function drawObstacle(o) {
       ctx.fillStyle = o.color;
       if (o.type === 'cylinder') {
-        // Body
         ctx.fillRect(o.x, o.y + o.w / 2, o.w, o.h);
-        // Top ellipse
         ctx.beginPath();
         ctx.ellipse(o.x + o.w / 2, o.y + o.w / 2, o.w / 2, o.w / 4, 0, 0, Math.PI * 2);
         ctx.fill();
       } else {
-        // Box
-        roundedRect(o.x, o.y, o.w, o.h, Math.min(6, o.w * 0.25));
-        ctx.fill();
+        roundedRect(o.x, o.y, o.w, o.h, Math.min(6, o.w * 0.25)); ctx.fill();
       }
     }
 
     function drawParticles(dt) {
       ctx.fillStyle = 'rgba(247,255,247,0.8)';
       for (const p of state.particles) {
-        p.x += p.vx * dt;
-        p.y += p.vy * dt;
-        p.vy += state.gravity * 0.7 * dt;
-        p.life -= dt;
-        ctx.globalAlpha = Math.max(0, p.life * 2);
-        ctx.fillRect(p.x, p.y, 2, 2);
+        p.x += p.vx * dt; p.y += p.vy * dt; p.vy += state.gravity * 0.7 * dt; p.life -= dt;
+        ctx.globalAlpha = Math.max(0, p.life * 2); ctx.fillRect(p.x, p.y, 2, 2);
       }
-      ctx.globalAlpha = 1;
-      state.particles = state.particles.filter(p => p.life > 0);
+      ctx.globalAlpha = 1; state.particles = state.particles.filter(p => p.life > 0);
     }
 
     function update(dt) {
       const w = wrap.clientWidth;
 
-      // Increase difficulty over time
+      // Difficulty ramp (gentler on mobile via tuning)
       state.speed += state.speedRamp * state.speed * dt;
-      state.spawnTimer += dt;
 
-      // Spawn obstacles
+      // Spawning
+      state.spawnTimer += dt;
       if (state.spawnTimer >= state.spawnInterval) {
         spawnObstacle(w);
         state.spawnTimer = 0;
       }
 
-      // Update player physics
+      // Player physics
       player.y += player.vy * dt;
       player.vy += state.gravity * dt;
 
       // Ground collision
       const floor = state.groundY - player.r * 2;
       if (player.y > floor) {
-        if (player.jumping) {
-          spawnDust(player.x + player.r, state.groundY - 6, 10);
-        }
-        player.y = floor;
-        player.vy = 0;
-        player.jumping = false;
+        if (player.jumping) spawnDust(player.x + player.r, state.groundY - 6, 10);
+        player.y = floor; player.vy = 0; player.jumping = false;
       }
 
       // Obstacles
-      for (const o of state.obstacles) {
-        o.x -= state.speed * dt;
-      }
+      for (const o of state.obstacles) o.x -= state.speed * dt;
       state.obstacles = state.obstacles.filter(o => o.x + o.w > -10);
 
       // Collisions
-      const cx = player.x + player.r;
-      const cy = player.y + player.r;
+      const cx = player.x + player.r, cy = player.y + player.r;
       for (const o of state.obstacles) {
-        if (circleRectCollide(cx, cy, player.r, o.x, o.y, o.w, o.h)) {
-          gameOver();
-          return;
-        }
+        if (circleRectCollide(cx, cy, player.r, o.x, o.y, o.w, o.h)) { gameOver(); return; }
       }
 
       // Score
@@ -716,64 +587,56 @@
     }
 
     function draw(dt) {
-      const w = wrap.clientWidth;
-      const h = wrap.clientHeight;
-
-      // Clear
+      const w = wrap.clientWidth, h = wrap.clientHeight;
       ctx.clearRect(0, 0, w, h);
-
-      // World
       drawBackground(w, h, dt);
       drawGround(w, dt);
-
-      // Entities
       for (const o of state.obstacles) drawObstacle(o);
       drawPlayer();
       drawParticles(dt);
     }
 
-    // Loop
     let rafId = 0;
     function loop(ts) {
       if (state.mode !== 'playing') return;
       if (!state.lastTs) state.lastTs = ts;
-      let dt = (ts - state.lastTs) / 1000;
-      state.lastTs = ts;
-      // Clamp dt to avoid simulation spikes
+      let dt = (ts - state.lastTs) / 1000; state.lastTs = ts;
       dt = Math.min(dt, 0.05);
-
-      update(dt);
-      draw(dt);
-
+      update(dt); draw(dt);
       rafId = requestAnimationFrame(loop);
     }
 
-    // Actions
+    function applyTuning(t) {
+      state.speed = t.speed;
+      state.speedRamp = t.speedRamp;
+      state.gravity = t.gravity;
+      state.jumpVel = t.jumpVel;
+      state.spawnInterval = t.spawnBase;
+      state.gapMin = t.gapMin;
+      state.gapMax = t.gapMax;
+    }
+
     function startGame() {
       cancelAnimationFrame(rafId);
-      state.mode = 'playing';
-      overlay.classList.remove('show');
+      state.mode = 'playing'; overlay.classList.remove('show');
+
+      // Apply desktop/mobile tuning at start
+      applyTuning(currentTuning());
 
       // Reset
       state.score = 0;
-      state.speed = 340;
       state.spawnTimer = 0;
-      state.spawnInterval = 1.0;
-      state.obstacles = [];
-      state.clouds = [];
-      state.grounds = [];
-      state.particles = [];
-      player.y = state.groundY - player.r * 2;
-      player.vy = 0;
-      player.jumping = false;
+      state.obstacles = []; state.clouds = []; state.grounds = []; state.particles = [];
+      player.y = state.groundY - player.r * 2; player.vy = 0; player.jumping = false;
 
       // Seed background
       const w = wrap.clientWidth;
-      for (let i = 0; i < 6; i++) spawnCloud(w);
-      for (let i = 0; i < 12; i++) spawnGround(w);
+      const clouds = (mqMobile.matches || mqCoarse.matches) ? 3 : 6;
+      const grounds = (mqMobile.matches || mqCoarse.matches) ? 8 : 12;
+      for (let i = 0; i < clouds; i++) spawnCloud(w);
+      for (let i = 0; i < grounds; i++) spawnGround(w);
 
-      state.lastTs = 0;
-      rafId = requestAnimationFrame(loop);
+      state.lastTs = 0; rafId = requestAnimationFrame(loop);
     }
 
     function pauseGame() {
@@ -781,100 +644,56 @@
         state.mode = 'paused';
         overlay.classList.add('show');
         overlayTitle.textContent = 'Paused';
-        overlayText.innerHTML =
-          'Press <span class="kbd">P</span> or Pause to resume, <span class="kbd">R</span> to restart.';
+        overlayText.innerHTML = 'Press <span class="kbd">P</span> or Pause to resume, <span class="kbd">R</span> to restart.';
       } else if (state.mode === 'paused') {
-        state.mode = 'playing';
-        overlay.classList.remove('show');
-        state.lastTs = 0;
-        rafId = requestAnimationFrame(loop);
+        state.mode = 'playing'; overlay.classList.remove('show'); state.lastTs = 0; rafId = requestAnimationFrame(loop);
       }
     }
 
     function gameOver() {
-      state.mode = 'gameover';
-      cancelAnimationFrame(rafId);
-      beep(180, 0.18, 'sawtooth', 0.04);
-      spawnDust(player.x + player.r, state.groundY - 6, 16);
-      // Update high score
-      if (state.score > state.hi) {
-        state.hi = state.score;
-        localStorage.setItem('runner_hi', String(Math.floor(state.hi)));
-      }
+      state.mode = 'gameover'; cancelAnimationFrame(rafId);
+      beep(180, 0.18, 'sawtooth', 0.04); spawnDust(player.x + player.r, state.groundY - 6, 16);
+      if (state.score > state.hi) { state.hi = state.score; localStorage.setItem('runner_hi', String(Math.floor(state.hi))); }
       overlay.classList.add('show');
       overlayTitle.textContent = 'Game Over';
-      overlayText.innerHTML =
-        'Final Score: <b>' + Math.floor(state.score) +
-        '</b><br/>Press <span class="kbd">Space</span> or <span class="kbd">R</span> to restart.';
+      overlayText.innerHTML = 'Final Score: <b>' + Math.floor(state.score) + '</b><br/>Press <span class="kbd">Space</span> or <span class="kbd">R</span> to restart.';
     }
 
     function jump() {
-      if (state.mode === 'ready') {
-        startGame();
-        return;
-      }
+      if (state.mode === 'ready') { startGame(); return; }
       if (state.mode !== 'playing') return;
-      if (!player.jumping) {
-        player.vy = state.jumpVel;
-        player.jumping = true;
-        beep(440, 0.08, 'square', 0.03);
-      }
+      if (!player.jumping) { player.vy = state.jumpVel; player.jumping = true; beep(440, 0.08, 'square', 0.03); }
     }
+    function restart() { overlay.classList.remove('show'); startGame(); }
+    function toggleMute() { state.muted = !state.muted; muteBtn.textContent = state.muted ? 'Unmute (M)' : 'Mute (M)'; }
 
-    function restart() {
-      overlay.classList.remove('show');
-      startGame();
-    }
-
-    function toggleMute() {
-      state.muted = !state.muted;
-      muteBtn.textContent = state.muted ? 'Unmute (M)' : 'Mute (M)';
-    }
-
-    // Input
+    // Inputs
     document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        e.preventDefault();
-        if (state.mode === 'gameover') restart();
-        else jump();
-      } else if (e.code === 'KeyP') {
-        pauseGame();
-      } else if (e.code === 'KeyR') {
-        restart();
-      } else if (e.code === 'KeyM') {
-        toggleMute();
-      }
+      if (e.code === 'Space') { e.preventDefault(); if (state.mode === 'gameover') restart(); else jump(); }
+      else if (e.code === 'KeyP') pauseGame();
+      else if (e.code === 'KeyR') restart();
+      else if (e.code === 'KeyM') toggleMute();
     });
 
-    // Click / touch
-    jumpBtn.addEventListener('click', () => {
-      if (state.mode === 'gameover') restart();
-      else jump();
-    });
+    // Mobile controls
+    jumpBtn.addEventListener('click', () => { if (state.mode === 'gameover') restart(); else jump(); });
     pauseBtn2.addEventListener('click', pauseGame);
     restartBtn2.addEventListener('click', restart);
 
-    pauseBtn.addEventListener('click', pauseGame);
-    restartBtn.addEventListener('click', restart);
-    muteBtn.addEventListener('click', toggleMute);
+    // Header controls
+    pauseBtn?.addEventListener('click', pauseGame);
+    restartBtn?.addEventListener('click', restart);
+    muteBtn?.addEventListener('click', toggleMute);
     overlayStart.addEventListener('click', startGame);
 
-    canvas.addEventListener('mousedown', () => {
-      if (state.mode === 'gameover') restart();
-      else jump();
-    });
-    canvas.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      if (state.mode === 'gameover') restart();
-      else jump();
-    }, { passive: false });
+    // Canvas pointer
+    canvas.addEventListener('mousedown', () => { if (state.mode === 'gameover') restart(); else jump(); });
+    canvas.addEventListener('touchstart', (e) => { e.preventDefault(); if (state.mode === 'gameover') restart(); else jump(); }, { passive: false });
 
     // Initialize overlay
     overlay.classList.add('show');
     overlayTitle.textContent = 'Ready';
-    overlayText.innerHTML =
-      'Press <span class="kbd">Space</span> or tap Jump to start, jump over obstacles, and aim for a new high score.';
-
+    overlayText.innerHTML = 'Press <span class="kbd">Space</span> or tap Jump to start, jump over obstacles, and aim for a new high score.';
   </script>
 </body>
 </html>
