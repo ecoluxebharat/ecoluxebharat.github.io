@@ -1,721 +1,181 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
+<html lang="en">
 <head>
-<!-- Basic Meta Tags -->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporarily Down for Maintenance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a535c;
+            --secondary-color: #287680;
+            --accent-color: #4ecdc4;
+            --text-color: #f7fff7;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
 
-<!-- SEO Meta Tags -->
-<meta name="description" content="Ecoluxe Bharat is a multidisciplinary design and build studio offering luxury interiors, exteriors, landscaping, solar solutions, and turnkey project execution across India.">
-<meta name="keywords" content="Ecoluxe Bharat, Interior Design, Exterior Design, Landscaping, Turnkey Projects, Solar Solutions, Sustainable Architecture, Metal Fabrication, India, Custom Furniture, Acoustics, 3D Visualization">
-<meta name="author" content="Ecoluxe Bharat">
-<meta name="robots" content="index, follow">
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            background-image: radial-gradient(circle at 10% 20%, var(--primary-color) 0%, var(--secondary-color) 100%);
+            animation: fadeIn 1s ease-in-out;
+        }
 
-<!-- Open Graph (for Facebook, LinkedIn, etc.) -->
-<meta property="og:title" content="Ecoluxe Bharat">
-<meta property="og:description" content="Crafting Luxury the Sustainable way">
-<meta property="og:url" content="https://ecoluxebharat.com">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://ecoluxebharat.com/img/social-preview.jpg"> <!-- Replace with your actual social preview image -->
+        .container {
+            padding: 4rem 2rem;
+            background-color: var(--secondary-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 600px;
+            width: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ecoluxe Bharat — Sustainable Luxury by Design">
-<meta name="twitter:description" content="Luxury design meets sustainability. Interior, exterior, landscaping, solar, turnkey projects — pan India.">
-<meta name="twitter:image" content="https://ecoluxebharat.com/img/social-preview.jpg"> <!-- Replace with your actual image -->
+        .container:hover {
+            transform: translateY(-5px);
+        }
 
-    <title>EcoLuxe Bharat</title>
+        .icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0 0 1rem;
+            letter-spacing: -1px;
+        }
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slick.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/popupinquiry.css" type="text/css">
-	
-	<!-- favicons
-    ================================================== -->
-	<link rel="icon" type="image/x-icon" href="img/favicon/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon/site.webmanifest">
-	
-	
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
 
-<style>
-/* Service Section fix on mobile */
-@media only screen and (max-width: 575.98px) {
-  .services__item {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    gap: 12px;
-    margin-bottom: 32px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .services__item img {
-    width: 48px;
-    min-width: 48px;
-    max-width: 48px;
-    height: 48px;   /* Or 'auto' if your icons are different sizes */
-    margin: 0;
-    display: block;
-  }
-  .service-title-desc {
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-  }
-  .service-title-desc h4 {
-    margin-top: 0;
-    margin-bottom: 0.18em;
-    font-size: 1.05em;
-  }
-  .service-title-desc p {
-    margin-bottom: 0;
-    margin-top: 2px;
-    font-size: 0.98em;
-  }
-}
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: inline-block;
+            min-width: 250px;
+        }
 
-/* Service Section fix on mobile end */
-</style>
+        .countdown span {
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
 
+        .countdown .label {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            display: block;
+            margin-top: 0.2rem;
+            font-weight: 400;
+        }
 
+        .contact-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease-in-out;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 2px;
+        }
+
+        .contact-link:hover {
+            color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
+    <div class="container">
+        <!-- Using a Unicode character for a sleek icon -->
+        <div class="icon">⚙️</div>
+        <h1>Temporarily Under Maintenance</h1>
+        <p>
+            We're working on some important upgrades to improve your experience. We apologize for any inconvenience this may cause.
+        </p>
+        <div class="countdown" id="countdown">
+            <!-- Countdown will be rendered here by JavaScript -->
+        </div>
+        <p>
+            For urgent inquiries, you can <a href="mailto:contact@yourwebsite.com" class="contact-link">contact us directly</a>.
+        </p>
     </div>
 
-    <!-- Offcanvas Menu Begin -->
-    <div class="offcanvas-menu-overlay"></div>
-    <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__logo">
-            <a href="./"><img src="img/logo.png" alt=""></a>
-        </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__widget">
-            <span>Call us for any questions</span>
-            <h4 style="font-family: 'Noto Sans', sans-serif; font-weight: 700;">+91 92118 09192<br /> +91 90452 90167</h4>
-        </div>
-    </div>
-    <!-- Offcanvas Menu End -->
+    <script>
+        const countdownElement = document.getElementById('countdown');
+        const maintenanceDate = new Date("November 1, 2025 00:00:00").getTime();
 
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo">
-                        <a href="./"><img src="img/logo.png" alt="" style="width: 250px; height: auto;"></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li class="active"><a href="./">Home</a></li>
-                            <li><a href="./projects.html">Projects</a></li>
-                            <li><a href="./services.html">Services</a></li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./about.html">About</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3">
-                    <div class="header__widget">
-                        <span>Call us for any questions</span>
-                        <h4 style="font-family: 'Noto Sans', sans-serif; font-weight: 700;">+91 92118 09192<br /> +91 90452 90167</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open"><i class="fa fa-bars"></i></div>
-        </div>
-    </header>
-    <!-- Header Section End -->
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = maintenanceDate - now;
 
-    <!-- Hero Section Begin -->
-    <section class="hero">
-        <div class="hero__slider owl-carousel">
-            
-            <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
-                <div class="hero__text">
-                    <h2>Crafting Luxury the Sustainable way</h2>
-					
-                    <a href="projects.html" class="primary-btn">See Projects</a>
-                    <div class="hero__social">
-                        <a href="https://facebook.com/EcoLuxeBharat" target="_blank"><i class="fa fa-facebook"></i></a>
-                        <a href="https://twitter.com/EcoLuxeBharat" target="_blank"><i class="fa fa-twitter"></i></a>
-                        <a href="https://instagram.com/EcoLuxeBharat" target="_blank"><i class="fa fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@EcoLuxeBharat" target="_blank"><i class="fa fa-youtube-play"></i></a>
-                        <a href="https://linkedin.com/company/EcoLuxeBharat" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        <a href="https://wa.me/919211809192" target="_blank"><i class="fa fa-whatsapp"></i></a>
-                        <a href="tel:+919211809192" target="_blank"><i class="fa fa-phone"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+            if (distance < 0) {
+                countdownElement.innerHTML = "We're back!";
+                clearInterval(interval);
+                return;
+            }
 
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+            countdownElement.innerHTML = `
+                <span>${days}<span class="label">Days</span></span>
+                <span>${hours}<span class="label">Hours</span></span>
+                <span>${minutes}<span class="label">Minutes</span></span>
+                <span>${seconds}<span class="label">Seconds</span></span>
+            `;
+        };
 
-    <!-- Project Section Begin -->
-<section class="project">
-  <div class="container-fluid" style="padding-bottom: 40px;">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <div class="section-title">
-          <span>Our works</span>
-          <h2>Latest projects</h2>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="project__slider owl-carousel">
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/ph2.webp">
-            <a href="piano-house.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>3D Visualisation</span>
-              <h5>
-                <a href="piano-house.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  Piano House
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/gh2.webp">
-            <a href="garden-house.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>3D Visualisation</span>
-              <h5>
-                <a href="garden-house.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  The Garden House
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/rc3.webp">
-            <a href="rooftop-cafe.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>Interior</span>
-              <h5>
-                <a href="rooftop-cafe.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  Rooftop Cafe
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/slc.webp">
-            <a href="stoneleaf-casa.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>Elevation</span>
-              <h5>
-                <a href="stoneleaf-casa.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  Stoneleaf Casa
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/np1.webp">
-            <a href="aarambh-villa.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>Elevation</span>
-              <h5>
-                <a href="aarambh-villa.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  Aarambh Villa
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/np2.webp">
-            <a href="rudra-adobe.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>Elevation</span>
-              <h5>
-                <a href="rudra-adobe.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  Rudra Abode
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/np3.webp">
-            <a href="amrit-vihar.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>Elevation</span>
-              <h5>
-                <a href="amrit-vihar.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  Amrit Vihar
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-3">
-          <div class="project__slider__item set-bg" data-setbg="img/project/bv.webp">
-            <a href="bali-villa.html" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></a>
-            <div class="project__slider__item__hover">
-              <span>3D Visualisation</span>
-              <h5>
-                <a href="bali-villa.html" style="color: inherit; text-decoration: none; transition: color 0.4s ease;" onmouseover="this.style.color='#50ab3c';" onmouseout="this.style.color='inherit';">
-                  Bali Vila
-                </a>
-              </h5>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-12 text-center mt-4">
-    <a href="projects.html" class="primary-btn normal-btn">See All Projects</a>
-  </div>
-</section>
-    <!-- Project Section End -->
-	
-	
-
-
-<!-- Services Section Begin -->
-<section class="services spad">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="section-title">
-          <span>Our Specialization</span>
-          <h2>What We Do</h2>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="services__item">
-          <img src="img/services/services-4.png" alt="">
-          <div class="service-title-desc">
-            <h4>Turnkey Project Execution</h4>
-            <p>From concept to completion, we manage and deliver complete, high-end spaces with unmatched precision.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="services__item">
-          <img src="img/services/services-3.png" alt="">
-          <div class="service-title-desc">
-            <h4>Interior & Exterior Design</h4>
-            <p>Elegant, functional, and brand-aligned designs — inside and out — crafted to elevate everyday living.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="services__item">
-          <img src="img/services/landscape.png" alt="">
-          <div class="service-title-desc">
-            <h4>Landscaping Solutions</h4>
-            <p>Green, sustainable, and visually striking outdoor environments that harmonize with built spaces.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="services__item">
-          <img src="img/services/metalfab.png" alt="">
-          <div class="service-title-desc">
-            <h4>Metal Fabrication</h4>
-            <p>Custom-designed metalworks that blend strength and style — from structural frames to decorative elements.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="services__item">
-          <img src="img/services/decor2.png" alt="">
-          <div class="service-title-desc">
-            <h4>Custom Furniture & Decor</h4>
-            <p>Tailor-made furniture and decor pieces that bring character, comfort, and cohesion to your space.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="services__item">
-          <img src="img/services/services-6.png" alt="">
-          <div class="service-title-desc">
-            <h4>3D Visualization</h4>
-            <p>Experience your space before it's built with photorealistic renders and immersive design walkthroughs.</p>
-          </div>
-        </div>
-      </div>
-
-
-
-    </div>
-
-    <div class="col-lg-12 text-center mt-4">
-      <a href="contact.html" class="primary-btn normal-btn">Get in Touch</a>
-    </div>
-  </div>
-</section>
-<!-- Services Section End -->
-
-
-
-
-    <!-- Testimonial Section Begin -->
-    <section class="testimonial spad set-bg" data-setbg="img/testimonial/testimonial-bg.jpg" style="padding-bottom: 50px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="section-title">
-                        <span>Testimonials</span>
-                        <h2>What our clients say</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="testimonial__carousel">
-                        <div class="testimonial__item">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-xl-9 col-lg-10">
-                                    <p>"The attention to detail was second to none, and they read the plans correctly, which meant very few revisions were needed. I'm very happy with the results."</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial__item">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-xl-9 col-lg-10">
-                                    <p>“Thanks for the great work! Very professional, yet friendly. I felt comfortable discussing everything with them.”</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial__item">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-xl-9 col-lg-10">
-                                    <p>“It was high quality work. This guy is flexible and does what his clients need. I would definitely use him again.”</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial__item">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-xl-9 col-lg-10">
-                                    <p>“They really knew how to fix the issues in my project. Everything was sorted quickly and properly. I’ll definitely reach out again if I face something I can't handle myself. Thanks a lot!!!”</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial__item">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-9">
-                                    <p>“Team is very helpful and easy to talk to. They understood our need quickly and did a good job.”</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial__item">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-lg-9">
-                                    <p>“Good communication, work was done before time will definately hire again.”</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-xl-6 col-lg-8 col-md-7 col-sm-10 ">
-                    <div class="testimonial__client">
-                        <div class="testimonial__client__item add">
-                            <div class="testimonial__client__pic">
-                                <img src="img/testimonial/Tim.png" alt="">
-                            </div>
-                            <div class="testimonial__client__text">
-                                <h5>Tim Dunlop</h5>
-                                <span>Client</span>
-                            </div>
-                        </div>
-                        <div class="testimonial__client__item">
-                            <div class="testimonial__client__pic">
-                                <img src="img/testimonial/ranjeet.png" alt="">
-                            </div>
-                            <div class="testimonial__client__text">
-                                <h5>Ranjit K</h5>
-                                <span>Client</span>
-                            </div>
-                        </div>
-                        <div class="testimonial__client__item">
-                            <div class="testimonial__client__pic">
-                                <img src="img/testimonial/gw.png" alt="">
-                            </div>
-                            <div class="testimonial__client__text">
-                                <h5>Glen Wells</h5>
-                                <span>Client</span>
-                            </div>
-                        </div>
-                        <div class="testimonial__client__item">
-                            <div class="testimonial__client__pic">
-                                <img src="img/testimonial/darren.png" alt="">
-                            </div>
-                            <div class="testimonial__client__text">
-                                <h5>Darren K</h5>
-                                <span>Client</span>
-                            </div>
-                        </div>
-                        <div class="testimonial__client__item">
-                            <div class="testimonial__client__pic">
-                                <img src="img/testimonial/Nadeem.png" alt="">
-                            </div>
-                            <div class="testimonial__client__text">
-                                <h5>Mohd Nadeem</h5>
-                                <span>Client</span>
-                            </div>
-                        </div>
-                        <div class="testimonial__client__item">
-                            <div class="testimonial__client__pic">
-                                <img src="img/testimonial/marck.png" alt="">
-                            </div>
-                            <div class="testimonial__client__text">
-                                <h5>Mark Knox</h5>
-                                <span>Client</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!-- Testimonial Section End -->
-
-
-
-
-
-
-
-
-
-    <!-- Footer Section Begin -->
-    <footer class="footer set-bg" data-setbg="img/footer-bg.jpg">
-        <div class="container">
-            <div class="footer__top">
-                <div class="row">
-                    <div class="col-lg-8 col-md-6">
-                        <div class="footer__top__text">
-                            <h2>Ready To Work With Us?</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div  class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="./"><img src="img/logo.png" alt="" style="width: 300px; height: auto;"></a>
-                        </div>
-                        <p>B10, Supertech Ecovillage 1, <br />Sector 1, Greater Noida, <br />Uttar Pradesh, 201306 </p>
-                        <ul>
-                            <li class="footer__social"><a href="mailto:ecoluxebharat@gmail.com">ecoluxebharat@gmail.com</a></li>
-                            <li class="footer__social"><a href="tel:+919211809192" target="_blank" style="font-family: 'Noto Sans', sans-serif; font-weight: 500;">+91 92118 09192</a></li>
-                            <li class="footer__social"><a href="tel:+919045290167" target="_blank" style="font-family: 'Noto Sans', sans-serif; font-weight: 500;">+91 90452 90167</a></li>
-                        </ul>
-                        <div class="footer__social">
-                        <a href="https://facebook.com/EcoLuxeBharat" target="_blank"><i class="fa fa-facebook"></i></a>
-                        <a href="https://twitter.com/EcoLuxeBharat" target="_blank"><i class="fa fa-twitter"></i></a>
-                        <a href="https://instagram.com/EcoLuxeBharat" target="_blank"><i class="fa fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/@EcoLuxeBharat" target="_blank"><i class="fa fa-youtube-play"></i></a>
-                        <a href="https://linkedin.com/company/EcoLuxeBharat" target="_blank"><i class="fa fa-linkedin"></i></a>
-                        <a href="https://wa.me/919211809192" target="_blank"><i class="fa fa-whatsapp"></i></a>
-                        <a href="tel:+919211809192" target="_blank"><i class="fa fa-phone"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 offset-lg-1 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        
-                    </div>
-                </div>
-                <div  class="col-lg-2 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>Navigation</h6>
-                        <ul>
-                            <li><a href="./projects.html">Projects</a></li>
-                            <li><a href="./services.html">Services</a></li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./about.html">About</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div >
-                </div>
-            </div>
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-lg-8 col-md-7">
-                        <div class="copyright__text">
-                            <p>Copyright © <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-                                document.write(new Date().getFullYear());
-                            </script> EcoLuxe Bharat, All rights reserved <p> Template by <a href="https://colorlib.com"
-                            target="_blank">Colorlib <i class="fa fa-heart-o"
-                            aria-hidden="true"></i></a> 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-5">
-                    <div class="copyright__widget">
-                        <a href="#">Terms of use</a>
-                        <a href="#">Privacy Policy</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- Footer Section End -->
-
-
-<!-- Inquiry Popup -->
-
-<div id="inquiryContainer" class="inquiry-container">
-    <button id="inquiryToggleButton" class="inquiry-toggle-button">
-        <svg xmlns="http://www.w3.org/2999/xlink" width="24" height="24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="feather feather-message-square">
-            <path d="M10 9H17M10 13H17M7 9H7.01M7 13H7.01M21 20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20Z"></path>
-        </svg>
-        <span class="button-text">Got a question? Ask Us.</span>
-    </button>
-    <span id="permanentCloseInquiryButton" class="permanent-close-button">&times;</span>
-    <div class="inquiry-form-content">
-        <button id="closeInquiryForm" class="close-button">&times;</button>
-        <h2>Send Us an Inquiry</h2>
-        
-        <div class="form-blur-area">
-            <form id="inquiryForm" action="https://formsubmit.co/ajax/c1d7227628041c568dbd62caac8ef5e7" method="POST">
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="Form" value="Popup Form"> 
-                <input type="hidden" name="_subject" id="inquiryDynamicSubject" value="Website Inquiry" /> 
-                
-                <div class="form-row">
-                    <input type="text" name="Name" id="inquiryName" placeholder="Name" required /> 
-                    <input type="text" name="Phone Number" placeholder="Number" required />
-                </div>
-                <input type="email" name="Email" placeholder="Email" required />
-                <textarea id="inquiryMessage" name="Message" rows="5" placeholder="Message" required></textarea>
-                <button type="submit" name="_submit" id="sendMessageButton">
-                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" width="20" height="20" viewBox="0 0 32 32" id="send-icon" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title>send--filled</title><path d="M27.45,15.11l-22-11a1,1,0,0,0-1.08.12,1,1,0,0,0-.33,1L6.69,15H18v2H6.69L4,26.74A1,1,0,0,0,5,28a1,1,0,0,0,.45-.11l22-11a1,1,0,0,0,0-1.78Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
-                    <span>Send Message</span>
-                </button>
-            </form>
-        </div>
-
-        <div id="inquiryOverlay" class="inquiry-overlay">
-            <div id="spinner" class="spinner"></div>
-            <p id="overlayMessage" class="overlay-message"></p>
-        </div>
-    </div>
-</div>
-
-<!-- Inquiry Popup End -->
-
-	
-<!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/main.js"></script>
-<script src="js/popupinquiry.js"></script>
-
-<script>
- (function ($) {
-  function setBackgrounds() {
-   $('.set-bg').each(function () {
-    var bg = $(this).data('setbg');
-    if (bg) $(this).css('background-image', 'url(' + bg + ')');
-   });
-  }
-
-  function initProjectSlider() {
-   var $slider = $('.project__slider');
-
-   // If Owl already initialized, update autoplay settings instead of reinit
-   if ($slider.hasClass('owl-loaded')) {
-    $slider.trigger('play.owl.autoplay', [4000]); // Updated to 4000ms
-    return;
-   }
-
-   $slider.owlCarousel({
-    loop: true,
-    margin: 30,
-    nav: true,
-    dots: false,
-    autoplay: true,
-    autoplayTimeout: 1000,  // 1 second
-    autoplayHoverPause: true,
-    smartSpeed: 600,
-    responsive: {
-     0:  { items: 1 },
-     480: { items: 1 },
-     768: { items: 2 },
-     992: { items: 3 },
-     1200: { items: 4 }
-    }
-   });
-  }
-
-  // Run when DOM is ready
-  $(function () {
-   setBackgrounds();
-   initProjectSlider();
-  });
-
-  // If content is injected later or images change layout, you can refresh:
-  // $(window).on('load', function(){ $('.project__slider').trigger('refresh.owl.carousel'); });
- })(jQuery);
-</script>
-
+        updateCountdown();
+        const interval = setInterval(updateCountdown, 1000);
+    </script>
 </body>
-
 </html>
