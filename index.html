@@ -370,12 +370,10 @@
       const days = Math.floor(distance / (1000 * 60 * 60 * 24));
       const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
       countdownElement.innerHTML = `
         <span>${days}<span class="label">Days</span></span>
         <span>${hours}<span class="label">Hours</span></span>
         <span>${minutes}<span class="label">Minutes</span></span>
-        <span>${seconds}<span class="label">Seconds</span></span>
       `;
     };
     updateCountdown();
