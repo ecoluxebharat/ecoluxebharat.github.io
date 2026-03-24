@@ -5,37 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Portal | NHIDCL Package-3</title>
     <style>
-	
-	/* Styling specifically for the bottom warranty card */
-.warranty-card {
-    background-color: #f8fafc; 
-    border: 2px dashed #cbd5e1; /* A slightly softer grey for the dash */
-}
-
-/* Flexbox container for the inner content */
-.warranty-content {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    flex-wrap: wrap;
-    gap: 24px; /* Ensures elements don't touch when wrapping on smaller screens */
-}
-
-/* Make the dates bold and prominent */
-.date-highlight {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--brand-dark);
-    margin-top: 6px;
-}
-
-/* De-emphasize the secondary text */
-.sub-text {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-top: 4px;
-    font-weight: 500;
-}
         :root {
             --brand-dark: #0f172a; 
             --accent: #2563eb;
@@ -112,6 +81,7 @@
             color: var(--text-muted);
             font-weight: 700;
             margin-bottom: 8px;
+            display: block;
         }
 
         .value {
@@ -127,12 +97,43 @@
             line-height: 1.4;
         }
 
+        /* Bottom Warranty Card Styling */
+        .warranty-card {
+            background-color: #f8fafc; 
+            border: 2px dashed #cbd5e1;
+        }
+
+        .warranty-content {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .date-highlight {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-top: 6px;
+        }
+
+        .sub-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
         /* Warranty Status Box */
         .status-box {
             text-align: center;
             border: 2px solid;
-            padding: 15px;
+            padding: 15px 24px;
             border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .status-active {
@@ -169,7 +170,18 @@
             .dashboard { grid-template-columns: 1fr; }
             .card-full { grid-column: span 1; }
             .main-wrapper { padding: 40px 20px; }
-            .merged-bottom-card { flex-direction: column; align-items: flex-start !important; gap: 15px;}
+            
+            /* Stacks the dates and completely centers everything in the warranty card */
+            .warranty-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            #warrantyStatus {
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
@@ -217,27 +229,27 @@
                 <div class="value">TYPE - XI</div>
             </div>
 
-<div class="card card-full warranty-card">
-    <div class="warranty-content">
-        
-        <div class="info-group">
-            <span class="label">Installation Date</span>
-            <div class="date-highlight">17 - JAN - 2026</div>
-            <div class="sub-text">Warranty Period: 10 Years</div>
-        </div>
-        
-        <div class="info-group">
-            <span class="label">Warranty End Date</span>
-            <div class="date-highlight">16 - JAN - 2036</div>
-        </div>
+            <div class="card card-full warranty-card">
+                <div class="warranty-content">
+                    
+                    <div class="info-group">
+                        <span class="label">Installation Date</span>
+                        <div class="date-highlight">17 - JAN - 2026</div>
+                        <div class="sub-text">Warranty Period: 10 Years</div>
+                    </div>
+                    
+                    <div class="info-group">
+                        <span class="label">Warranty End Date</span>
+                        <div class="date-highlight">16 - JAN - 2036</div>
+                    </div>
 
-        <div id="warrantyStatus" class="status-box status-active">
-            <span class="pulse"></span>
-            <strong id="statusText">WARRANTY ACTIVE</strong>
-        </div>
+                    <div id="warrantyStatus" class="status-box status-active">
+                        <span class="pulse"></span>
+                        <strong id="statusText">WARRANTY ACTIVE</strong>
+                    </div>
 
-    </div>
-</div>
+                </div>
+            </div>
 
         </div>
     </div>
