@@ -23,7 +23,6 @@
             background-color: var(--bg-page);
             color: var(--text-main);
             overflow-x: hidden;
-            /* Prevents scrolling on large desktops */
             height: 100vh; 
             display: flex;
             flex-direction: column;
@@ -73,7 +72,6 @@
 
         /* Large Project Title Card */
         .card-full { grid-column: span 3; }
-        .card-2 { grid-column: span 2; }
 
         /* Typography */
         .label {
@@ -104,7 +102,6 @@
             border: 2px solid;
             padding: 15px;
             border-radius: 8px;
-            margin-top: 10px;
         }
 
         .status-active {
@@ -139,8 +136,9 @@
         @media (max-width: 1024px) {
             body { height: auto; overflow-y: auto; }
             .dashboard { grid-template-columns: 1fr; }
-            .card-full, .card-2 { grid-column: span 1; }
+            .card-full { grid-column: span 1; }
             .main-wrapper { padding: 40px 20px; }
+            .merged-bottom-card { flex-direction: column; align-items: flex-start !important; gap: 15px;}
         }
     </style>
 </head>
@@ -179,27 +177,34 @@
             </div>
 
             <div class="card">
-                <span class="label">Sheeting Specs</span>
-                <div class="value" style="margin-bottom: 10px;">Manufacturer: <strong>AVERY DENNISON</strong></div>
-                <div class="value">Type: <strong>TYPE - XI</strong></div>
+                <span class="label">Sheeting Manufacturer</span>
+                <div class="value">AVERY DENNISON</div>
             </div>
 
             <div class="card">
-                <span class="label">Timeline</span>
-                <div class="value">Installed: 17- JAN - 2026</div>
-                <div class="value" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Warranty Period: 10 Years from Installation</div>
+                <span class="label">Sheeting Type</span>
+                <div class="value">TYPE - XI</div>
             </div>
 
-            <div class="card card-2" style="background: #f8fafc; border-style: dashed; border-width: 2px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="card card-full" style="background: #f8fafc; border-style: dashed; border-width: 2px;">
+                <div class="merged-bottom-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                    
+                    <div>
+                        <span class="label">Installation Timeline</span>
+                        <div class="value">Installed: 17 - JAN - 2026</div>
+                        <div class="value" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Warranty Period: 10 Years from Installation</div>
+                    </div>
+                    
                     <div>
                         <span class="label">Warranty End Date</span>
-                        <div class="value" style="font-size: 1.2rem; color: var(--brand-dark);">16 - JAN 2036</div>
+                        <div class="value" style="font-size: 1.2rem; color: var(--brand-dark);">16 - JAN - 2036</div>
                     </div>
+
                     <div id="warrantyStatus" class="status-box status-active">
                         <span class="pulse"></span>
                         <strong id="statusText">WARRANTY ACTIVE</strong>
                     </div>
+
                 </div>
             </div>
 
