@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Portal | NHIDCL Package-3</title>
     <style>
+	
+	/* Styling specifically for the bottom warranty card */
+.warranty-card {
+    background-color: #f8fafc; 
+    border: 2px dashed #cbd5e1; /* A slightly softer grey for the dash */
+}
+
+/* Flexbox container for the inner content */
+.warranty-content {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    flex-wrap: wrap;
+    gap: 24px; /* Ensures elements don't touch when wrapping on smaller screens */
+}
+
+/* Make the dates bold and prominent */
+.date-highlight {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--brand-dark);
+    margin-top: 6px;
+}
+
+/* De-emphasize the secondary text */
+.sub-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-weight: 500;
+}
         :root {
             --brand-dark: #0f172a; 
             --accent: #2563eb;
@@ -186,27 +217,27 @@
                 <div class="value">TYPE - XI</div>
             </div>
 
-            <div class="card card-full" style="background: #f8fafc; border-style: dashed; border-width: 2px;">
-                <div class="merged-bottom-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                    
-                    <div>
-                        <span class="label">Installation Timeline</span>
-                        <div class="value">Installed: 17 - JAN - 2026</div>
-                        <div class="value" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">Warranty Period: 10 Years from Installation</div>
-                    </div>
-                    
-                    <div>
-                        <span class="label">Warranty End Date</span>
-                        <div class="value" style="font-size: 1.2rem; color: var(--brand-dark);">16 - JAN - 2036</div>
-                    </div>
+<div class="card card-full warranty-card">
+    <div class="warranty-content">
+        
+        <div class="info-group">
+            <span class="label">Installation Date</span>
+            <div class="date-highlight">17 - JAN - 2026</div>
+            <div class="sub-text">Warranty Period: 10 Years</div>
+        </div>
+        
+        <div class="info-group">
+            <span class="label">Warranty End Date</span>
+            <div class="date-highlight">16 - JAN - 2036</div>
+        </div>
 
-                    <div id="warrantyStatus" class="status-box status-active">
-                        <span class="pulse"></span>
-                        <strong id="statusText">WARRANTY ACTIVE</strong>
-                    </div>
+        <div id="warrantyStatus" class="status-box status-active">
+            <span class="pulse"></span>
+            <strong id="statusText">WARRANTY ACTIVE</strong>
+        </div>
 
-                </div>
-            </div>
+    </div>
+</div>
 
         </div>
     </div>
