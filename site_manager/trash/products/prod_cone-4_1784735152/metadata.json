@@ -1,0 +1,33 @@
+{
+    "category_slug": "traffic-cones",
+    "description": "lskdsjfoi sflhs lfhlskjh fkjsdh fkjsh fdkjshfdkj skjdfh ksjdhf kjshdf kjshd",
+    "id": "cone-4",
+    "images": [
+        {
+            "alt": "Cone 4",
+            "h": 447,
+            "src": "img/products/traffic-cones/cone-4/cone-4-0.jpg",
+            "w": 447
+        }
+    ],
+    "model": "Cone-4",
+    "specifications": [
+        {
+            "label": "Cone Size",
+            "value": "98374mm"
+        },
+        {
+            "label": "asasfsdfsd",
+            "value": "fsdfsdf"
+        },
+        {
+            "label": "sdfsdf",
+            "value": "fsdfs"
+        },
+        {
+            "label": "dfsdfsdf",
+            "value": "sd"
+        }
+    ],
+    "title": "Cone 4"
+}

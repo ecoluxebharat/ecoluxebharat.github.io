@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>{% block title %}{{ page_seo.title if page_seo and page_seo.title else 'EcoLuxe Bharat | Sustainable Road Safety Solutions' }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ page_seo.description if page_seo and page_seo.description else 'EcoLuxe Bharat is a leading manufacturer of sustainable road safety products.' }}{% endblock %}">
+    {% if page_seo and page_seo.enable_keywords != false %}
+    <meta name="keywords" content="{% block meta_keywords %}{{ page_seo.keywords if page_seo and page_seo.keywords else 'EcoLuxe Bharat, Road Safety' }}{% endblock %}">
+    {% endif %}
+    <meta name="author" content="EcoLuxe Bharat">
+    <meta name="robots" content="index, follow">
+    {% if site_info.seo_global and site_info.seo_global.site_url and page_seo %}
+    <link rel="canonical" href="{{ site_info.seo_global.site_url }}{{ page_seo.canonical_path }}">
+    
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site_info.seo_global.site_name or 'EcoLuxe Bharat' }}">
+    <meta property="og:url" content="{{ site_info.seo_global.site_url }}{{ page_seo.canonical_path }}">
+    <meta property="og:title" content="{{ page_seo.og_title or page_seo.title }}">
+    <meta property="og:description" content="{{ page_seo.og_description or page_seo.description }}">
+    <meta property="og:image" content="{{ site_info.seo_global.site_url }}{{ page_seo.og_image }}">
+    
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    {% if site_info.header_footer and site_info.header_footer.social_links and site_info.header_footer.social_links.twitter %}<meta name="twitter:site" content="{{ site_info.header_footer.social_links.twitter }}">{% endif %}
+    <meta name="twitter:title" content="{{ page_seo.og_title or page_seo.title }}">
+    <meta name="twitter:description" content="{{ page_seo.og_description or page_seo.description }}">
+    <meta name="twitter:image" content="{{ site_info.seo_global.site_url }}{{ page_seo.og_image }}">
+    {% endif %}
+
+    <!-- Schema.org Organization JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "EcoLuxe Bharat",
+      "url": "{{ site_info.seo_global.site_url if (site_info and site_info.seo_global and site_info.seo_global.site_url) else 'https://ecoluxebharat.com/' }}",
+      "logo": "{{ site_info.seo_global.site_url if (site_info and site_info.seo_global and site_info.seo_global.site_url) else 'https://ecoluxebharat.com/' }}{{ site_info.site_images.logo if (site_info and site_info.site_images and site_info.site_images.logo) else 'img/logo.png' }}"
+    }
+    </script>
+    {% if breadcrumb_schema %}
+    <!-- Schema.org BreadcrumbList JSON-LD -->
+    <script type="application/ld+json">
+    {{ breadcrumb_schema | tojson }}
+    </script>
+    {% endif %}
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ root_path }}css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ root_path }}css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ root_path }}css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="{{ root_path }}css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ root_path }}css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="{{ root_path }}css/slick.css" type="text/css">
+    {% block css_links %}{% endblock %}
+    <link rel="stylesheet" href="{{ root_path }}css/style.css?v=1.2" type="text/css">
+    <link rel="stylesheet" href="{{ root_path }}css/popupinquiry.css" type="text/css">
+    <link rel="stylesheet" href="{{ root_path }}css/photoswipe.css" type="text/css">
+
+    <!-- favicons -->
+    <link rel="icon" type="image/x-icon" href="{{ root_path }}img/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ root_path }}img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ root_path }}img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ root_path }}img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="{{ root_path }}img/favicon/site.webmanifest">
+
+    {% block custom_styles %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__logo">
+            <a href="{{ root_path }}index.html"><img src="{{ root_path }}{{ (site_info.site_images and site_info.site_images.logo) or 'img/logo.png' }}" alt="EcoLuxe Bharat Logo"></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__widget">
+            <span>Call us for any questions</span>
+            <h4 style="font-family: 'Noto Sans', sans-serif; font-weight: 700;">{% for phone in site_info.header_footer.header_phones %}{{ phone }}{% if not loop.last %}<br />{% endif %}{% endfor %}</h4>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__logo">
+                        <a href="{{ root_path }}index.html"><img src="{{ root_path }}{{ (site_info.site_images and site_info.site_images.logo) or 'img/logo.png' }}" alt="EcoLuxe Bharat Logo" style="width: 250px; height: auto;"></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            <li class="{% if active_menu == 'home' %}active{% endif %}"><a href="{{ root_path }}index.html">Home</a></li>
+                            <li class="{% if active_menu == 'products' %}active{% endif %}"><a href="{{ root_path }}products.html">Products</a></li>
+                            <li><a href="{{ root_path }}index.html#clients">Clients</a></li>
+                            <li class="{% if active_menu == 'about' %}active{% endif %}"><a href="{{ root_path }}about.html">About</a></li>
+                            <li class="{% if active_menu == 'contact' %}active{% endif %}"><a href="{{ root_path }}contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div class="header__widget">
+                        <span>Call us for any questions</span>
+                        <h4 style="font-family: 'Noto Sans', sans-serif; font-weight: 700;">{% for phone in site_info.header_footer.header_phones %}{{ phone }}{% if not loop.last %}<br />{% endif %}{% endfor %}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open"><i class="fa fa-bars"></i></div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer Section Begin -->
+    <footer class="footer set-bg" data-setbg="{{ root_path }}{{ (site_info.site_images and site_info.site_images.footer_bg) or 'img/footer-bg.jpg' }}">
+        <div class="container">
+            <div class="footer__top">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="footer__top__text">
+                            <h2>Ready To Work With Us?</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="{{ root_path }}index.html"><img src="{{ root_path }}{{ (site_info.site_images and site_info.site_images.logo) or 'img/logo.png' }}" alt="EcoLuxe Bharat Logo" style="width: 300px; height: auto;"></a>
+                        </div>
+                        <p>{{ site_info.header_footer.address|replace('\n', '<br />')|safe }}</p>
+                        <ul>
+                            {% for email in site_info.header_footer.footer_emails %}
+                            <li class="footer__social"><a href="mailto:{{ email }}">{{ email }}</a></li>
+                            {% endfor %}
+                            {% for phone in site_info.header_footer.footer_phones %}
+                            <li class="footer__social"><a href="tel:{{ phone|replace(' ', '') }}" target="_blank" style="font-family: 'Noto Sans', sans-serif; font-weight: 500;">{{ phone }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div class="footer__social">
+                            <a href="{{ site_info.header_footer.social_links.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="{{ site_info.header_footer.social_links.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="{{ site_info.header_footer.social_links.instagram }}" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <a href="{{ site_info.header_footer.social_links.youtube }}" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                            <a href="{{ site_info.header_footer.social_links.linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+                            <a href="{{ site_info.header_footer.social_links.whatsapp }}" target="_blank"><i class="fa fa-whatsapp"></i></a>
+                            <a href="{{ site_info.header_footer.social_links.phone }}" target="_blank"><i class="fa fa-phone"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1 col-md-3 col-sm-6">
+                    <div class="footer__widget"></div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                    <div class="footer__widget">
+                        <h6>Navigation</h6>
+                        <ul>
+                            <li><a href="{{ root_path }}products.html">Products</a></li>
+                            <li><a href="{{ root_path }}index.html#clients">Clients</a></li>
+                            <li><a href="{{ root_path }}about.html">About</a></li>
+                            <li><a href="{{ root_path }}contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <div class="copyright__text">
+                            <p>Copyright © <script>document.write(new Date().getFullYear());</script> EcoLuxe Bharat, All rights reserved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    {% block inquiry_popup %}{% endblock %}
+
+    <!-- Dedicated Product Inquiry Modal -->
+    <div id="productInquiryModal" class="product-inquiry-modal">
+        <div class="product-inquiry-backdrop" id="productInquiryBackdrop"></div>
+        <div class="product-inquiry-dialog">
+            <button type="button" class="product-inquiry-close" id="closeProductInquiryModal" aria-label="Close">&times;</button>
+            
+            <div class="product-inquiry-header">
+                <h3 class="product-inquiry-title">Product Inquiry</h3>
+            </div>
+
+            <!-- Top Product Preview Header Card -->
+            <div id="productModalPreviewCard" class="product-modal-preview">
+                <div class="product-modal-preview-imgwrap">
+                    <img id="productModalImg" src="" alt="Product Thumbnail">
+                </div>
+                <div class="product-modal-preview-info">
+                    <h4 id="productModalTitle"></h4>
+                    <div class="product-modal-preview-badges">
+                        <span id="productModalModel" class="badge-model"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-inquiry-body">
+                <form id="productInquiryForm" action="{{ site_info.header_footer.formsubmit_url }}" method="POST">
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_subject" id="prodModalHiddenSubject" value="Product Inquiry" /> 
+                    <input type="hidden" name="Product Category" id="prodModalHiddenCategory" value="" />
+                    <input type="hidden" name="Inquired Product" id="prodModalHiddenName" value="" /> 
+                    <input type="hidden" name="Quantity / Requirement" id="prodModalHiddenQtyFormatted" value="" />
+                    <input type="hidden" name="Page URL" id="prodModalHiddenUrl" value="" /> 
+                    
+                    <div class="modal-form-row">
+                        <div class="modal-form-group">
+                            <label>Your Name <span class="req">*</span></label>
+                            <input type="text" name="Name" id="prodModalName" placeholder="Full Name" required />
+                        </div>
+                        <div class="modal-form-group">
+                            <label>Phone Number <span class="req">*</span></label>
+                            <input type="tel" name="Phone Number" id="prodModalPhone" placeholder="Mobile / Phone Number" required />
+                        </div>
+                    </div>
+                    
+                    <div class="modal-form-row">
+                        <div class="modal-form-group flex-2">
+                            <label>Email Address <span class="req">*</span></label>
+                            <input type="email" name="Email" id="prodModalEmail" placeholder="name@example.com" required />
+                        </div>
+                        <div class="modal-form-group flex-1">
+                            <label>Quantity <span class="req">*</span></label>
+                            <input type="text" id="prodModalQtyInput" placeholder="e.g. 50pcs" required />
+                        </div>
+                    </div>
+
+                    <div class="modal-form-group">
+                        <label>Message</label>
+                        <textarea id="prodModalMessage" name="Message" rows="5" placeholder="Message"></textarea>
+                    </div>
+
+                    <button type="submit" id="prodModalSubmitBtn" class="product-modal-submit-btn">
+                        <span>Send Product Inquiry</span>
+                    </button>
+                </form>
+
+                <div id="productModalOverlay" class="product-modal-overlay">
+                    <div class="product-modal-spinner"></div>
+                    <p id="productModalOverlayMsg" class="product-modal-overlay-msg"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dedicated Product Inquiry Modal End -->
+
+    <!-- Js Plugins -->
+    <script src="{{ root_path }}js/jquery-3.3.1.min.js"></script>
+    <script src="{{ root_path }}js/bootstrap.min.js"></script>
+    <script src="{{ root_path }}js/jquery.slicknav.js"></script>
+    <script src="{{ root_path }}js/owl.carousel.min.js"></script>
+    <script src="{{ root_path }}js/slick.min.js"></script>
+    <script src="{{ root_path }}js/main.js?v=1.2"></script>
+    <script>
+        window.FORMSUBMIT_URL = "{{ site_info.header_footer.formsubmit_url }}";
+    </script>
+    <script src="{{ root_path }}js/popupinquiry_v2.js"></script>
+
+    {% block custom_scripts %}{% endblock %}
+</body>
+</html>

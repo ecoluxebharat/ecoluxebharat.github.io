@@ -1,0 +1,35 @@
+{
+    "category_slug": "road-barriers",
+    "description": "",
+    "id": "elb-dksdk39",
+    "images": [
+        {
+            "alt": "Barrier 2",
+            "h": 377,
+            "src": "img/products/road-barriers/elb-dksdk39/elb-dksdk39-0.webp",
+            "w": 500
+        },
+        {
+            "alt": "Barrier 2",
+            "h": 1000,
+            "src": "img/products/road-barriers/elb-dksdk39/elb-dksdk39-1.webp",
+            "w": 1000
+        }
+    ],
+    "model": "ELB-dksdk39",
+    "specifications": [
+        {
+            "label": "qwe qew qw eqw e",
+            "value": "we qw qwe qwe"
+        },
+        {
+            "label": "qewqw",
+            "value": "q we qweqwe qwe q"
+        },
+        {
+            "label": "eqweqwqewq",
+            "value": "we qwe qwe qw"
+        }
+    ],
+    "title": "Barrier 2"
+}

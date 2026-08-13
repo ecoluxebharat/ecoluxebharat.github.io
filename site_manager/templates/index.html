@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_seo.title if page_seo and page_seo.title else 'Sustainable Road Safety & Traffic Management Solutions | EcoLuxe Bharat' }}{% endblock %}
+
+{% block content %}
+<section class="hero">
+<div class="hero__slider owl-carousel">
+<div class="hero__items set-bg" data-setbg="{{ root_path }}{{ (site_info.site_images and site_info.site_images.hero_bg) or 'img/hero/hero-1.jpg' }}">
+<div class="hero__text">
+<h1>{{ site_info.index_page.hero_tagline }}</h1>
+<div class="hero__social">
+<a href="{{ site_info.header_footer.social_links.facebook }}" target="_blank"><i class="fa fa-facebook"></i></a>
+<a href="{{ site_info.header_footer.social_links.twitter }}" target="_blank"><i class="fa fa-twitter"></i></a>
+<a href="{{ site_info.header_footer.social_links.instagram }}" target="_blank"><i class="fa fa-instagram"></i></a>
+<a href="{{ site_info.header_footer.social_links.youtube }}" target="_blank"><i class="fa fa-youtube-play"></i></a>
+<a href="{{ site_info.header_footer.social_links.linkedin }}" target="_blank"><i class="fa fa-linkedin"></i></a>
+<a href="{{ site_info.header_footer.social_links.whatsapp }}" target="_blank"><i class="fa fa-whatsapp"></i></a>
+<a href="{{ site_info.header_footer.social_links.phone }}" target="_blank"><i class="fa fa-phone"></i></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+{% include "categories_section.html" %}
+
+<section id="clients" class="testimonial spad set-bg" data-setbg="img/testimonial/testimonial-bg.jpg" style="padding-bottom: 80px; padding-top: 80px;">
+<div class="container">
+<div class="row">
+<div class="col-lg-12 text-center">
+<div class="section-title">
+<span>Trusted By</span>
+<h2>Our clients</h2>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-lg-12">
+<div class="logo__carousel owl-carousel">
+{% for client in clients %}
+<div class="logo__carousel__item">
+  {% if client.link_enabled and client.link and client.link != '#' %}
+  <a href="{{ client.link }}" target="_blank"><img src="{{ root_path }}{{ client.logo }}" alt="Client Logo" style="height: {{ (62 * (client.scale or 1.0))|int }}px; width: auto; max-width: none;"></a>
+  {% else %}
+  <img src="{{ root_path }}{{ client.logo }}" alt="Client Logo" style="height: {{ (62 * (client.scale or 1.0))|int }}px; width: auto; max-width: none;">
+  {% endif %}
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</section>
+
+{% endblock %}
+
+{% block inquiry_popup %}
+<!-- Inquiry Popup -->
+<div id="inquiryContainer" class="inquiry-container">
+    <button id="inquiryToggleButton" class="inquiry-toggle-button">
+        <svg xmlns="http://www.w3.org/2999/xlink" width="24" height="24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-message-square">
+            <path d="M10 9H17M10 13H17M7 9H7.01M7 13H7.01M21 20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20Z"></path>
+        </svg>
+        <span class="button-text">Got a question? Ask Us.</span>
+    </button>
+    <span id="permanentCloseInquiryButton" class="permanent-close-button">&times;</span>
+    <div class="inquiry-form-content">
+        <button id="closeInquiryForm" class="close-button">&times;</button>
+        <h2>Send Us an Inquiry</h2>
+        
+        <div class="form-blur-area">
+            <form id="inquiryForm" action="{{ site_info.header_footer.formsubmit_url }}" method="POST">
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="Form" value="Popup Form"> 
+                <input type="hidden" name="_subject" id="inquiryDynamicSubject" value="Website Inquiry" /> 
+                
+                <div class="form-row">
+                    <input type="text" name="Name" id="inquiryName" placeholder="Name" required /> 
+                    <input type="tel" name="Phone Number" placeholder="Number" required />
+                </div>
+                <input type="email" name="Email" placeholder="Email" required />
+                <textarea id="inquiryMessage" name="Message" rows="5" placeholder="Message" required></textarea>
+                <button type="submit" name="_submit" id="sendMessageButton">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" fill="#ffffff" width="20" height="20" viewBox="0 0 32 32" id="send-icon" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title>send--filled</title><path d="M27.45,15.11l-22-11a1,1,0,0,0-1.08.12,1,1,0,0,0-.33,1L6.69,15H18v2H6.69L4,26.74A1,1,0,0,0,5,28a1,1,0,0,0,.45-.11l22-11a1,1,0,0,0,0-1.78Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
+                    <span>Send Message</span>
+                </button>
+            </form>
+        </div>
+
+        <div id="inquiryOverlay" class="inquiry-overlay">
+            <div id="spinner" class="spinner"></div>
+            <p id="overlayMessage" class="overlay-message"></p>
+        </div>
+    </div>
+</div>
+<!-- Inquiry Popup End -->
+{% endblock %}
+
+{% block custom_scripts %}
+<script>
+ (function ($) {
+  function setBackgrounds() {
+   $('.set-bg').each(function () {
+    var bg = $(this).data('setbg');
+    if (bg) $(this).css('background-image', 'url(' + bg + ')');
+   });
+  }
+
+  function initProjectSlider() {
+   var $slider = $('.project__slider');
+   if ($slider.hasClass('owl-loaded')) {
+    $slider.trigger('play.owl.autoplay', [4000]);
+    return;
+   }
+   $slider.owlCarousel({
+    loop: true,
+    margin: 30,
+    nav: true,
+    dots: false,
+    autoplay: true,
+    autoplayTimeout: 4000,
+    autoplayHoverPause: true,
+    smartSpeed: 600,
+    responsive: {
+     0:  { items: 1 },
+     480: { items: 1 },
+     768: { items: 2 },
+     992: { items: 3 },
+     1200: { items: 4 }
+    }
+   });
+  }
+
+  $(function () {
+   setBackgrounds();
+   initProjectSlider();
+  });
+ })(jQuery);
+</script>
+<script>
+  $(document).ready(function() {
+    var $carousel = $(".categories-carousel");
+    if ($carousel.length) {
+      var owl = $carousel.owlCarousel({
+        loop: true,
+        margin: 30,
+        nav: false,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 4000,
+        autoplayHoverPause: true,
+        responsive: {
+          0: { items: 1 },
+          576: { items: 2 },
+          992: { items: 4 }
+        },
+        onInitialized: function() {
+          if (window.alignHashTarget) window.alignHashTarget();
+        }
+      });
+      
+      $("#toggle-index-cats-btn").click(function() {
+        var $carouselView = $("#categories-carousel-view");
+        var $gridView = $("#categories-grid-view");
+        var sectionTop = Math.round($(".services").offset().top);
+        
+        if ($gridView.is(":hidden")) {
+          $carouselView.fadeOut(200, function() {
+            $gridView.fadeIn(300, function() {
+              window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+            });
+          });
+          $(this).text("View Less");
+        } else {
+          $gridView.fadeOut(200, function() {
+            $carouselView.fadeIn(300, function() {
+              owl.trigger('refresh.owl.carousel');
+              window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+            });
+          });
+          $(this).text("View More");
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

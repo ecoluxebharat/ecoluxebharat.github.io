@@ -1,0 +1,545 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_seo.title if page_seo and page_seo.title else product.title + ' | EcoLuxe Bharat' }}{% endblock %}
+
+{% block custom_styles %}
+{%- set ns = namespace(brand="EcoLuxe Bharat", specs=[]) -%}
+{%- if product.specifications -%}
+  {%- for spec in product.specifications -%}
+    {%- if spec.label.lower() == 'brand' -%}
+      {%- set ns.brand = spec.value -%}
+    {%- else -%}
+      {%- set _ = ns.specs.append(spec) -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title }} ({{ product.model }})",
+  "image": [
+    "{{ site_info.seo_global.site_url if site_info.seo_global else '' }}{{ page_seo.og_image if page_seo else '' }}"
+  ],
+  "description": "{{ page_seo.description if page_seo else '' }}",
+  "sku": "{{ product.model }}",
+  "mpn": "{{ product.model }}",
+  "brand": {
+    "@type": "Brand",
+    "name": {{ ns.brand | tojson }}
+  },
+  "category": "{{ category.title if category else '' }}",
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ site_info.seo_global.site_url if site_info.seo_global else '' }}{{ page_seo.canonical_path if page_seo else '' }}",
+    "priceCurrency": "INR",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "EcoLuxe Bharat"
+    }
+  }{% if ns.specs %},
+  "additionalProperty": [
+    {% for spec in ns.specs %}
+    {
+      "@type": "PropertyValue",
+      "name": {{ spec.label | tojson }},
+      "value": {{ spec.value | tojson }}
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]{% endif %}
+}
+</script>
+<style>
+    /* ===== Related Products Owl Carousel ===== */
+    .rel-card { background:#fff; border:1px solid #eee; border-radius:8px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.03); display:flex; flex-direction:column; height:100%; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; -webkit-tap-highlight-color: transparent; outline: none; }
+    @media (hover: hover) {
+      .rel-card:hover { border-color:#50ab3c; box-shadow:0 6px 20px rgba(80,171,60,0.1); transform:translateY(-3px); }
+      .rel-card:hover .rel-card-img img { transform:scale(1.06); }
+      .rel-card-btn:hover { background:#3d8c2e; color:#ffffff; transform:scale(1.02); box-shadow:0 4px 12px rgba(80,171,60,0.25); text-decoration:none; }
+    }
+    .rel-card-img { background:#f9f9f9; height:300px; display:block; overflow:hidden; border-bottom:1px solid #eee; position:relative; }
+    .rel-card-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s ease; }
+    .rel-card-body { padding:18px; display:flex; flex-direction:column; flex-grow:1; }
+    .rel-card-btn { display:block; width:100%; text-align:center; background:#50ab3c; color:#ffffff; padding:8px 14px; border-radius:4px; font-size:12px; font-weight:600; text-decoration:none; margin-top:auto; transition:background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; -webkit-tap-highlight-color:transparent; outline:none; }
+    .rel-card-btn:active { transform:scale(0.98); }
+    .related-products-carousel .owl-stage { display: flex; }
+    .related-products-carousel .owl-item { display: flex; flex: 1 0 auto; }
+    .related-products-carousel .owl-item .item { display: flex; flex: 1 0 auto; width: 100%; }
+    .related-products-carousel .owl-item .rel-card { display: flex; flex-direction: column; width: 100%; }
+    .related-products-carousel .owl-stage-outer { padding-top: 6px; margin-top: -6px; }
+
+    /* ===== Mini Image Gallery ===== */
+    .product-mini-gallery { position: relative; }
+    .mini-gallery-main-wrap { position: relative; background:#f9f9f9; border-radius:8px; overflow:hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor:grab; touch-action:pan-y; user-select:none; -webkit-user-select:none; }
+    .mini-gallery-main-wrap.grabbing { cursor:grabbing !important; }
+    .mini-gallery-main-img { width:100%; height:400px; object-fit:contain; padding:20px; display:block; transition: opacity 0.25s ease; pointer-events:none; }
+    .mini-gallery-nav { position:absolute; top:50%; transform:translateY(-50%); width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.35); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); border:1px solid rgba(255,255,255,0.6); color:#222; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.25s ease; box-shadow:0 2px 10px rgba(0,0,0,0.08); z-index:3; padding:0; outline:none; }
+    .mini-gallery-nav:hover, .mini-gallery-nav:active, .mini-gallery-nav:focus { background:rgba(80,171,60,0.5) !important; color:#fff !important; border-color:rgba(80,171,60,0.7) !important; box-shadow:0 4px 15px rgba(80,171,60,0.25); outline:none; }
+    .mini-gallery-nav:disabled { opacity: 0.15; cursor: not-allowed; pointer-events: none; }
+    .mini-gallery-nav.prev { left:12px; }
+    .mini-gallery-nav.next { right:12px; }
+    .mini-gallery-thumbs { display:flex; gap:8px; margin-top:10px; overflow-x:auto; padding-bottom:4px; }
+    .mini-gallery-thumb { flex:0 0 70px; height:70px; border-radius:6px; border:2px solid #eee; background:#f9f9f9; overflow:hidden; cursor:pointer; transition:border-color 0.2s, box-shadow 0.2s; }
+    .mini-gallery-thumb img { width:100%; height:100%; object-fit:contain; padding:6px; }
+    .mini-gallery-thumb.active { border-color:#50ab3c; box-shadow:0 0 0 2px rgba(80,171,60,0.2); }
+    .mini-gallery-thumb:hover:not(.active) { border-color:#aaa; }
+    .mini-gallery-hint { font-size:12px; color:#888; margin-top:8px; text-align:center; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- Breadcrumb Section Begin -->
+    <div class="breadcrumb-option breadcrumb-option-short spad set-bg" data-setbg="{{ root_path }}{{ (site_info.site_images and site_info.site_images.breadcrumb_bg) or 'img/breadcrumb-bg.jpg' }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>{{ product.title }}</h2>
+                        <div class="breadcrumb__links">
+                            <a href="{{ root_path }}index.html">Home</a>
+                            <a href="{{ root_path }}products.html">Products</a>
+                            <a href="{{ root_path }}categories/{{ category.slug }}.html">{{ category.title }}</a>
+                            <span>{{ product.model }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Product Details Section Begin -->
+    <section class="project-details spad">
+        <div class="container" style="max-width: 1200px;">
+            <div class="row">
+                <!-- Mobile Product Title Block -->
+                <div class="col-12 d-block d-lg-none mb-4">
+                    <span class="badge" style="background: #50ab3c; color: #ffffff; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Model: {{ product.model }}</span>
+                    <h1 style="font-size: 26px; font-weight: 700; color: #111111; margin-top: 10px; margin-bottom: 0;">{{ product.title }}</h1>
+                </div>
+
+                <div class="col-lg-7">
+                    {% if product.images|length > 1 %}
+                    <!-- Multiple Image Gallery -->
+                    <div class="product-mini-gallery pswp-gallery" id="product-gallery">
+                        <div class="mini-gallery-main-wrap">
+                            <button class="mini-gallery-nav prev" id="gallery-prev" aria-label="Previous image"><i class="fa fa-chevron-left"></i></button>
+                            <a href="{{ root_path }}{{ product.images[0].src }}" data-pswp-width="{{ product.images[0].w }}" data-pswp-height="{{ product.images[0].h }}" class="mini-gallery-pswp-link" id="gallery-main-link">
+                                <img src="{{ root_path }}{{ product.images[0].src }}" class="mini-gallery-main-img" alt="{{ product.title }}" id="gallery-main-img">
+                            </a>
+                            <button class="mini-gallery-nav next" id="gallery-next" aria-label="Next image"><i class="fa fa-chevron-right"></i></button>
+                        </div>
+                        <!-- Thumbnail Strip -->
+                        <div class="mini-gallery-thumbs" id="gallery-thumbs">
+                            {% for img in product.images %}
+                            <div class="mini-gallery-thumb {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}"><img src="{{ root_path }}{{ img.src }}" alt="{{ img.alt }}"></div>
+                            {% endfor %}
+                        </div>
+                        <!-- Hidden pswp anchors for secondary images (so lightbox can navigate them) -->
+                        <div style="display:none;">
+                            {% for img in product.images[1:] %}
+                            <a href="{{ root_path }}{{ img.src }}" data-pswp-width="{{ img.w }}" data-pswp-height="{{ img.h }}"></a>
+                            {% endfor %}
+                        </div>
+                        <p class="mini-gallery-hint"><i class="fa fa-search-plus"></i> Click image to open zoom lightbox view</p>
+                    </div>
+                    {% elif product.images|length == 1 %}
+                    <!-- Single Image Gallery -->
+                    <div class="row pswp-gallery">
+                        <div class="col-lg-12 text-center">
+                            <a href="{{ root_path }}{{ product.images[0].src }}" data-pswp-width="{{ product.images[0].w }}" data-pswp-height="{{ product.images[0].h }}">
+                                <img src="{{ root_path }}{{ product.images[0].src }}" class="img-fluid mb-3" alt="{{ product.title }}" style="max-height: 400px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); object-fit: contain; background: #f9f9f9; padding: 20px; width: 100%;">
+                            </a>
+                            <p style="font-size: 12px; color: #888; margin-top: 5px;"><i class="fa fa-search-plus"></i> Click image to open zoom lightbox view</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <!-- No Image Fallback -->
+                    <div class="row">
+                        <div class="col-lg-12 text-center py-5" style="background:#f9f9f9; border-radius:8px;">
+                            <i class="fa fa-picture-o" style="font-size:48px; color:#ccc;"></i>
+                            <p style="color:#666; margin-top:10px;">No images available</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="col-lg-5">
+                    <div class="project__sidebar" style="padding-left: 15px;">
+                        <div class="project__sidebar__about" style="margin-bottom: 25px;">
+                            <span class="badge d-none d-lg-inline-block" style="background: #50ab3c; color: #ffffff; padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Model: {{ product.model }}</span>
+                            <h1 class="d-none d-lg-block" style="font-size: 26px; font-weight: 700; color: #111111; margin-top: 10px; margin-bottom: 15px;">{{ product.title }}</h1>
+                            <p style="font-size: 14px; color: #666666; line-height: 1.6;">{{ product.description }}</p>
+                        </div>
+                        <div class="product__details__widget" style="border-top: 1px solid #eeeeee; padding-top: 20px;">
+                            {% for spec in product.specifications %}
+                            <div class="product__details__widget__item" style="margin-bottom: 15px;">
+                                <span style="font-size: 12px; text-transform: uppercase; color: #50ab3c; font-weight: 600; letter-spacing: 0.5px; display: block; margin-bottom: 2px;">{{ spec.label }}</span>
+                                <h4 style="font-size: 15px; font-weight: 700; color: #111111; margin: 0;">{{ spec.value }}</h4>
+                            </div>
+                            {% endfor %}
+                            
+                            <a href="javascript:void(0)" class="open-inquiry-btn primary-btn normal-btn" data-product="{{ product.title }} ({{ product.model }})" data-product-category="{{ category.title if category else product.category }}" data-product-img="{{ root_path }}{{ product.images[0].src if (product.images and product.images|length > 0) else 'img/categories/road-barriers.jpg' }}" data-product-title="{{ product.title }}" data-product-model="{{ product.model }}" data-product-unit="Pcs" style="border: none; border-radius: 4px; background: #50ab3c; color: #ffffff; padding: 12px 28px; font-size: 13px; font-weight: 600; display: inline-block; cursor: pointer; text-decoration:none;">Inquire Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+
+    <!-- Related Product Section Begin -->
+    {% if related_products %}
+    <section class="related-product spad" style="padding-top: 50px; padding-bottom: 70px; background: #fbfbfb; border-top: 1px solid #eeeeee;">
+        <div class="container" style="position: relative; max-width: 1260px;">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <span>Similar Range</span>
+                        <h2>Related Products in Category</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="related-products-carousel owl-carousel">
+                            {% for rel in related_products %}
+                            <div class="item">
+                                <div class="rel-card">
+                                    <a href="{{ root_path }}products/{{ rel.category_slug }}/{{ rel.id }}.html" class="rel-card-img">
+                                        <img src="{{ root_path }}{{ rel.images[0].src if rel.images else 'img/project/cones.png' }}" alt="{{ rel.title }}">
+                                    </a>
+                                    <div class="rel-card-body">
+                                        <span class="badge mb-2" style="background:#50ab3c;color:#fff;width:fit-content;padding:4px 8px;font-size:9px;text-transform:uppercase;font-weight:600;border-radius:3px;">{{ rel.model }}</span>
+                                        <h5 style="font-size:14px;font-weight:700;margin-bottom:10px;"><a href="{{ root_path }}products/{{ rel.category_slug }}/{{ rel.id }}.html" style="color:#111;text-decoration:none;">{{ rel.title }}</a></h5>
+                                        <a href="{{ root_path }}products/{{ rel.category_slug }}/{{ rel.id }}.html" class="rel-card-btn">View Details &rarr;</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- Related Product Section End -->
+
+    {% include "categories_section.html" %}
+{% endblock %}
+
+{% block custom_scripts %}
+        <script type="module">
+            import PhotoSwipeLightbox from '{{ root_path }}js/photoswipe-lightbox.esm.min.js';
+            const lightbox = new PhotoSwipeLightbox({
+                gallery: '.pswp-gallery',
+                children: 'a',
+                pswpModule: () => import('{{ root_path }}js/photoswipe.esm.min.js')
+            });
+            
+            // Dynamically set image dimensions based on natural size of the thumbnail image
+            lightbox.addFilter('domItemData', (itemData, element) => {
+                const imgEl = element.querySelector('img');
+                if (imgEl && imgEl.naturalWidth && imgEl.naturalHeight) {
+                    itemData.w = imgEl.naturalWidth;
+                    itemData.h = imgEl.naturalHeight;
+                }
+                return itemData;
+            });
+
+            lightbox.init();
+        </script>
+
+    <script>
+    window.addEventListener('load', function() {
+        var $relCarousel = $(".related-products-carousel");
+        if (!$relCarousel.length) return;
+        var totalItems = $relCarousel.find('.item').length;
+        if (!totalItems) return;
+        
+        if (totalItems === 1) {
+            // Single related product: No carousel. Center static card nicely.
+            $relCarousel.removeClass('owl-carousel');
+            $relCarousel.css({
+                'display': 'flex',
+                'justify-content': 'center',
+                'margin': '0 auto'
+            });
+            $relCarousel.find('.item').css({
+                'display': 'flex',
+                'flex-direction': 'column',
+                'width': '100%',
+                'max-width': '290px',
+                'padding': '12px',
+                'box-sizing': 'border-box'
+            });
+            $relCarousel.find('.rel-card').css({
+                'display': 'flex',
+                'flex-direction': 'column',
+                'width': '100%',
+                'height': '100%'
+            });
+        } else {
+            // 2 or more related products:
+            // On mobile (< 768px): run carousel with 1 item per slide
+            // On desktop (>= 992px): carousel if totalItems > 4, else static grid
+            var isMobile = function() {
+                return $(window).width() < 768;
+            };
+
+            var initRelLayout = function() {
+                if (isMobile() || totalItems > 4) {
+                    if (!$relCarousel.hasClass('owl-loaded')) {
+                        $relCarousel.addClass('owl-carousel').owlCarousel({
+                            loop: true,
+                            margin: 20,
+                            nav: false,
+                            dots: true,
+                            autoplay: true,
+                            autoplayTimeout: 4000,
+                            autoplayHoverPause: true,
+                            responsive: {
+                                0: { items: 1, margin: 15 },
+                                576: { items: 2, margin: 20 },
+                                992: { items: 4, margin: 24 }
+                            }
+                        });
+                    }
+                } else {
+                    // Desktop (>= 768px) with 2, 3, or 4 items: static grid
+                    if ($relCarousel.hasClass('owl-loaded')) {
+                        $relCarousel.trigger('destroy.owl.carousel').removeClass('owl-carousel owl-loaded');
+                    } else {
+                        $relCarousel.removeClass('owl-carousel');
+                    }
+                    $relCarousel.css({
+                        'display': 'flex',
+                        'flex-wrap': 'wrap',
+                        'margin': '0 -12px',
+                        'justify-content': 'center'
+                    });
+                    $relCarousel.find('.item').css({
+                        'display': 'flex',
+                        'flex-direction': 'column',
+                        'padding': '12px',
+                        'box-sizing': 'border-box',
+                        'width': '100%',
+                        'max-width': '290px'
+                    });
+                    $relCarousel.find('.rel-card').css({
+                        'display': 'flex',
+                        'flex-direction': 'column',
+                        'width': '100%',
+                        'height': '100%'
+                    });
+                }
+            };
+
+            initRelLayout();
+
+            var resizeTimer;
+            $(window).on('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(initRelLayout, 200);
+            });
+        }
+    });
+      
+      // ===== Category Toggle Script =====
+      $(document).ready(function() {
+        var $carousel = $(".categories-carousel").owlCarousel({
+          loop: true,
+          margin: 30,
+          nav: false,
+          dots: true,
+          autoplay: true,
+          autoplayTimeout: 4000,
+          autoplayHoverPause: true,
+          responsive: {
+            0: { items: 1 },
+            576: { items: 2 },
+            992: { items: 4 }
+          }
+        });
+
+        $("#toggle-index-cats-btn").click(function() {
+          var $carouselView = $("#categories-carousel-view");
+          var $gridView = $("#categories-grid-view");
+          var sectionTop = Math.round($(".services").offset().top);
+          
+          if ($gridView.is(":hidden")) {
+            $carouselView.fadeOut(200, function() {
+              $gridView.fadeIn(300, function() {
+                window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+              });
+            });
+            $(this).text("View Less");
+          } else {
+            $gridView.fadeOut(200, function() {
+              $carouselView.fadeIn(300, function() {
+                $carousel.trigger('refresh.owl.carousel');
+                window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+              });
+            });
+            $(this).text("View More");
+          }
+        });
+      });
+    </script>
+
+    {% if product.images|length > 1 %}
+    <script>
+    // ===== Mini Image Gallery Logic =====
+    (function() {
+        var images = [
+            {% for img in product.images %}
+            { src: '{{ root_path }}{{ img.src }}', w: {{ img.w }}, h: {{ img.h }}, alt: '{{ img.alt }}' }{% if not loop.last %},{% endif %}
+            {% endfor %}
+        ];
+        var mainImg = document.getElementById('gallery-main-img');
+        var mainLink = document.getElementById('gallery-main-link');
+        var thumbContainer = document.getElementById('gallery-thumbs');
+        var prevBtn = document.getElementById('gallery-prev');
+        var nextBtn = document.getElementById('gallery-next');
+        if (!mainImg) return;
+        var thumbs = thumbContainer ? thumbContainer.querySelectorAll('.mini-gallery-thumb') : [];
+        var current = 0;
+        function goTo(idx) {
+            current = idx;
+            mainImg.style.opacity = '0';
+            setTimeout(function() {
+                mainImg.src = images[idx].src;
+                mainImg.alt = images[idx].alt;
+                if (mainLink) {
+                    mainLink.href = images[idx].src;
+                    mainLink.setAttribute('data-pswp-width', images[idx].w);
+                    mainLink.setAttribute('data-pswp-height', images[idx].h);
+                }
+                mainImg.style.opacity = '1';
+            }, 150);
+            thumbs.forEach(function(t, i) { t.classList.toggle('active', i === idx); });
+            if (prevBtn) prevBtn.disabled = (idx === 0);
+            if (nextBtn) nextBtn.disabled = (idx === images.length - 1);
+        }
+        thumbs.forEach(function(t, i) { t.addEventListener('click', function() { goTo(i); }); });
+        if (prevBtn) prevBtn.addEventListener('click', function() { if (current > 0) goTo(current - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', function() { if (current < images.length - 1) goTo(current + 1); });
+        goTo(0);
+
+        // ===== Touch & Mouse Drag Swipe Support =====
+        var startX = 0;
+        var startY = 0;
+        var currentX = 0;
+        var currentY = 0;
+        var isDragging = false;
+        var hasSwiped = false;
+        var isClickDispatching = false;
+        var mainWrap = document.querySelector('.mini-gallery-main-wrap');
+
+        if (mainWrap) {
+            // Disable HTML5 ghost image/link drag
+            mainWrap.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+
+            if (mainLink) {
+                mainLink.addEventListener('click', function(e) {
+                    if (hasSwiped) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        hasSwiped = false;
+                    }
+                }, true);
+            }
+
+            // Touch events (with direction lock)
+            mainWrap.addEventListener('touchstart', function(e) {
+                if (e.touches.length === 1) {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                    currentX = startX;
+                    currentY = startY;
+                    isDragging = true;
+                    hasSwiped = false;
+                }
+            }, { passive: true });
+
+            mainWrap.addEventListener('touchmove', function(e) {
+                if (!isDragging || e.touches.length !== 1) return;
+                currentX = e.touches[0].clientX;
+                currentY = e.touches[0].clientY;
+                var diffX = Math.abs(currentX - startX);
+                var diffY = Math.abs(currentY - startY);
+
+                if (diffX > 8 && diffX > diffY) {
+                    hasSwiped = true;
+                    if (e.cancelable) {
+                        e.preventDefault();
+                    }
+                }
+            }, { passive: false });
+
+            mainWrap.addEventListener('touchend', function() {
+                if (!isDragging) return;
+                isDragging = false;
+                var diffX = currentX - startX;
+                if (Math.abs(diffX) > 30) {
+                    hasSwiped = true;
+                    if (diffX < 0 && current < images.length - 1) {
+                        goTo(current + 1);
+                    } else if (diffX > 0 && current > 0) {
+                        goTo(current - 1);
+                    }
+                }
+            });
+
+            // Mouse drag events (Desktop)
+            mainWrap.addEventListener('mousedown', function(e) {
+                if (e.target.closest('.mini-gallery-nav')) return;
+
+                if (e.button === 0) { // Left mouse button
+                    startX = e.clientX;
+                    currentX = startX;
+                    isDragging = true;
+                    hasSwiped = false;
+                    mainWrap.classList.add('grabbing');
+                    e.preventDefault(); // Prevents browser link/ghost drag
+                }
+            });
+
+            window.addEventListener('mousemove', function(e) {
+                if (isDragging) {
+                    currentX = e.clientX;
+                    if (Math.abs(currentX - startX) > 8) {
+                        hasSwiped = true;
+                    }
+                }
+            });
+
+            window.addEventListener('mouseup', function(e) {
+                if (!isDragging) return;
+                var diffX = currentX - startX;
+                isDragging = false;
+                mainWrap.classList.remove('grabbing');
+
+                if (hasSwiped && Math.abs(diffX) > 30) {
+                    if (diffX < 0 && current < images.length - 1) {
+                        goTo(current + 1);
+                    } else if (diffX > 0 && current > 0) {
+                        goTo(current - 1);
+                    }
+                } else if (!hasSwiped) {
+                    // Tap/click without dragging -> open PhotoSwipe lightbox view
+                    if (mainLink && !isClickDispatching) {
+                        isClickDispatching = true;
+                        mainLink.click();
+                        setTimeout(function() { isClickDispatching = false; }, 100);
+                    }
+                }
+            });
+        }
+    })();
+    </script>
+    {% endif %}
+{% endblock %}

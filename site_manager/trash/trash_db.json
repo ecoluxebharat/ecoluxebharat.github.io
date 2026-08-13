@@ -1,0 +1,258 @@
+[
+    {
+        "trash_id": "prod_eb-pp-glv03_1784735081",
+        "type": "product",
+        "id": "eb-pp-glv03",
+        "name": "Protective Safety Gloves",
+        "deleted_date": "2026-07-22 21:14:41",
+        "metadata_path": "trash\\products\\prod_eb-pp-glv03_1784735081\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Protective Safety Gloves",
+                "h": 1024,
+                "src": "img/products/ppe-safety/eb-pp-glv03/eb-pp-glv03-0.png",
+                "w": 1024
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-pp-hlm02_1784735081",
+        "type": "product",
+        "id": "eb-pp-hlm02",
+        "name": "Industrial Safety Helmet",
+        "deleted_date": "2026-07-22 21:14:41",
+        "metadata_path": "trash\\products\\prod_eb-pp-hlm02_1784735081\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Industrial Safety Helmet",
+                "h": 1024,
+                "src": "img/products/ppe-safety/eb-pp-hlm02/eb-pp-hlm02-0.png",
+                "w": 1024
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-ee-sl05_1784735090",
+        "type": "product",
+        "id": "eb-ee-sl05",
+        "name": "Rechargeable Tactical Search Light",
+        "deleted_date": "2026-07-22 21:14:50",
+        "metadata_path": "trash\\products\\prod_eb-ee-sl05_1784735090\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Rechargeable Tactical Search Light",
+                "h": 1024,
+                "src": "img/products/emergency-equipment/eb-ee-sl05/eb-ee-sl05-0.png",
+                "w": 1024
+            },
+            {
+                "alt": "Rechargeable Tactical Search Light",
+                "h": 1500,
+                "src": "img/products/emergency-equipment/eb-ee-sl05/eb-ee-sl05-1.jpg",
+                "w": 1500
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_8589934859-ksjd_1784735097",
+        "type": "product",
+        "id": "8589934859-ksjd",
+        "name": "Anti Glare Board",
+        "deleted_date": "2026-07-22 21:14:57",
+        "metadata_path": "trash\\products\\prod_8589934859-ksjd_1784735097\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Anti Glare Board",
+                "h": 2048,
+                "src": "img/products/anti-glare-panels/8589934859-ksjd/8589934859-ksjd-0.png",
+                "w": 2048
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-dl-pu80_1784735134",
+        "type": "product",
+        "id": "eb-dl-pu80",
+        "name": "Flexible PU Delineator Post",
+        "deleted_date": "2026-07-22 21:15:34",
+        "metadata_path": "trash\\products\\prod_eb-dl-pu80_1784735134\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Flexible PU Delineator Post",
+                "h": 1024,
+                "src": "img/products/road-delineators/eb-dl-pu80/eb-dl-pu80-0.png",
+                "w": 1024
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-dl-pl10_1784735134",
+        "type": "product",
+        "id": "eb-dl-pl10",
+        "name": "Plastic Delineator Board",
+        "deleted_date": "2026-07-22 21:15:34",
+        "metadata_path": "trash\\products\\prod_eb-dl-pl10_1784735134\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Plastic Delineator Board",
+                "h": 1024,
+                "src": "img/products/road-delineators/eb-dl-pl10/eb-dl-pl10-0.png",
+                "w": 1024
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-dl-ms75_1784735134",
+        "type": "product",
+        "id": "eb-dl-ms75",
+        "name": "MS Steel Delineator Post",
+        "deleted_date": "2026-07-22 21:15:34",
+        "metadata_path": "trash\\products\\prod_eb-dl-ms75_1784735134\\metadata.json",
+        "original_images": [
+            {
+                "alt": "MS Steel Delineator Post",
+                "h": 1024,
+                "src": "img/products/road-delineators/eb-dl-ms75/eb-dl-ms75-0.png",
+                "w": 1024
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-tc-rub80_1784735152",
+        "type": "product",
+        "id": "eb-tc-rub80",
+        "name": "Rubber Safety Cone",
+        "deleted_date": "2026-07-22 21:15:52",
+        "metadata_path": "trash\\products\\prod_eb-tc-rub80_1784735152\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Rubber Safety Cone",
+                "h": 1024,
+                "src": "img/products/traffic-cones/eb-tc-rub80/eb-tc-rub80-0.png",
+                "w": 1024
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-tc-flx75_1784735152",
+        "type": "product",
+        "id": "eb-tc-flx75",
+        "name": "Flexible PU Cone",
+        "deleted_date": "2026-07-22 21:15:52",
+        "metadata_path": "trash\\products\\prod_eb-tc-flx75_1784735152\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Flexible PU Cone - View 1",
+                "h": 1024,
+                "src": "img/products/traffic-cones/eb-tc-flx75/eb-tc-flx75-0.png",
+                "w": 1024
+            },
+            {
+                "alt": "Flexible PU Cone",
+                "h": 1264,
+                "src": "img/products/traffic-cones/eb-tc-flx75/eb-tc-flx75-1.png",
+                "w": 871
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_eb-tc-pvc75_1784735152",
+        "type": "product",
+        "id": "eb-tc-pvc75",
+        "name": "PVC Safety Cone",
+        "deleted_date": "2026-07-22 21:15:52",
+        "metadata_path": "trash\\products\\prod_eb-tc-pvc75_1784735152\\metadata.json",
+        "original_images": [
+            {
+                "alt": "PVC Safety Cone",
+                "h": 1024,
+                "src": "img/products/traffic-cones/eb-tc-pvc75/eb-tc-pvc75-0.png",
+                "w": 1024
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_cone-3_1784735152",
+        "type": "product",
+        "id": "cone-3",
+        "name": "Cone 3",
+        "deleted_date": "2026-07-22 21:15:52",
+        "metadata_path": "trash\\products\\prod_cone-3_1784735152\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Cone 3",
+                "h": 554,
+                "src": "img/products/traffic-cones/cone-3/cone-3-0.jpg",
+                "w": 554
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_cone-4_1784735152",
+        "type": "product",
+        "id": "cone-4",
+        "name": "Cone 4",
+        "deleted_date": "2026-07-22 21:15:52",
+        "metadata_path": "trash\\products\\prod_cone-4_1784735152\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Cone 4",
+                "h": 447,
+                "src": "img/products/traffic-cones/cone-4/cone-4-0.jpg",
+                "w": 447
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_cone-5_1784735152",
+        "type": "product",
+        "id": "cone-5",
+        "name": "Cone 5",
+        "deleted_date": "2026-07-22 21:15:52",
+        "metadata_path": "trash\\products\\prod_cone-5_1784735152\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Cone 5",
+                "h": 447,
+                "src": "img/products/traffic-cones/cone-5/cone-5-0.jpg",
+                "w": 447
+            }
+        ],
+        "parent_trash_id": null
+    },
+    {
+        "trash_id": "prod_elb-dksdk39_1785850389",
+        "type": "product",
+        "id": "elb-dksdk39",
+        "name": "Barrier 2",
+        "deleted_date": "2026-08-04 19:03:09",
+        "metadata_path": "trash\\products\\prod_elb-dksdk39_1785850389\\metadata.json",
+        "original_images": [
+            {
+                "alt": "Barrier 2",
+                "h": 377,
+                "src": "img/products/road-barriers/elb-dksdk39/elb-dksdk39-0.webp",
+                "w": 500
+            },
+            {
+                "alt": "Barrier 2",
+                "h": 1000,
+                "src": "img/products/road-barriers/elb-dksdk39/elb-dksdk39-1.webp",
+                "w": 1000
+            }
+        ],
+        "parent_trash_id": null
+    }
+]

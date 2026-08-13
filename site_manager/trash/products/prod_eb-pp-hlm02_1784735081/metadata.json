@@ -1,0 +1,29 @@
+{
+    "category_slug": "ppe-safety",
+    "description": "Heavy-duty hard hat designed to absorb shock from falling objects. Features sweatband and secure adjustable straps.",
+    "id": "eb-pp-hlm02",
+    "images": [
+        {
+            "alt": "Industrial Safety Helmet",
+            "h": 1024,
+            "src": "img/products/ppe-safety/eb-pp-hlm02/eb-pp-hlm02-0.png",
+            "w": 1024
+        }
+    ],
+    "model": "EB-PP-HLM02",
+    "specifications": [
+        {
+            "label": "Dimensions / Capacity",
+            "value": "Adjustable suspension head band"
+        },
+        {
+            "label": "Material Build",
+            "value": "High-impact ABS shell"
+        },
+        {
+            "label": "Key Specifications",
+            "value": "White / Yellow / Blue colors, IS 2925 certified"
+        }
+    ],
+    "title": "Industrial Safety Helmet"
+}
